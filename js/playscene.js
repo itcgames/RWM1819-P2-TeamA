@@ -71,6 +71,15 @@ class PlayScene
   //  window.setInterval(update, 1000 / 60);
 
 
+  this.scoreboard = new ScoreboardManager();
+
+  this.scoreboard.initBoard("session")
+
+
+
+  }
+  init(){
+    this.scoreboard.startTimer();
   }
   update()
   {
@@ -81,6 +90,13 @@ class PlayScene
     );
     world.DrawDebugData();
     world.ClearForces();
+
+    this.time = this.scoreboard.getDisplayTimer();
+    if(this.time == "00:10"){
+      this.scoreboard.addToBoard(55)
+      console.log(this.scoreboard.getBoard());
+    }
+
 
   }
   /**
@@ -93,6 +109,10 @@ class PlayScene
    var canvas = document.createElement("mycanvas");
    var ctx = mycanvas.getContext("2d");
    document.body.style.background = "#ffffff";
-
+   ctx.fillStyle ='white';
+   ctx.font = '55px Adventure Regular';
+   ctx.strokeStyle = 'black';
+   ctx.fillText(this.time,100,100);
+  ctx.strokeText(this.time,100,100);
   }
 }
