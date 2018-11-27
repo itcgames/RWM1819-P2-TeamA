@@ -76,12 +76,28 @@ class Fan
 
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
-      new b2Vec2(1,0.5),
-      new b2Vec2(1 , 1.2),
       new b2Vec2(1.5, 1.2),
       new b2Vec2(1.5,1.5),
       new b2Vec2(-0.5 , 1.5),
       new b2Vec2(-0.5, 1.2),
+		  ]);
+		bodyDef.position.Set(x - 2,y);
+
+    //create ground
+    bodyDef.type = b2Body.b2_staticBody;
+    world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+    var fixDef = new b2FixtureDef;
+    fixDef.density = 1;
+    fixDef.friction = 0.5;
+    fixDef.restitution = 0.5;
+
+    var bodyDef = new b2BodyDef;
+
+    fixDef.shape = new b2PolygonShape;
+    fixDef.shape.SetAsArray([
+      new b2Vec2(1,0.5),
+      new b2Vec2(1 , 1.2),
       new b2Vec2(0,1.2),
       new b2Vec2(0 ,0.5),
 		  ]);
