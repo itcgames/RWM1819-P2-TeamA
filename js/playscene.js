@@ -33,6 +33,9 @@ class PlayScene
     this.blowPipe = new BlowPipe(4,1.5,true,world);
     this.blowPipe2 = new BlowPipe(4,3,false,world);
 
+    //Jamie
+    var canvas = document.querySelector('canvas');
+    var ctx = canvas.getContext('2d');
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1.0;
@@ -79,8 +82,8 @@ class PlayScene
           );
        }
        fixDef.restitution = 0.2;
-       bodyDef.position.x = 1;
-       bodyDef.position.y = 1;
+       bodyDef.position.x = 10;
+       bodyDef.position.y = 5;
        world.CreateBody(bodyDef).CreateFixture(fixDef);
     }
 
@@ -93,7 +96,7 @@ class PlayScene
  debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
  world.SetDebugDraw(debugDraw);
 
-  //  window.setInterval(update, 1000 / 60);
+  //  window.setInterval(update, 1000 / 60)
 
 
   }
@@ -118,6 +121,7 @@ class PlayScene
    var canvas = document.createElement("mycanvas");
    var ctx = mycanvas.getContext("2d");
    document.body.style.background = "#ffffff";
+   this.trampoline.render();
 
   }
 }

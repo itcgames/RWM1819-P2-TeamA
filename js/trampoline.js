@@ -9,8 +9,11 @@ class Trampoline
      ,	b2Fixture = Box2D.Dynamics.b2Fixture
      ,	b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
        ;
-    this.imageX = x;
-    this.imageY = y;
+
+    this.img = new Image();
+    this.img.src = "img/tramp.png";
+    this.imgX = (x *30) - 30;
+    this.imgY = (y *30) - 15;
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1.0;
@@ -60,7 +63,13 @@ class Trampoline
   }
 
 
-  render(){}
+  render(){
+    var canvas = document.createElement("mycanvas");
+    var ctx = mycanvas.getContext("2d");
+    var image = this.img;
+    ctx.drawImage(image, this.imgX, this.imgY)
+
+  }
   /**
    * Draws an image after it is loaded.
    */
