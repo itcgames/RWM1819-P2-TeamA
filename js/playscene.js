@@ -26,6 +26,8 @@ class PlayScene
     );
 
     this.trampoline = new Trampoline(10,10,world);
+    this.ball = new Ball(10,5,0.5,world);
+    this.ramp = new Ramp(15,10,world);
 
 
     var fixDef = new b2FixtureDef;
