@@ -25,6 +25,9 @@ class PlayScene
        ,  true                 //allow sleep
     );
 
+    this.trampoline = new Trampoline(10,10,world);
+
+
     var fixDef = new b2FixtureDef;
     fixDef.density = 1.0;
     fixDef.friction = 0.5;
@@ -40,22 +43,38 @@ class PlayScene
     fixDef.shape.SetAsBox(10, 0.5);
     world.CreateBody(bodyDef).CreateFixture(fixDef);
 
+    var fixDef = new b2FixtureDef;
+    fixDef.density = 1.0;
+    fixDef.friction = 0.5;
+    fixDef.restitution = 0.2;
+
+    var bodyDef = new b2BodyDef;
+
+    //create ground
+    bodyDef.type = b2Body.b2_staticBody;
+    bodyDef.position.x = 1;
+    bodyDef.position.y = 10;
+    fixDef.shape = new b2PolygonShape;
+    fixDef.shape.SetAsBox(1, 0.5);
+    world.CreateBody(bodyDef).CreateFixture(fixDef);
+
     //create some objects
     bodyDef.type = b2Body.b2_dynamicBody;
-    for(var i = 0; i < 10; ++i) {
-       if(Math.random() > 0.5) {
+    for(var i = 0; i < 1; ++i) {
+       if(i == 1) {
           fixDef.shape = new b2PolygonShape;
           fixDef.shape.SetAsBox(
-                Math.random() + 0.1 //half width
-             ,  Math.random() + 0.1 //half height
+                1 //half width
+             ,  1 //half height
           );
        } else {
           fixDef.shape = new b2CircleShape(
              Math.random() + 0.1 //radius
           );
        }
-       bodyDef.position.x = Math.random() * 10;
-       bodyDef.position.y = Math.random() * 10;
+       fixDef.restitution = 0.2;
+       bodyDef.position.x = 1;
+       bodyDef.position.y = 1;
        world.CreateBody(bodyDef).CreateFixture(fixDef);
     }
 
