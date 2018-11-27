@@ -20,6 +20,7 @@ class Fan
 
     var bodyDef = new b2BodyDef;
 
+    // Fan shape
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
 		  new b2Vec2(-1 , -1),
@@ -47,6 +48,7 @@ class Fan
 
     var bodyDef = new b2BodyDef;
 
+    // Back shape
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
       new b2Vec2(-1, 0),
@@ -73,7 +75,7 @@ class Fan
     fixDef.restitution = 0.5;
 
     var bodyDef = new b2BodyDef;
-
+    // Bottom platform
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
       new b2Vec2(1.5, 1.2),
@@ -94,6 +96,7 @@ class Fan
 
     var bodyDef = new b2BodyDef;
 
+    // Shaft shape
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
       new b2Vec2(1,0.5),

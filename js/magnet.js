@@ -21,7 +21,7 @@ class Magnet
     fixDef.restitution = 0.5;
 
     var bodyDef = new b2BodyDef;
-
+    // Top bend
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
       new b2Vec2(-1,0.5),
@@ -49,6 +49,7 @@ class Magnet
 
     var bodyDef = new b2BodyDef;
 
+    // Top rect
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
       new b2Vec2(-0, -0.25),
@@ -69,6 +70,7 @@ class Magnet
 
     var bodyDef = new b2BodyDef;
 
+    // Bottom rect
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
       new b2Vec2(-0, -0.25),
@@ -88,6 +90,8 @@ class Magnet
     fixDef.restitution = 0.5;
 
     var bodyDef = new b2BodyDef;
+
+    // Bottom bend
 
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
