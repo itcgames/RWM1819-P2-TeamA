@@ -92,9 +92,12 @@ class PlayScene
     world.ClearForces();
 
     this.time = this.scoreboard.getDisplayTimer();
-    if(this.time == "00:10"){
+    if(this.time == "00:05"){
       this.scoreboard.addToBoard(55)
       console.log(this.scoreboard.getBoard());
+      this.scoreboard.generate_table()
+      gameNs.endScene.render();
+      this.scoreboard.render();
     }
 
 

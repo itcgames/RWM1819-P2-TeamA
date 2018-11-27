@@ -59,6 +59,13 @@ body {
                                    /* offset horizontal: half of text area width */
 }
 
+
+
+.tablegrid{
+  grid-area: t;
+  position: absolute;
+}
+
 /* Landscape layout (with min-width) */
 @media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
     .app {
@@ -76,6 +83,30 @@ h1 {
     overflow:visible;
     padding:0px;
     text-align:center;
+}
+table {
+    border-collapse: collapse;
+}
+
+table {
+  margin-left:50px; text-align:center; border-collapse:collapse;
+  position: absolute;}
+td, th {padding:5px; }
+th {color:white; background-color:blue; font-family:Arial, Helvetica, sans-serif;}
+tr:nth-child(even) {background: #CCC}
+.test{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+    z-index: 10;
+    grid-area: t;
+
 }
 
 .event {
@@ -102,13 +133,13 @@ h1 {
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
- 
+
 @-webkit-keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
- 
+
 .blink {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;

@@ -7,6 +7,12 @@ class EndScene
   constructor(title)
   {
     this.title = title;
+    this.windowWidth = window.innerWidth;
+    this.windowHeight = window.innerHeight;
+    this.img = new Image();
+   this.bgimg = new Image();
+    this.bgimg.src ="img/gameoverbg.png"
+    this.img.src = "img/table.png";
   }
   /**
    * render function which will overwrite the one inherited by scene
@@ -17,10 +23,11 @@ class EndScene
 
     var canvas = document.createElement("mycanvas");
     var ctx = mycanvas.getContext("2d");
-    ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
-    document.body.style.background = "#ffffff";
-    ctx.font = '50px Arial';
-    ctx.fillText(this.title, 10, 50);
+    var imagebg = this.bgimg;
+    var image = this.img;
+    ctx.drawImage(imagebg, 0 , 0,this.windowWidth, this.windowHeight ,0,0, this.windowWidth ,this.windowHeight);
+   ctx.drawImage(image, 0 , 0,918, 761 ,this.windowWidth/3.7,this.windowHeight/7, 918 ,761);
+
 
   }
 

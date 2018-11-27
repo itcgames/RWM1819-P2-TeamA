@@ -2,6 +2,8 @@ class ScoreboardManager
 {
   constructor()
   {
+    this.windowWidth = window.innerWidth;
+    this.windowHeight = window.innerHeight;
     this.scoreboard =  []
     this.count = 0
     this.playerName = ""
@@ -17,6 +19,7 @@ class ScoreboardManager
    this.posX=405;
    this.posY=50;
    this.timerActive = true;
+   
 
   }
   startTimer(){
@@ -212,4 +215,100 @@ class ScoreboardManager
       }
     })
   }
+  generate_table() {
+
+
+
+      var tablecontents = "";
+      tablecontents = "<table>";
+      tablecontents += "<tr>";
+      tablecontents += "<td>" + "Pos" + "</td>";
+      tablecontents += "<td>" + "Name"+ "</td>";
+      tablecontents += "<td>" + "Time" + "</td>";
+      tablecontents += "</tr>";
+      for (var i = 0; i < 5; i ++)
+     {
+        tablecontents += "<tr>";
+        tablecontents += "<td>" + this.scoreboard[i].name + "</td>";
+        tablecontents += "<td>" + this.scoreboard[i].time + "</td>";
+        tablecontents += "<td>" + i * 1000 + "</td>";
+        tablecontents += "</tr>";
+     }
+     tablecontents += "</table>";
+     document.getElementById("table").innerHTML=tablecontents;
+
+}
+  render()
+  {
+
+    var canvas = document.createElement("mycanvas");
+    var ctx = mycanvas.getContext("2d");
+    var imagebg = this.bgimg;
+    var image = this.img;
+
+    var y = 1;
+    var i = 1;
+    var j = 0;
+
+    for(var i = 0; i < this.scoreboard.length; i++){
+
+      var stringName = this.scoreboard[i].name;
+      var stringTime = this.scoreboard[i].time;
+
+      ctx.fillStyle ='black';
+    //  ctx.font = '50px Adventure Regular';
+      //ctx.fillText(positionText, this.windowWidth/7*2, this.windowHeight/8);
+      ctx.font = '40px Adventure Regular';
+      ctx.fillText(stringName, this.windowWidth/3, (51 * y) + this.windowHeight/4.8);
+      ctx.fillText(stringTime, this.windowWidth/7 * 4.2, (51* y) + this.windowHeight/4.8);
+      y=y+1;
+      j=j+1;
+    }
+    //Output for order lowest to highest
+
+/*
+
+    this.position = this.keyValue.indexOf(this.findPos.toString());
+      console.log(this.position);
+      if(j <= 1)
+      {
+
+
+        this.position = this.position + 1;
+      }
+
+    //  console.log("positionText"+this.positionArray);
+/*
+      for (var key in this.leaderboard) {
+      // check if the property/key is defined in the object itself, not in parent
+
+      if (this.ordered.hasOwnProperty(key) && j < 7 ) {
+        var positionText = "You placed "+ this.position +" out of "+this.positionArray.length;
+        var stringName = (this.ordered)[key];
+        this.diff = this.duration - (((Date.now() - gameNs.start) / 1000) | 0);
+
+        // does the same job as parseInt truncates the float
+        this.minutes = (key/ 60) | 0;
+        this.seconds = (key % 60) | 0;
+
+        this.minutes = this.minutes < 10 ? "0" + this.minutes : this.minutes;
+        this.seconds = this.seconds < 10 ? "0" + this.seconds : this.seconds;
+        var stringScore = (this.minutes+":"+this.seconds);
+        var positionText = "You placed "+ this.position +" out of "+this.keyValue.length;
+
+
+        i = i+1;
+        ctx.fillStyle ='black';
+        ctx.font = '50px Adventure Regular';
+        ctx.fillText(positionText, this.windowWidth/7*2, this.windowHeight/8);
+        ctx.font = '40px Adventure Regular';
+        ctx.fillText(stringName, this.windowWidth/3, (51 * y) + this.windowHeight/4.8);
+        ctx.fillText(stringScore, this.windowWidth/7 * 4.2, (51* y) + this.windowHeight/4.8);
+        y=y+1;
+        j=j+1;
+
+        */
+      }
+
+      //ctx.fillText("Press Back to return to the menu  <-", this.windowWidth/7 * 1.7, this.windowHeight/6 * 5.8);
 }
