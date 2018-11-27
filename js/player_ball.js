@@ -1,4 +1,5 @@
 
+
 class PlayerBall
 {
   constructor(x,y,radius,world) {
@@ -11,7 +12,7 @@ class PlayerBall
        ;
     this.imageX = x;
     this.imageY = y;
-
+    this.body;
     var fixDef = new b2FixtureDef;
     fixDef.density = radius * 1;
     fixDef.friction = 0.5;
@@ -25,12 +26,22 @@ class PlayerBall
     bodyDef.position.y = y;
     fixDef.shape = new b2CircleShape(radius);
 
-    var body = world.CreateBody(bodyDef)
-    body.CreateFixture(fixDef);
+    this.body = world.CreateBody(bodyDef)
+    this.body.CreateFixture(fixDef);
 	//	body.GetBody().ApplyImpulse(
 	//		new b2Vec2(100000,100000),
 	//		body.GetBody().GetWorldCenter()
 	//	);
+
+  }
+  checkFan(fanX,fanY)
+  {
+     if(this.body.GetPosition().x > fanX && this.body.GetPosition().y > fanY - 2
+     && this.body.GetPosition().y < fanY + 2){
+       console.log("YIKES");
+     }
+     console.log(this.body.GetPosition().x);
+     console.log(fanX);
 
   }
   getPositionX()

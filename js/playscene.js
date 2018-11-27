@@ -26,13 +26,14 @@ class PlayScene
     );
 
     this.trampoline = new Trampoline(10,10,world);
-    this.player = new PlayerBall(1,1,0.5,world);
+    this.player = new PlayerBall(10,1,0.5,world);
     this.ball = new Ball(10,5,0.5,world);
     this.ramp = new Ramp(15,10,world);
     this.fan = new Fan(9,5,world);
     this.magnet = new Magnet(4,5,world);
     this.blowPipe = new BlowPipe(4,1.5,true,world);
     this.blowPipe2 = new BlowPipe(4,3,false,world);
+
 
     //Jamie
     var canvas = document.querySelector('canvas');
@@ -103,6 +104,8 @@ class PlayScene
   }
   update()
   {
+    this.player.checkFan(this.fan.getPositionX()
+    ,this.fan.getPositionY());
       world.Step(
           1 / 60   //frame-rate
        ,  10       //velocity iterations
