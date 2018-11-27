@@ -26,6 +26,12 @@ class Ball
     fixDef.shape = new b2CircleShape(radius);
     world.CreateBody(bodyDef).CreateFixture(fixDef);
 
+    var body = world.CreateBody(bodyDef).CreateFixture(fixDef);
+		body.GetBody().ApplyImpulse(
+			new b2Vec2(100000,100000),
+			body.GetBody().GetWorldCenter()
+		);
+
   }
 
 
