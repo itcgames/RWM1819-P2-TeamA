@@ -25,9 +25,9 @@ class Ramp
 
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
-		  new b2Vec2(0 , -1),
+		  new b2Vec2(0 , 0),
 		  new b2Vec2(1, 1),
-		  new b2Vec2(-1, 1),
+		  new b2Vec2(0, 1),
 		  ]);
 		bodyDef.position.Set(x,y);
 
