@@ -32,18 +32,17 @@ class BlowPipe
 		  new b2Vec2(1.1, 0.6),
 		  new b2Vec2(0, 1.1),
 		  ]);
-		bodyDef.position.Set(x,y);
-
-    //create ground
+      
+    bodyDef.position.Set(x,y);
     bodyDef.type = b2Body.b2_staticBody;
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+    var body = world.CreateBody(bodyDef);
+    body.CreateFixture(fixDef);
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
     fixDef.friction = 0.5;
     fixDef.restitution = 0.5;
 
-    var bodyDef = new b2BodyDef;
 
 
 
@@ -56,18 +55,18 @@ class BlowPipe
       new b2Vec2(1.55, 0.7),
 
 		  ]);
-		bodyDef.position.Set(x,y);
 
-    //create ground
-    bodyDef.type = b2Body.b2_staticBody;
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+
+
+    body.CreateFixture(fixDef);
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
     fixDef.friction = 0.5;
     fixDef.restitution = 0.5;
 
-    var bodyDef = new b2BodyDef;
+
 
 
 
@@ -80,18 +79,18 @@ class BlowPipe
       new b2Vec2(-0.4, -0.1),
 
 		  ]);
-		bodyDef.position.Set(x,y);
 
-    //create ground
-    bodyDef.type = b2Body.b2_staticBody;
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+
+
+    body.CreateFixture(fixDef);
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
     fixDef.friction = 0.5;
     fixDef.restitution = 0.5;
 
-    var bodyDef = new b2BodyDef;
+
 
 
 
@@ -104,11 +103,11 @@ class BlowPipe
       new b2Vec2(-0.4, 1),
 
 		  ]);
-		bodyDef.position.Set(x,y);
 
-    //create ground
-    bodyDef.type = b2Body.b2_staticBody;
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+
+
+    body.CreateFixture(fixDef);
 
     //Create Deflated objects
   }else{
@@ -117,8 +116,8 @@ class BlowPipe
     fixDef.friction = 0.5;
     fixDef.restitution = 0.5;
 
-    var bodyDef = new b2BodyDef;
 
+    var bodyDef = new b2BodyDef;
 
 
     // Triangle
@@ -129,18 +128,20 @@ class BlowPipe
 		  new b2Vec2(1.1, 0.6),
 		  new b2Vec2(0, 0.7),
 		  ]);
-		bodyDef.position.Set(x,y);
-
-    //create ground
+    bodyDef.position.Set(x,y);
     bodyDef.type = b2Body.b2_staticBody;
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+    var body = world.CreateBody(bodyDef);
+    body.CreateFixture(fixDef);
+
+
+
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
     fixDef.friction = 0.5;
     fixDef.restitution = 0.5;
 
-    var bodyDef = new b2BodyDef;
+
 
 
 
@@ -153,18 +154,18 @@ class BlowPipe
       new b2Vec2(1.55, 0.7),
 
 		  ]);
-		bodyDef.position.Set(x,y);
 
-    //create ground
-    bodyDef.type = b2Body.b2_staticBody;
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+
+
+    body.CreateFixture(fixDef);
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
     fixDef.friction = 0.5;
     fixDef.restitution = 0.5;
 
-    var bodyDef = new b2BodyDef;
+
 
 
 
@@ -177,18 +178,18 @@ class BlowPipe
       new b2Vec2(-0.4, 0.3),
 
 		  ]);
-		bodyDef.position.Set(x,y);
 
-    //create ground
-    bodyDef.type = b2Body.b2_staticBody;
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+
+
+    body.CreateFixture(fixDef);
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
     fixDef.friction = 0.5;
     fixDef.restitution = 0.5;
 
-    var bodyDef = new b2BodyDef;
+
 
 
 
@@ -201,11 +202,11 @@ class BlowPipe
       new b2Vec2(-0.4, 0.6),
 
 		  ]);
-		bodyDef.position.Set(x,y);
 
-    //create ground
-    bodyDef.type = b2Body.b2_staticBody;
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+
+
+    body.CreateFixture(fixDef);
   }
 
   }

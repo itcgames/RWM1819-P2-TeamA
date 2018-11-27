@@ -31,7 +31,7 @@ class Ramp
 		  ]);
 		bodyDef.position.Set(x,y);
 
-    //create ground
+
     bodyDef.type = b2Body.b2_staticBody;
     world.CreateBody(bodyDef).CreateFixture(fixDef);
 

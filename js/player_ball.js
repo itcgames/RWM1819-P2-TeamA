@@ -1,5 +1,5 @@
 
-class Ball
+class PlayerBall
 {
   constructor(x,y,radius,world) {
     var   b2Vec2 = Box2D.Common.Math.b2Vec2
@@ -24,16 +24,23 @@ class Ball
     bodyDef.position.x = x;
     bodyDef.position.y = y;
     fixDef.shape = new b2CircleShape(radius);
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
 
-    var body = world.CreateBody(bodyDef).CreateFixture(fixDef);
-		body.GetBody().ApplyImpulse(
-			new b2Vec2(100000,100000),
-			body.GetBody().GetWorldCenter()
-		);
+    var body = world.CreateBody(bodyDef)
+    body.CreateFixture(fixDef);
+	//	body.GetBody().ApplyImpulse(
+	//		new b2Vec2(100000,100000),
+	//		body.GetBody().GetWorldCenter()
+	//	);
 
   }
+  getPositionX()
+  {
 
+  }
+  getPositionY()
+  {
+
+  }
 
   render(){}
   /**

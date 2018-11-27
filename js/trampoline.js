@@ -22,7 +22,7 @@ class Trampoline
 
     var bodyDef = new b2BodyDef;
 
-    //create ground
+
     bodyDef.type = b2Body.b2_staticBody;
     bodyDef.position.x = x;
     bodyDef.position.y = y;
@@ -37,7 +37,7 @@ class Trampoline
 
     //var bodyDef = new b2BodyDef;
 
-    //create ground
+
     bodyDef.type = b2Body.b2_staticBody;
     bodyDef.position.x = x -1.2;
     bodyDef.position.y = y + 0.3;
@@ -52,7 +52,7 @@ class Trampoline
 
     //var bodyDef = new b2BodyDef;
 
-    //create ground
+
     bodyDef.type = b2Body.b2_staticBody;
     bodyDef.position.x = x +1.2;
     bodyDef.position.y = y+0.3;

@@ -37,17 +37,15 @@ class Magnet
 
 		  ]);
 		bodyDef.position.Set(x,y);
-
-    //create ground
     bodyDef.type = b2Body.b2_staticBody;
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+    var body = world.CreateBody(bodyDef);
+    body.CreateFixture(fixDef);
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
     fixDef.friction = 0.5;
     fixDef.restitution = 0.5;
 
-    var bodyDef = new b2BodyDef;
 
     // Top rect
     fixDef.shape = new b2PolygonShape;
@@ -57,60 +55,56 @@ class Magnet
       new b2Vec2(0.75,0),
       new b2Vec2(0 , 0),
 		  ]);
-		bodyDef.position.Set(x,y);
 
-    //create ground
-    bodyDef.type = b2Body.b2_staticBody;
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+
+
+    body.CreateFixture(fixDef);
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
     fixDef.friction = 0.5;
     fixDef.restitution = 0.5;
 
-    var bodyDef = new b2BodyDef;
 
     // Bottom rect
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
-      new b2Vec2(-0, -0.25),
-      new b2Vec2(0.75 , -0.25),
-      new b2Vec2(0.75,0),
-      new b2Vec2(0 , 0),
+      new b2Vec2(-0, 1),
+      new b2Vec2(0.75 , 1),
+      new b2Vec2(0.75,1.25),
+      new b2Vec2(0 , 1.25),
 		  ]);
-		bodyDef.position.Set(x,y + 1.25);
 
-    //create ground
-    bodyDef.type = b2Body.b2_staticBody;
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+
+
+    body.CreateFixture(fixDef);
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
     fixDef.friction = 0.5;
     fixDef.restitution = 0.5;
-
-    var bodyDef = new b2BodyDef;
 
     // Bottom bend
 
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
-      new b2Vec2(-1,-0.5),
-      new b2Vec2(-0.9, -0.3),
-      new b2Vec2(-0.8,-0.2),
-      new b2Vec2(-0.7,-0.1),
-      new b2Vec2(-0.6,-0.05),
-      new b2Vec2(-0.5,-0),
-      new b2Vec2(-0.25, 0.15),
-      new b2Vec2(0, 0.25),
-      new b2Vec2(0,0),
-      new b2Vec2(-0.8, -0.5),
+      new b2Vec2(-1,0.5),
+      new b2Vec2(-0.9, 0.7),
+      new b2Vec2(-0.8,0.8),
+      new b2Vec2(-0.7,0.9),
+      new b2Vec2(-0.6,0.95),
+      new b2Vec2(-0.5,1),
+      new b2Vec2(-0.25, 1.15),
+      new b2Vec2(0, 1.25),
+      new b2Vec2(0,1),
+      new b2Vec2(-0.8, 0.5),
 		  ]);
-		bodyDef.position.Set(x,y + 1);
 
-    //create ground
-    bodyDef.type = b2Body.b2_staticBody;
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+
+    body.CreateFixture(fixDef);
 
 
 

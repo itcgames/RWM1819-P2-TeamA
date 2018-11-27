@@ -37,78 +37,73 @@ class Fan
 		  ]);
 		bodyDef.position.Set(x,y);
 
-    //create ground
+
     bodyDef.type = b2Body.b2_staticBody;
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+    var body = world.CreateBody(bodyDef);
+    body.CreateFixture(fixDef);
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
     fixDef.friction = 0.5;
     fixDef.restitution = 0.5;
 
-    var bodyDef = new b2BodyDef;
 
     // Back shape
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
-      new b2Vec2(-1, 0),
-      new b2Vec2(-0.90,-0.125),
-      new b2Vec2(-0.70 , -0.25),
-      new b2Vec2(-0.40, -0.375),
-      new b2Vec2(-0, -0.5),
-      new b2Vec2(1 , -0.5),
-      new b2Vec2(1,0.5),
-      new b2Vec2(0 , 0.5),
-      new b2Vec2(-0.40, 0.375),
-      new b2Vec2(-0.70,0.25),
-      new b2Vec2(-0.90 , 0.125),
+      new b2Vec2(-3, 0),
+      new b2Vec2(-2.90,-0.125),
+      new b2Vec2(-2.70 , -0.25),
+      new b2Vec2(-2.40, -0.375),
+      new b2Vec2(-2, -0.5),
+      new b2Vec2(-1 , -0.5),
+      new b2Vec2(-1,0.5),
+      new b2Vec2(-2 , 0.5),
+      new b2Vec2(-2.40, 0.375),
+      new b2Vec2(-2.70,0.25),
+      new b2Vec2(-2.90 , 0.125),
 		  ]);
-		bodyDef.position.Set(x-2,y);
 
-    //create ground
-    bodyDef.type = b2Body.b2_staticBody;
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+    body.CreateFixture(fixDef);
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
     fixDef.friction = 0.5;
     fixDef.restitution = 0.5;
 
-    var bodyDef = new b2BodyDef;
     // Bottom platform
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
-      new b2Vec2(1.5, 1.2),
-      new b2Vec2(1.5,1.5),
-      new b2Vec2(-0.5 , 1.5),
       new b2Vec2(-0.5, 1.2),
+      new b2Vec2(-0.5,1.5),
+      new b2Vec2(-2.5 , 1.5),
+      new b2Vec2(-2.5, 1.2),
 		  ]);
-		bodyDef.position.Set(x - 2,y);
 
-    //create ground
-    bodyDef.type = b2Body.b2_staticBody;
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+
+    body.CreateFixture(fixDef);
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
     fixDef.friction = 0.5;
     fixDef.restitution = 0.5;
 
-    var bodyDef = new b2BodyDef;
 
     // Shaft shape
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
-      new b2Vec2(1,0.5),
-      new b2Vec2(1 , 1.2),
-      new b2Vec2(0,1.2),
-      new b2Vec2(0 ,0.5),
+      new b2Vec2(-1,0.5),
+      new b2Vec2(-1 , 1.2),
+      new b2Vec2(-2,1.2),
+      new b2Vec2(-2 ,0.5),
 		  ]);
-		bodyDef.position.Set(x - 2,y);
 
-    //create ground
-    bodyDef.type = b2Body.b2_staticBody;
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+
+
+;
+    body.CreateFixture(fixDef);
 
   }
 
