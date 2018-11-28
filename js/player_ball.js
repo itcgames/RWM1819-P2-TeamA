@@ -3,13 +3,13 @@
 class PlayerBall
 {
   constructor(x,y,radius,world) {
-    var   b2Vec2 = Box2D.Common.Math.b2Vec2
-     ,	b2BodyDef = Box2D.Dynamics.b2BodyDef
+     var	b2BodyDef = Box2D.Dynamics.b2BodyDef
      ,	b2Body = Box2D.Dynamics.b2Body
      ,	b2FixtureDef = Box2D.Dynamics.b2FixtureDef
      ,	b2Fixture = Box2D.Dynamics.b2Fixture
      ,	b2CircleShape = Box2D.Collision.Shapes.b2CircleShape
        ;
+    this.b2Vec2 = Box2D.Common.Math.b2Vec2
     this.imageX = x;
     this.imageY = y;
     this.body;
@@ -25,9 +25,10 @@ class PlayerBall
     bodyDef.position.x = x;
     bodyDef.position.y = y;
     fixDef.shape = new b2CircleShape(radius);
+    this.body = world.CreateBody(bodyDef);
+    this.bodyAndFixture = this.body.CreateFixture(fixDef);
 
-    this.body = world.CreateBody(bodyDef)
-    this.body.CreateFixture(fixDef);
+    this.impApplied = false;
 	//	body.GetBody().ApplyImpulse(
 	//		new b2Vec2(100000,100000),
 	//		body.GetBody().GetWorldCenter()
@@ -36,12 +37,16 @@ class PlayerBall
   }
   checkFan(fanX,fanY)
   {
-     if(this.body.GetPosition().x > fanX && this.body.GetPosition().y > fanY - 2
-     && this.body.GetPosition().y < fanY + 2){
-       console.log("YIKES");
+     if(this.body.GetPosition().x > fanX && this.body.GetPosition().y > fanY - 1.5
+     && this.body.GetPosition().y < fanY + 1.5){
+      // if(this.impApplied == false){
+   		    this.bodyAndFixture.GetBody().ApplyForce(
+   			  new this.b2Vec2(10,-3),
+   		  	this.bodyAndFixture.GetBody().GetWorldCenter()
+   		   );
+      //this.impApplied = true;
+      //}
      }
-     console.log(this.body.GetPosition().x);
-     console.log(fanX);
 
   }
   getPositionX()
