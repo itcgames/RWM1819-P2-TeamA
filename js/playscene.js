@@ -125,6 +125,7 @@ class PlayScene
    this.trampoline.render();
    this.ramp.render();
    this.fan.render();
+   this.magnet.render();
 
   }
 }
