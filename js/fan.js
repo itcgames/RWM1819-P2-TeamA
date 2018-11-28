@@ -42,6 +42,7 @@ class Fan
     bodyDef.type = b2Body.b2_staticBody;
     this.body = world.CreateBody(bodyDef);
     this.body.CreateFixture(fixDef);
+    this.body.SetUserData("Fan");
 
 
     var fixDef = new b2FixtureDef;

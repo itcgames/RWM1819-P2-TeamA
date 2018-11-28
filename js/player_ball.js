@@ -8,8 +8,13 @@ class PlayerBall
      ,	b2FixtureDef = Box2D.Dynamics.b2FixtureDef
      ,	b2Fixture = Box2D.Dynamics.b2Fixture
      ,	b2CircleShape = Box2D.Collision.Shapes.b2CircleShape
+     ,  listener = new Box2D.Dynamics.b2ContactListener;
        ;
     this.b2Vec2 = Box2D.Common.Math.b2Vec2
+    this.listener = new Box2D.Dynamics.b2ContactListener;
+
+    this.world = world;
+
     this.imageX = x;
     this.imageY = y;
     this.body;
@@ -33,6 +38,7 @@ class PlayerBall
 	//		new b2Vec2(100000,100000),
 	//		body.GetBody().GetWorldCenter()
 	//	);
+    this.body.SetUserData("Player");
 
   }
   checkFan(fanX,fanY)
@@ -41,13 +47,31 @@ class PlayerBall
      && this.body.GetPosition().y < fanY + 1.5){
       // if(this.impApplied == false){
    		    this.bodyAndFixture.GetBody().ApplyForce(
-   			  new this.b2Vec2(10,-3),
+   			  new this.b2Vec2(0,0),
    		  	this.bodyAndFixture.GetBody().GetWorldCenter()
    		   );
       //this.impApplied = true;
       //}
      }
 
+  }
+  checkCollision()
+  {
+    //console.log(this.body.GetUserData());
+    this.listener.BeginContact = function(contact) {
+         console.log(contact.GetFixtureA().GetBody().GetUserData());
+         console.log(contact.GetFixtureB().GetBody().GetUserData());
+    }
+    this.listener.EndContact = function(contact) {
+         console.log(contact.GetFixtureA().GetBody().GetUserData());
+    }
+    this.listener.PostSolve = function(contact, impulse) {
+        // Can overide contact here
+    }
+    this.listener.PreSolve = function(contact, oldManifold) {
+        // Includes impulse from contact
+    }
+    this.world.SetContactListener(this.listener);
   }
   getPositionX()
   {

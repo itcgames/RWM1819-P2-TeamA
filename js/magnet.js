@@ -40,6 +40,7 @@ class Magnet
     bodyDef.type = b2Body.b2_staticBody;
     var body = world.CreateBody(bodyDef);
     body.CreateFixture(fixDef);
+    body.SetUserData("Magnet");
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;

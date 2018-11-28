@@ -33,7 +33,9 @@ class Ramp
 
 
     bodyDef.type = b2Body.b2_staticBody;
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+    var body = world.CreateBody(bodyDef);
+    body.CreateFixture(fixDef);
+    body.SetUserData("Ramp");
 
   }
 

@@ -52,7 +52,9 @@ class PlayScene
     bodyDef.position.y = 13;
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsBox(10, 0.5);
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+    var groundBody = world.CreateBody(bodyDef);
+    groundBody.CreateFixture(fixDef);
+    groundBody.SetUserData("Ground");
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1.0;
@@ -104,6 +106,7 @@ class PlayScene
   }
   update()
   {
+    this.player.checkCollision();
     this.player.checkFan(this.fan.getPositionX()
     ,this.fan.getPositionY());
       world.Step(
