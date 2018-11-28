@@ -62,9 +62,9 @@ class BlowPipe
     // Top back
     fixDef.shape = new this.b2PolygonShape;
     fixDef.shape.SetAsArray([
-      new this.b2Vec2(0, 0.1),
-      new this.b2Vec2(0, -0.1),
       new this.b2Vec2(-0.4, -0.3),
+      new this.b2Vec2(0, -0.1),
+      new this.b2Vec2(0, 0.1),
       new this.b2Vec2(-0.4, -0.1),
 		  ]);
 
@@ -135,9 +135,9 @@ class BlowPipe
     // Back top
     fixDef.shape = new this.b2PolygonShape;
     fixDef.shape.SetAsArray([
-      new this.b2Vec2(0, 0.5),
-      new this.b2Vec2(0, 0.3),
       new this.b2Vec2(-0.4, 0.1),
+      new this.b2Vec2(0, 0.3),
+      new this.b2Vec2(0, 0.5),
       new this.b2Vec2(-0.4, 0.3),
 
 		  ]);
@@ -208,9 +208,9 @@ while (fix) {
       // Back top
       fixDef.shape = new this.b2PolygonShape;
       fixDef.shape.SetAsArray([
-        new this.b2Vec2(0, 0.5),
-        new this.b2Vec2(0, 0.3),
         new this.b2Vec2(-0.4, 0.1),
+        new this.b2Vec2(0, 0.3),
+        new this.b2Vec2(0, 0.5),
         new this.b2Vec2(-0.4, 0.3),
 
   		  ]);

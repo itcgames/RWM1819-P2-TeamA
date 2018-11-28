@@ -38,9 +38,9 @@ class Magnet
 		  ]);
 		bodyDef.position.Set(x,y);
     bodyDef.type = b2Body.b2_staticBody;
-    var body = world.CreateBody(bodyDef);
-    body.CreateFixture(fixDef);
-    body.SetUserData("Magnet");
+    this.body = world.CreateBody(bodyDef);
+    this.body.CreateFixture(fixDef);
+    this.body.SetUserData("Magnet");
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
@@ -60,7 +60,7 @@ class Magnet
 
 
 
-    body.CreateFixture(fixDef);
+    this.body.CreateFixture(fixDef);
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
@@ -80,7 +80,7 @@ class Magnet
 
 
 
-    body.CreateFixture(fixDef);
+    this.body.CreateFixture(fixDef);
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
@@ -105,13 +105,19 @@ class Magnet
 
 
 
-    body.CreateFixture(fixDef);
+    this.body.CreateFixture(fixDef);
 
 
 
   }
 
+  getPositionX(){
+    return this.body.GetPosition().x;
 
+  }
+  getPositionY(){
+    return this.body.GetPosition().y;
+  }
   render(){}
   /**
    * Draws an image after it is loaded.

@@ -106,6 +106,8 @@ class PlayScene
     this.player.checkCollision();
     this.player.checkFan(this.fan.getPositionX()
     ,this.fan.getPositionY());
+    this.player.checkMagnet(this.magnet.getPositionX()
+    ,this.magnet.getPositionY());
       world.Step(
           1 / 60   //frame-rate
        ,  10       //velocity iterations
