@@ -20,6 +20,7 @@ class Trampoline
     this.imgX = (x *30) - 45; // X position on screen, Multipling and substracting to get position right
     this.imgY = (y *30) - 8;  // Y position on screen, Multipling and substracting to get position right
 
+    // controllers for animation speed and where it starts
     this.animeSpeed = 10;
     this.animeSpeedIndex = 0;
 

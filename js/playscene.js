@@ -124,6 +124,7 @@ class PlayScene
    document.body.style.background = "#ffffff";
    this.trampoline.render();
    this.ramp.render();
+   this.fan.render();
 
   }
 }
