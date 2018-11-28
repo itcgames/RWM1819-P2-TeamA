@@ -32,11 +32,12 @@ class BlowPipe
 		  new b2Vec2(1.1, 0.6),
 		  new b2Vec2(0, 1.1),
 		  ]);
-      
+
     bodyDef.position.Set(x,y);
     bodyDef.type = b2Body.b2_staticBody;
     var body = world.CreateBody(bodyDef);
     body.CreateFixture(fixDef);
+    body.SetUserData("BlowPipe");
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
@@ -132,6 +133,7 @@ class BlowPipe
     bodyDef.type = b2Body.b2_staticBody;
     var body = world.CreateBody(bodyDef);
     body.CreateFixture(fixDef);
+    body.SetUserData("BlowPipeUsed")
 
 
 

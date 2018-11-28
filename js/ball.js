@@ -24,13 +24,15 @@ class Ball
     bodyDef.position.x = x;
     bodyDef.position.y = y;
     fixDef.shape = new b2CircleShape(radius);
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+    var body = world.CreateBody(bodyDef);
+    body.CreateFixture(fixDef);
+    body.SetUserData("Ball");
 
-    var body = world.CreateBody(bodyDef).CreateFixture(fixDef);
+/*    var body = world.CreateBody(bodyDef).CreateFixture(fixDef);
 		body.GetBody().ApplyImpulse(
 			new b2Vec2(100000,100000),
 			body.GetBody().GetWorldCenter()
-		);
+		); */
 
   }
 

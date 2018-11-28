@@ -1,5 +1,5 @@
 
-class Magnet
+class GoalCup
 {
   constructor(x,y,world) {
     var   b2Vec2 = Box2D.Common.Math.b2Vec2
@@ -21,26 +21,19 @@ class Magnet
     fixDef.restitution = 0.5;
 
     var bodyDef = new b2BodyDef;
-    // Top bend
+    // Left Wall
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
-      new b2Vec2(-1,0.5),
-      new b2Vec2(-0.9, 0.3),
-      new b2Vec2(-0.8,0.2),
-      new b2Vec2(-0.7,0.1),
-      new b2Vec2(-0.6,0.05),
-      new b2Vec2(-0.5,0),
-      new b2Vec2(-0.25, -0.15),
-      new b2Vec2(0, -0.25),
-      new b2Vec2(0,0),
-      new b2Vec2(-0.8, 0.5),
-
+      new b2Vec2(-1,0),
+      new b2Vec2(-1.2, -2),
+      new b2Vec2(-1,-2),
+      new b2Vec2(-0.8,0),
 		  ]);
 		bodyDef.position.Set(x,y);
     bodyDef.type = b2Body.b2_staticBody;
     var body = world.CreateBody(bodyDef);
     body.CreateFixture(fixDef);
-    body.SetUserData("Magnet");
+    body.SetUserData("Cup");
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
@@ -48,17 +41,29 @@ class Magnet
     fixDef.restitution = 0.5;
 
 
-    // Top rect
+    // Right Wall
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
-      new b2Vec2(-0, -0.25),
-      new b2Vec2(0.75 , -0.25),
-      new b2Vec2(0.75,0),
-      new b2Vec2(0 , 0),
+      new b2Vec2(0.8,0),
+      new b2Vec2(1, -2),
+      new b2Vec2(1.2,-2),
+      new b2Vec2(1,0),
+      ]);
+    body.CreateFixture(fixDef);
+
+    var fixDef = new b2FixtureDef;
+    fixDef.density = 1;
+    fixDef.friction = 0.5;
+    fixDef.restitution = 0.5;
+
+    // Bottom
+    fixDef.shape = new b2PolygonShape;
+    fixDef.shape.SetAsArray([
+      new b2Vec2(-1,0),
+      new b2Vec2(1, 0),
+      new b2Vec2(1,0.2),
+      new b2Vec2(-1,0.2),
 		  ]);
-
-
-
 
     body.CreateFixture(fixDef);
 
@@ -67,45 +72,20 @@ class Magnet
     fixDef.friction = 0.5;
     fixDef.restitution = 0.5;
 
-
-    // Bottom rect
-    fixDef.shape = new b2PolygonShape;
-    fixDef.shape.SetAsArray([
-      new b2Vec2(-0, 1),
-      new b2Vec2(0.75 , 1),
-      new b2Vec2(0.75,1.25),
-      new b2Vec2(0 , 1.25),
-		  ]);
-
-
-
-
-    body.CreateFixture(fixDef);
-
-    var fixDef = new b2FixtureDef;
-    fixDef.density = 1;
-    fixDef.friction = 0.5;
-    fixDef.restitution = 0.5;
-
-    // Bottom bend
+    var goalBodyDef = new b2BodyDef;
 
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
-      new b2Vec2(-1,0.5),
-      new b2Vec2(-0.9, 0.7),
-      new b2Vec2(-0.8,0.8),
-      new b2Vec2(-0.7,0.9),
-      new b2Vec2(-0.6,0.95),
-      new b2Vec2(-0.5,1),
-      new b2Vec2(-0.25, 1.15),
-      new b2Vec2(0, 1.25),
-      new b2Vec2(0,1),
-      new b2Vec2(-0.8, 0.5),
+      new b2Vec2(-0.8,0),
+      new b2Vec2(-0.8,-0.1),
+      new b2Vec2(0.8,-0.1),
+      new b2Vec2(0.8, 0),
 		  ]);
-
-
-
-    body.CreateFixture(fixDef);
+		goalBodyDef.position.Set(x,y);
+    goalBodyDef.type = b2Body.b2_staticBody;
+    var goalBody = world.CreateBody(goalBodyDef);
+    goalBody.CreateFixture(fixDef);
+    goalBody.SetUserData("CupGoal");
 
 
 

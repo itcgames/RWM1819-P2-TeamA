@@ -1,4 +1,5 @@
 
+
 class Fan
 {
   constructor(x,y,world) {
@@ -39,8 +40,10 @@ class Fan
 
 
     bodyDef.type = b2Body.b2_staticBody;
-    var body = world.CreateBody(bodyDef);
-    body.CreateFixture(fixDef);
+    this.body = world.CreateBody(bodyDef);
+    this.body.CreateFixture(fixDef);
+    this.body.SetUserData("Fan");
+
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
@@ -65,7 +68,7 @@ class Fan
 		  ]);
 
 
-    body.CreateFixture(fixDef);
+    this.body.CreateFixture(fixDef);
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
@@ -83,7 +86,7 @@ class Fan
 
 
 
-    body.CreateFixture(fixDef);
+    this.body.CreateFixture(fixDef);
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
@@ -103,10 +106,16 @@ class Fan
 
 
 ;
-    body.CreateFixture(fixDef);
+    this.body.CreateFixture(fixDef);
 
   }
+  getPositionX(){
+    return this.body.GetPosition().x;
 
+  }
+  getPositionY(){
+    return this.body.GetPosition().y;
+  }
 
   render(){}
   /**

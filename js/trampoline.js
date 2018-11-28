@@ -22,13 +22,14 @@ class Trampoline
 
     var bodyDef = new b2BodyDef;
 
-
     bodyDef.type = b2Body.b2_staticBody;
     bodyDef.position.x = x;
     bodyDef.position.y = y;
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsBox(1, 0.2);
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+    var bodyTop = world.CreateBody(bodyDef);
+    bodyTop.CreateFixture(fixDef);
+    bodyTop.SetUserData("TrampolineTop");
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1.0;
@@ -36,14 +37,15 @@ class Trampoline
     fixDef.restitution = 0.2;
 
     //var bodyDef = new b2BodyDef;
-
 
     bodyDef.type = b2Body.b2_staticBody;
     bodyDef.position.x = x -1.2;
     bodyDef.position.y = y + 0.3;
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsBox(0.2, 0.5);
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+    var bodyLeft = world.CreateBody(bodyDef);
+    bodyLeft.CreateFixture(fixDef);
+    bodyLeft.SetUserData("TrampolineLeft");
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1.0;
@@ -52,14 +54,14 @@ class Trampoline
 
     //var bodyDef = new b2BodyDef;
 
-
     bodyDef.type = b2Body.b2_staticBody;
     bodyDef.position.x = x +1.2;
     bodyDef.position.y = y+0.3;
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsBox(0.2, 0.5);
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
-
+    var bodyRight = world.CreateBody(bodyDef);
+    bodyRight.CreateFixture(fixDef);
+    bodyRight.SetUserData("TrampolineRight");
   }
 
 
