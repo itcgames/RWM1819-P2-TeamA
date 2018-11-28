@@ -47,7 +47,7 @@ class PlayerBall
      && this.body.GetPosition().y < fanY + 1.5){
       // if(this.impApplied == false){
    		    this.bodyAndFixture.GetBody().ApplyForce(
-   			  new this.b2Vec2(0,0),
+   			  new this.b2Vec2(10,-3),
    		  	this.bodyAndFixture.GetBody().GetWorldCenter()
    		   );
       //this.impApplied = true;
