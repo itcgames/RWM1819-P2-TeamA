@@ -15,6 +15,8 @@ class PlayerBall
 
     this.world = world;
 
+    this.fanOn = false;
+
     this.imageX = x;
     this.imageY = y;
     this.body;
@@ -43,6 +45,8 @@ class PlayerBall
   }
   checkFan(fanX,fanY)
   {
+    if(this.fanOn == true)
+    {
      if(this.body.GetPosition().x > fanX && this.body.GetPosition().y > fanY - 1.5
      && this.body.GetPosition().y < fanY + 1.5){
       // if(this.impApplied == false){
@@ -53,6 +57,7 @@ class PlayerBall
       //this.impApplied = true;
       //}
      }
+   }
 
   }
   checkCollision()
@@ -61,6 +66,11 @@ class PlayerBall
     this.listener.BeginContact = function(contact) {
          console.log(contact.GetFixtureA().GetBody().GetUserData());
          console.log(contact.GetFixtureB().GetBody().GetUserData());
+         if(contact.GetFixtureA().GetBody().GetUserData() == "Player" && contact.GetFixtureB().GetBody().GetUserData() == "CupGoal"
+       || contact.GetFixtureA().GetBody().GetUserData() == "CupGoal" && contact.GetFixtureB().GetBody().GetUserData() == "Player")
+         {
+           console.log("WINNER WINNER CHICKEN DINNERS");
+         }
     }
     this.listener.EndContact = function(contact) {
          console.log(contact.GetFixtureA().GetBody().GetUserData());

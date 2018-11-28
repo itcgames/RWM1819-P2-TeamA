@@ -21,7 +21,7 @@ class GoalCup
     fixDef.restitution = 0.5;
 
     var bodyDef = new b2BodyDef;
-    // LeftWall
+    // Left Wall
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
       new b2Vec2(-1,0),
@@ -40,15 +40,15 @@ class GoalCup
     fixDef.friction = 0.5;
     fixDef.restitution = 0.5;
 
+
     // Right Wall
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
-      new b2Vec2(1,0),
-      new b2Vec2(1.2, -2),
-      new b2Vec2(1,-2),
       new b2Vec2(0.8,0),
-		  ]);
-
+      new b2Vec2(1, -2),
+      new b2Vec2(1.2,-2),
+      new b2Vec2(1,0),
+      ]);
     body.CreateFixture(fixDef);
 
     var fixDef = new b2FixtureDef;
@@ -66,6 +66,26 @@ class GoalCup
 		  ]);
 
     body.CreateFixture(fixDef);
+
+    var fixDef = new b2FixtureDef;
+    fixDef.density = 1;
+    fixDef.friction = 0.5;
+    fixDef.restitution = 0.5;
+
+    var goalBodyDef = new b2BodyDef;
+
+    fixDef.shape = new b2PolygonShape;
+    fixDef.shape.SetAsArray([
+      new b2Vec2(-0.8,0),
+      new b2Vec2(-0.8,-0.1),
+      new b2Vec2(0.8,-0.1),
+      new b2Vec2(0.8, 0),
+		  ]);
+		goalBodyDef.position.Set(x,y);
+    goalBodyDef.type = b2Body.b2_staticBody;
+    var goalBody = world.CreateBody(goalBodyDef);
+    goalBody.CreateFixture(fixDef);
+    goalBody.SetUserData("CupGoal");
 
 
 

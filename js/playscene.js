@@ -33,7 +33,7 @@ class PlayScene
     this.magnet = new Magnet(4,5,world);
     this.blowPipe = new BlowPipe(4,1.5,true,world);
     this.blowPipe2 = new BlowPipe(4,3,false,world);
-    this.goalCup = new GoalCup(15,10,world);
+    this.goalCup = new GoalCup(13,10,world);
 
 
     //Jamie
@@ -72,25 +72,8 @@ class PlayScene
     fixDef.shape.SetAsBox(1, 0.5);
     world.CreateBody(bodyDef).CreateFixture(fixDef);
 
-    //create some objects
-    bodyDef.type = b2Body.b2_dynamicBody;
-    for(var i = 0; i < 1; ++i) {
-       if(i == 1) {
-          fixDef.shape = new b2PolygonShape;
-          fixDef.shape.SetAsBox(
-                1 //half width
-             ,  1 //half height
-          );
-       } else {
-          fixDef.shape = new b2CircleShape(
-             Math.random() + 0.1 //radius
-          );
-       }
-       fixDef.restitution = 0.2;
-       bodyDef.position.x = 10;
-       bodyDef.position.y = 5;
-       world.CreateBody(bodyDef).CreateFixture(fixDef);
-    }
+
+
 
     //setup debug draw
     var debugDraw = new b2DebugDraw();
