@@ -123,6 +123,7 @@ class PlayScene
    var ctx = mycanvas.getContext("2d");
    document.body.style.background = "#ffffff";
    this.trampoline.render();
+   this.ramp.render();
 
   }
 }

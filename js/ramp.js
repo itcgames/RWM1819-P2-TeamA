@@ -10,8 +10,14 @@ class Ramp
      ,	b2CircleShape = Box2D.Collision.Shapes.b2CircleShape
      ,	b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
        ;
-    this.imageX = x;
-    this.imageY = y;
+
+    // image variables
+    this.img = new Image(); // Image object
+    this.img.src = "img/Ramp.png";
+    this.img.width = 50;  // Width of image
+    this.img.height = 19;  // Height of image
+    this.imgX = (x *30); // X position on screen, Multipling and substracting to get position right
+    this.imgY = (y *30);  // Y position on screen, Multipling and substracting to get position right
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
@@ -38,7 +44,12 @@ class Ramp
   }
 
 
-  render(){}
+  render(){
+    var canvas = document.createElement("mycanvas");
+    var ctx = mycanvas.getContext("2d");
+
+    ctx.drawImage(this.img, 0, 0, this.img.width, this.img.height, this.imgX, this.imgY, this.img.width / 2 + 7, this.img.height * 2 - 7);
+  }
   /**
    * Draws an image after it is loaded.
    */
