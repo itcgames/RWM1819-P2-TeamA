@@ -97,7 +97,6 @@ class PlayScene
       console.log(this.scoreboard.getBoard());
       this.scoreboard.generate_table()
       gameNs.endScene.render();
-      this.scoreboard.render();
     }
 
 

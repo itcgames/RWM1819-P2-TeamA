@@ -19,7 +19,7 @@ class ScoreboardManager
    this.posX=405;
    this.posY=50;
    this.timerActive = true;
-   
+
 
   }
   startTimer(){
@@ -226,15 +226,16 @@ class ScoreboardManager
       tablecontents += "<td>" + "Name"+ "</td>";
       tablecontents += "<td>" + "Time" + "</td>";
       tablecontents += "</tr>";
-      for (var i = 0; i < 5; i ++)
+      for (var i = 0; i < this.scoreboard.length; i ++)
      {
         tablecontents += "<tr>";
+        tablecontents += "<td>" + i + "</td>";
         tablecontents += "<td>" + this.scoreboard[i].name + "</td>";
         tablecontents += "<td>" + this.scoreboard[i].time + "</td>";
-        tablecontents += "<td>" + i * 1000 + "</td>";
         tablecontents += "</tr>";
      }
      tablecontents += "</table>";
+     document.getElementById("table").style.display = "block";
      document.getElementById("table").innerHTML=tablecontents;
 
 }

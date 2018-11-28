@@ -26,7 +26,6 @@ class EndScene
     var imagebg = this.bgimg;
     var image = this.img;
     ctx.drawImage(imagebg, 0 , 0,this.windowWidth, this.windowHeight ,0,0, this.windowWidth ,this.windowHeight);
-   ctx.drawImage(image, 0 , 0,918, 761 ,this.windowWidth/3.7,this.windowHeight/7, 918 ,761);
 
 
   }
