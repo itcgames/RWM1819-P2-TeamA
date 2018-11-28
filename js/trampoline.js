@@ -10,10 +10,18 @@ class Trampoline
      ,	b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
        ;
 
-    this.img = new Image();
-    this.img.src = "img/tramp.png";
-    this.imgX = (x *30) - 30;
-    this.imgY = (y *30) - 15;
+    // image variables
+    this.img = new Image(); // Image object
+    this.img.src = "img/trampoline.png";
+    this.img.animeIndex = 0;  // Index of what part of the animation to display
+    this.img.width = 50;  // Width of one image
+    // Set to a x coordinate halfway through last sprite
+    this.img.widthThreshold = 175;  // After index goes past this value, index will reset
+    this.imgX = (x *30) - 45; // X position on screen, Multipling and substracting to get position right
+    this.imgY = (y *30) - 8;  // Y position on screen, Multipling and substracting to get position right
+
+    this.animeSpeed = 10;
+    this.animeSpeedIndex = 0;
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1.0;
@@ -67,9 +75,31 @@ class Trampoline
     var canvas = document.createElement("mycanvas");
     var ctx = mycanvas.getContext("2d");
     var image = this.img;
-    ctx.drawImage(image, this.imgX, this.imgY)
+    this.animate();
+
+    ctx.drawImage(image, this.img.animeIndex,0, 48,30,this.imgX, this.imgY,90,32)
 
   }
+
+  animate()
+  {
+    if(this.animeSpeedIndex < this.animeSpeed)
+    {
+      this.animeSpeedIndex++;
+    }
+    else
+    {
+      this.animeSpeedIndex = 0;
+      if(this.img.animeIndex < this.img.widthThreshold)
+      {
+        this.img.animeIndex = this.img.animeIndex + this.img.width
+      }
+      else {
+        this.img.animeIndex = 0;
+      }
+    }
+  };
+
   /**
    * Draws an image after it is loaded.
    */
