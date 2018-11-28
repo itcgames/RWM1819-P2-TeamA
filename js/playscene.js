@@ -126,6 +126,8 @@ class PlayScene
    this.ramp.render();
    this.fan.render();
    this.magnet.render();
+   this.blowPipe.render();
+   this.blowPipe2.render();
 
   }
 }

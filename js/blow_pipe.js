@@ -10,10 +10,20 @@ class BlowPipe
      ,	b2CircleShape = Box2D.Collision.Shapes.b2CircleShape
      ,	b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
        ;
-    this.imageX = x;
-    this.imageY = y;
-    var ready = readyBool;
+     // image variables
+     this.img = new Image(); // Image object
+     this.img.src = "img/blowpipe.png";
+     this.img.animeIndex = 70;  // Index of what part of the animation to display
+     this.img.width = 69;  // Width of one image
+     this.imgX = (x *30) - 14; // X position on screen, Multipling and substracting to get position right
+     this.imgY = (y *30) - 9;  // Y position on screen, Multipling and substracting to get position right
 
+     // controllers for animation speed and where it starts
+     this.animeSpeed = 25;
+     this.animeSpeedIndex = 0;
+
+    var ready = readyBool;
+    this.ready = ready;
     if(ready == true){
     var fixDef = new b2FixtureDef;
     fixDef.density = 1;
@@ -32,7 +42,7 @@ class BlowPipe
 		  new b2Vec2(1.1, 0.6),
 		  new b2Vec2(0, 1.1),
 		  ]);
-      
+
     bodyDef.position.Set(x,y);
     bodyDef.type = b2Body.b2_staticBody;
     var body = world.CreateBody(bodyDef);
@@ -212,7 +222,36 @@ class BlowPipe
   }
 
 
-  render(){}
+  render()
+  {
+    var canvas = document.createElement("mycanvas");
+    var ctx = mycanvas.getContext("2d");
+    //this.animate();
+
+
+    if(this.ready === true)
+    {
+      ctx.drawImage(this.img, 0, 0, this.img.width, this.img.height, this.imgX, this.imgY, this.img.width, this.img.height);
+    }
+    else {
+
+      ctx.drawImage(this.img, this.img.animeIndex, 0, this.img.width, this.img.height, this.imgX, this.imgY, this.img.width, this.img.height);
+    }
+  }
+
+  animate()
+  {
+    if(this.animeSpeedIndex < this.animeSpeed)
+    {
+      this.animeSpeedIndex++;
+    }
+    else
+    {
+      this.animeSpeedIndex = 0;
+      this.ready = !this.ready;
+    }
+  };
+
   /**
    * Draws an image after it is loaded.
    */
