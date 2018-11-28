@@ -71,6 +71,14 @@ class PlayerBall
          {
            console.log("WINNER WINNER CHICKEN DINNERS");
          }
+         if(contact.GetFixtureA().GetBody().GetUserData() == "Ball" && contact.GetFixtureB().GetBody().GetUserData() == "PipeInflated")
+         {
+           contact.GetFixtureB().GetBody().SetUserData("PipeDeflated");
+         }
+         if(contact.GetFixtureA().GetBody().GetUserData() == "PipeInflated" && contact.GetFixtureB().GetBody().GetUserData() == "Ball")
+         {
+           contact.GetFixtureA().GetBody().SetUserData("PipeDeflated");
+         }
     }
     this.listener.EndContact = function(contact) {
          console.log(contact.GetFixtureA().GetBody().GetUserData());
