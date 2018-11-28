@@ -88,6 +88,15 @@ class OptionsScene
      div.style.left = (this.width/ 2) - 450 +"px";
      div.style.top = (this.height/8) - 100 +'px';
    }
+   else if(div.id==="HelpScreen")
+   {
+     console.log("HelpScreen button created")
+     div.innerHTML = "<img src=\'img/helpButton.png\'>";
+     div.style.visibility = "visible"
+     div.style.position ="absolute"
+     div.style.left = (this.width/3)+'px'
+     div.style.top = (this.height/2) + 120+'px'
+   }
   // ctx.drawImage(image, 0 , this.height,100, this.heightVol ,this.x,this.y, this.widthVol,this.heightVol);
    div.addEventListener("touchstart", this.onTouchStart,{passive:false});
    document.body.appendChild(div);
@@ -201,6 +210,21 @@ class OptionsScene
           gameNs.menuScene.createDiv("Options");
           gameNs.menuScene.createDiv("Tutorial");
 
+        }
+
+        else if(filename==="helpButton.png")
+        {
+          gameNs.sceneManager.goToScene(gameNs.HelpScene.title);
+          var el = document.getElementById( 'Back' );
+          el.parentNode.removeChild( el );
+          var el = document.getElementById( 'VolumeUp' );
+          el.parentNode.removeChild( el );
+          var el = document.getElementById( 'VolumeDown' );
+          el.parentNode.removeChild( el );
+          var el = document.getElementById( 'Mute' );
+          el.parentNode.removeChild( el );
+          gameNs.helpScene.createDiv("Back")
+          gameNs.helpScene.createDiv("Hints")
         }
      }
    }
