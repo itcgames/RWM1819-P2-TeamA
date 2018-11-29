@@ -101,6 +101,7 @@ class PlayScene
   }
   update()
   {
+    this.ramp.update();
     this.blowPipe.update();
     this.blowPipe2.update();
     this.player.checkCollision();
