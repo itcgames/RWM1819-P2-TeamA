@@ -25,7 +25,7 @@ class Game
     gameNs.sceneManager.addScene(gameNs.playScene);
     gameNs.sceneManager.addScene(gameNs.optionsScene);
     gameNs.sceneManager.addScene(gameNs.endScene);
-    gameNs.sceneManager.goToScene(gameNs.playScene.title);
+    gameNs.sceneManager.goToScene(gameNs.menuScene.title);
 
   //  document.addEventListener("click", this.clickHandler.bind(null, gameNs.sceneManager));
     //draw(sceneManager);
