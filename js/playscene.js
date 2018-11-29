@@ -24,6 +24,7 @@ class PlayScene
           new b2Vec2(0, 10)    //gravity
        ,  true                 //allow sleep
     );
+
     this.level = new Level(0,0,world);
     this.fan = new Fan(22.6,6,world);
     this.trampoline = new Trampoline(21.3,11,world);
@@ -40,20 +41,6 @@ class PlayScene
     //Jamie
     var canvas = document.querySelector('canvas');
     var ctx = canvas.getContext('2d');
-
-
-
-/*
-    //Drag and drop
-    this.drag = new Square(200,400,50,50, 'red', "drag");
-    this.drop = new Square(400,500,75,75, 'green', "drop");
-
-    var array = [];
-    array.push(this.drop);
-    if(this.drag.draggable != undefined){
-      this.drag.draggable.addDropZones(array);
-    }
-    */
 
 
     //setup debug draw
@@ -75,6 +62,8 @@ class PlayScene
 
   this.am = new AudioManager();
 
+    this.scoreboard = new ScoreboardManager();
+    this.scoreboard.initBoard("session")
 
   }
   init(){
@@ -92,10 +81,12 @@ class PlayScene
     this.fan.update();
 
     this.player.checkCollision();
+
     this.player.checkFan(this.fan.getPositionX()
     ,this.fan.getPositionY());
     this.player.checkMagnet(this.magnet.getPositionX()
     ,this.magnet.getPositionY());
+
       world.Step(
           1 / 60   //frame-rate
        ,  10       //velocity iterations
@@ -103,8 +94,10 @@ class PlayScene
     );
     world.DrawDebugData();
     world.ClearForces();
+    this.player.update();
 
     this.time = this.scoreboard.getDisplayTimer();
+
     if(this.player.getWinState() == true){
       this.scoreboard.addToBoard();
       this.scoreboard.filterTime(1);
@@ -126,6 +119,7 @@ class PlayScene
    var ctx = mycanvas.getContext("2d");
    document.body.style.background = "#ffffff";
 
+
    //this.drop.draw(ctx);
    //this.drag.draw(ctx);
    this.trampoline.render();
@@ -137,12 +131,13 @@ class PlayScene
    if(this.player.getWinState() == true){
      gameNs.endScene.render();
    }
+   //partilce effect draw
 
   ctx.fillStyle ='white';
   ctx.font = '55px Adventure Regular';
   ctx.strokeStyle = 'black';
   ctx.fillText(this.time,100,100);
- ctx.strokeText(this.time,100,100);
+  ctx.strokeText(this.time,100,100);
 
   }
 }
