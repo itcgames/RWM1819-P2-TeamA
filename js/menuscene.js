@@ -22,7 +22,6 @@ class MenuScene
   //  this.soundManager.init()
   //  this.soundManager.loadSoundFile("backGround", "img/audio/backGround.mp3")
 
-
   }
    createDiv(divId)
   {
@@ -57,7 +56,7 @@ class MenuScene
         div.style.top = (this.height/8) * 5 + 40 +'px';
       }
 
-    div.addEventListener("touchstart", this.onTouchStart,{passive:false});
+    div.addEventListener("click", this.onTouchStart,{passive:false});
     document.body.appendChild(div);
 
   }
@@ -92,6 +91,7 @@ class MenuScene
          {
 
            gameNs.sceneManager.goToScene(gameNs.playScene.title);
+           gameNs.playScene.init();
            gameNs.timerStart = true;
            gameNs.start = Date.now();
 

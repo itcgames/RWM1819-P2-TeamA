@@ -11,7 +11,6 @@ class HelpScene{
     document.addEventListener("keydown", this.keyHandler, true);
     var canvas = document.createElement("mycanvas")
     var ctx = mycanvas.getContext("2d")
-    ctx.clearRect(0,0,mycanvas.width,mycanvas.height)
     gameNs.ctx = ctx
     gameNs.canvas = canvas
   }

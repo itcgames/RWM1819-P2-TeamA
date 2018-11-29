@@ -19,6 +19,7 @@ class Game
     gameNs.menuScene = new MenuScene('RWM');
     gameNs.playScene = new PlayScene('Play');
     gameNs.optionsScene = new OptionsScene('Options');
+    gameNs.endScene = new EndScene('endScene');
     gameNs.helpScene = new HelpScene('Help')
     gameNs.hintsScene = new HintsScene('Hints')
 
@@ -28,6 +29,7 @@ class Game
     gameNs.sceneManager.addScene(gameNs.helpScene);
     gameNs.sceneManager.addScene(gameNs.hintsScene)
 
+    gameNs.sceneManager.addScene(gameNs.endScene);
     gameNs.sceneManager.goToScene(gameNs.menuScene.title);
 
   //  document.addEventListener("click", this.clickHandler.bind(null, gameNs.sceneManager));

@@ -35,6 +35,7 @@ function main()
  	canvas.id = 'mycanvas';
  	canvas.width = window.innerWidth;
  	canvas.height = window.innerHeight;
+  canvas.style.position = 'relative';
  	//We want this to be a 2D canvas.
  	var ctx = canvas.getContext("2D");
  	//Adds the canvas element to the document.
@@ -98,7 +99,6 @@ function main()
  {
    var canvas = document.getElementById("mycanvas");
    var ctx = canvas.getContext("2d");
-   console.log(gameNs.touchStart);
 
    var time2 = new Date().getTime();
    var elapsedTime = time2 - gameNs.time1;
