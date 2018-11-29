@@ -1,4 +1,5 @@
-var grabbedSomething = false;
+
+var startNumber = 0;
 
 class PlayerBall
 {
@@ -15,7 +16,7 @@ class PlayerBall
 
     this.world = world;
 
-    this.fanOn = false;
+    this.fanOn = true;
 
     this.imageX = x;
     this.imageY = y;
@@ -42,6 +43,20 @@ class PlayerBall
 	//	);
     this.body.SetUserData("Player");
 
+    document.addEventListener("keydown",this.keyHandler, true);
+    this.startNumber = 0;
+
+  }
+  keyHandler(e){
+    if(e.keyCode === 83){
+      startNumber = 1;
+    }
+  }
+  update()
+  {
+    if(startNumber == 0){
+    this.body.SetPosition(new this.b2Vec2(this.imageX,this.imageY));
+  }
   }
   checkFan(fanX,fanY)
   {

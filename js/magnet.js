@@ -142,14 +142,15 @@ class Magnet
   }
   onMouseDown(e){
 
-      grabbedSomething = true;
     e.preventDefault();
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;
-    if(this.mousePosX < this.body.GetPosition().x*30
-    && this.mousePosX > this.body.GetPosition().x*30 - (this.img.width * 2)
-    && this.mousePosY  < this.body.GetPosition().y*30 + (this.img.height)
-    && this.mousePosY > this.body.GetPosition().y*30 - (this.img.height)){
+    console.log("Y mouse =" +this.mousePosY);
+    console.log("Y = " + this.body.GetPosition().y * 30);
+    if(this.mousePosX < this.body.GetPosition().x*30 + (this.img.width)
+    && this.mousePosX > this.body.GetPosition().x*30 - (this.img.width)
+    && this.mousePosY  > this.body.GetPosition().y*30
+    && this.mousePosY < this.body.GetPosition().y*30 + (this.img.height)){
       this.selected = true;
     }
     else{

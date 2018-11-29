@@ -133,8 +133,6 @@ class Fan
 
 
   onMouseDown(e){
-
-      grabbedSomething = true;
     e.preventDefault();
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;

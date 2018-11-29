@@ -24,54 +24,24 @@ class PlayScene
           new b2Vec2(0, 10)    //gravity
        ,  true                 //allow sleep
     );
-
-    this.fan = new Fan(9,5,world);
-    this.trampoline = new Trampoline(10,10,world);
-    this.player = new PlayerBall(10,1,0.5,world);
+    this.level = new Level(0,0,world);
+    this.fan = new Fan(22.6,6,world);
+    this.trampoline = new Trampoline(21.3,11,world);
+    this.player = new PlayerBall(2,1,0.5,world);
     this.ball = new Ball(10,5,0.5,world);
-    this.ball2 = new Ball(4.2,0.5,0.5,world);
-    this.ramp = new Ramp(15,1,world);
-    this.magnet = new Magnet(4,5,world);
-    this.blowPipe = new BlowPipe(4,1.5,world);
-    this.blowPipe2 = new BlowPipe(4,3,world);
-    this.goalCup = new GoalCup(13,10,world);
+    this.ball2 = new Ball(5.2,0.5,0.5,world);
+    this.ramp = new Ramp(20.1,1,world);
+    this.magnet = new Magnet(20.8,3,world);
+    this.blowPipe = new BlowPipe(20.5,9,world);
+    //this.blowPipe2 = new BlowPipe(4,3,world);
+    this.goalCup = new GoalCup(17,12.2,world);
 
 
     //Jamie
     var canvas = document.querySelector('canvas');
     var ctx = canvas.getContext('2d');
 
-    var fixDef = new b2FixtureDef;
-    fixDef.density = 1.0;
-    fixDef.friction = 0.5;
-    fixDef.restitution = 0.2;
 
-    var bodyDef = new b2BodyDef;
-
-    //create ground
-    bodyDef.type = b2Body.b2_staticBody;
-    bodyDef.position.x = 9;
-    bodyDef.position.y = 13;
-    fixDef.shape = new b2PolygonShape;
-    fixDef.shape.SetAsBox(10, 0.5);
-    var groundBody = world.CreateBody(bodyDef);
-    groundBody.CreateFixture(fixDef);
-    groundBody.SetUserData("Ground");
-
-    var fixDef = new b2FixtureDef;
-    fixDef.density = 1.0;
-    fixDef.friction = 0.5;
-    fixDef.restitution = 0.2;
-
-    var bodyDef = new b2BodyDef;
-
-    //create ground
-    bodyDef.type = b2Body.b2_staticBody;
-    bodyDef.position.x = 1;
-    bodyDef.position.y = 10;
-    fixDef.shape = new b2PolygonShape;
-    fixDef.shape.SetAsBox(1, 0.5);
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
 
 /*
     //Drag and drop
@@ -110,9 +80,10 @@ class PlayScene
   }
   update()
   {
+    this.player.update();
     this.ramp.update();
     this.blowPipe.update();
-    this.blowPipe2.update();
+  //  this.blowPipe2.update();
     this.ball.update();
     this.magnet.update();
     this.trampoline.update();
@@ -159,7 +130,6 @@ class PlayScene
    this.fan.render();
    this.magnet.render();
    this.blowPipe.render();
-   this.blowPipe2.render();
 
    if(this.time == "00:05"){
      gameNs.endScene.render();
