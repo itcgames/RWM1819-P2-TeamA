@@ -137,8 +137,8 @@ class Fan
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;
     if(this.mousePosX < this.body.GetPosition().x*30
-    && this.mousePosX > this.body.GetPosition().x*30 - (this.img.width * 2)
-    && this.mousePosY  < this.body.GetPosition().y*30 + (this.img.height)
+    && this.mousePosX > this.body.GetPosition().x*30 - (this.img.width * 4)
+    && this.mousePosY  < this.body.GetPosition().y*30 + (this.img.height * 2)
     && this.mousePosY > this.body.GetPosition().y*30 - (this.img.height)){
       this.selected = true;
     }

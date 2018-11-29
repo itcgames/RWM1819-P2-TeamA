@@ -92,7 +92,6 @@ class PlayerBall
     else{
       this.distance = Math.sqrt(playerX - magnetX)*(playerX - magnetX) + (playerY - magnetY)*(playerY - magnetY);
     }
-      console.log(this.distance);
       if(magnetY > playerY)
       {
         this.powerY = playerY - magnetY;

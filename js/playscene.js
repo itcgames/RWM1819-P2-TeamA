@@ -88,7 +88,6 @@ class PlayScene
     this.magnet.update();
     this.trampoline.update();
     this.fan.update();
-    console.log(this.player.checkTrampoline());
     if(this.player.checkTrampoline() == true){
       this.trampoline.jump();
       this.player.setTrampoline();
@@ -113,7 +112,6 @@ class PlayScene
     this.time = this.scoreboard.getDisplayTimer();
     if(this.time == "1000:00"){
       this.scoreboard.addToBoard(55)
-      console.log(this.scoreboard.getBoard());
       this.scoreboard.generate_table()
       gameNs.endScene.render();
     }
