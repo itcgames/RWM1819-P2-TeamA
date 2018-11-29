@@ -90,8 +90,12 @@ class PlayScene
   this.scoreboard = new ScoreboardManager();
 
   this.scoreboard.initBoard("session")
+  this.scoreboard.clearSessionStorage();
 
-
+  this.audioManager = new AudioManager();
+  this.audioManager.init();
+  this.audioManager.loadSoundFile("bg", "img\audio\background.mp3")
+  this.audioManager.playSound("backGround", true, 50)
 
   }
   init(){
@@ -111,8 +115,9 @@ class PlayScene
     world.ClearForces();
 
     this.time = this.scoreboard.getDisplayTimer();
-    if(this.time == "00:05"){
-      this.scoreboard.addToBoard(55)
+    if(this.time == "00:02"){
+      this.scoreboard.addToBoard(120);
+      this.scoreboard.filterTime(1);
       console.log(this.scoreboard.getBoard());
       this.scoreboard.generate_table()
       gameNs.endScene.render();
@@ -131,7 +136,7 @@ class PlayScene
    var ctx = mycanvas.getContext("2d");
    document.body.style.background = "#ffffff";
    this.trampoline.render();
-   if(this.time == "00:05"){
+   if(this.time == "00:02"){
      gameNs.endScene.render();
    }
 
