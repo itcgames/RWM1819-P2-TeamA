@@ -59,6 +59,13 @@ body {
                                    /* offset horizontal: half of text area width */
 }
 
+
+
+.tablegrid{
+  grid-area: t;
+  position: absolute;
+}
+
 /* Landscape layout (with min-width) */
 @media screen and (min-aspect-ratio: 1/1) and (min-width:400px) {
     .app {
@@ -76,6 +83,41 @@ h1 {
     overflow:visible;
     padding:0px;
     text-align:center;
+}
+table {
+    border-collapse: collapse;
+}
+
+table {
+  margin-left:50px; text-align:center; border-collapse:collapse;
+  position: absolute;}
+td, th {padding:5px; }
+th {color:white; background-color:blue; font-family:'5px Adventure Regular';;}
+tr:nth-child(even) {background: #CCC}
+.tableheader{
+
+}
+.test{
+
+    margin: auto;
+    width: 32%;
+    height: 80%;
+    text-align: center;
+    font-size: 3vw;
+    z-index: 10;
+
+    position: absolute;
+    padding-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    display: none;
+    overflow-y:auto;
+    overflow-x:hidden;
+    font-family:'10px Adventure Regular', Adventure;
+
+
 }
 
 .event {
@@ -102,13 +144,13 @@ h1 {
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
- 
+
 @-webkit-keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
- 
+
 .blink {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
