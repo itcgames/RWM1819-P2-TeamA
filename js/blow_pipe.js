@@ -7,14 +7,14 @@ class BlowPipe
      ,	b2Fixture = Box2D.Dynamics.b2Fixture
      ,	b2CircleShape = Box2D.Collision.Shapes.b2CircleShape
        ;
-    
-    
+
+
      // FSM variables
      this.stateReady = new State("Ready");
      this.stateEmpty = new State("Empty");
      this.eventBlow = new Event("Blow", this.stateReady, this.stateEmpty, false)
      this.fsm = new TwoStateTwoEvent("Fan", this.stateReady, this.stateEmpty, this.eventBlow);
-    
+
     // image variables
      this.img = new Image(); // Image object
      this.img.src = "img/blowpipe.png";
@@ -32,7 +32,7 @@ class BlowPipe
     this.b2FixtureDef = Box2D.Dynamics.b2FixtureDef;
     this.imageX = x;
     this.imageY = y;
-    
+
     var fixDef = new this.b2FixtureDef;
     fixDef.density = 1;
     fixDef.friction = 0.5;
@@ -104,7 +104,7 @@ class BlowPipe
 
     this.body.CreateFixture(fixDef);
 
-   
+
 
   }
 
@@ -197,7 +197,6 @@ while (this.fix) {
     if(this.fsm.currentState === this.stateReady)
     {
       this.fsm.changeState()
-      this.animate()
     }
   }
 
@@ -216,7 +215,7 @@ while (this.fix) {
       ctx.drawImage(this.img, this.img.animeIndex, 0, this.img.width, this.img.height, this.imgX, this.imgY, this.img.width, this.img.height);
     }
   }
-  
+
   /**
    * Draws an image after it is loaded.
    */

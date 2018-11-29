@@ -52,7 +52,6 @@ class Ramp
     document.addEventListener("mousedown",this.onMouseDown.bind(this), true);
     document.addEventListener("mouseup",this.onMouseUp.bind(this), true);
   }
-}
 
   render(){
     var canvas = document.createElement("mycanvas");
