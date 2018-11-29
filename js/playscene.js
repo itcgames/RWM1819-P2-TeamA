@@ -92,6 +92,7 @@ class PlayScene
   this.scoreboard.initBoard("session")
   this.scoreboard.clearSessionStorage();
 
+  this.am = new AudioManager();
   
 
   }
