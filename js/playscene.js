@@ -29,7 +29,6 @@ class PlayScene
     this.trampoline = new Trampoline(21.3,11,world);
     this.player = new PlayerBall(2,1,0.5,world);
     this.ball = new Ball(10,5,0.5,world);
-    this.ball2 = new Ball(5.2,0.5,0.5,world);
     this.ramp = new Ramp(20.1,1,world);
     this.magnet = new Magnet(20.8,3,world);
     this.blowPipe = new BlowPipe(20.5,9,world);
