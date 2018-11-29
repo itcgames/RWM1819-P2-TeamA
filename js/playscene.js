@@ -32,7 +32,6 @@ class PlayScene
     this.ramp = new Ramp(20.1,1,world);
     this.magnet = new Magnet(20.8,3,world);
     this.blowPipe = new BlowPipe(20.5,9,world);
-    //this.blowPipe2 = new BlowPipe(4,3,world);
     this.goalCup = new GoalCup(17,12.2,world);
 
 
@@ -97,6 +96,28 @@ class PlayScene
     ,this.fan.getPositionY());
     this.player.checkMagnet(this.magnet.getPositionX()
     ,this.magnet.getPositionY());
+    // Recreate if startNumber = -1
+    if(startNumber == -1)
+    {
+      try{
+        while(world.GetBodyList()){
+          world.DestroyBody(world.GetBodyList());
+          world.GetBodyList().next();
+        }}catch(e){
+            return true; //ignore them :)
+}
+      this.level = new Level(0,0,world);
+      this.fan = new Fan(22.6,6,world);
+      this.trampoline = new Trampoline(21.3,11,world);
+      this.player = new PlayerBall(2,1,0.5,world);
+      this.ball = new Ball(10,5,0.5,world);
+      this.ramp = new Ramp(20.1,1,world);
+      this.magnet = new Magnet(20.8,3,world);
+      this.blowPipe = new BlowPipe(20.5,9,world);
+      this.goalCup = new GoalCup(17,12.2,world);
+
+      startNumber = 0;
+    }
     if(startNumber == 1)
     {
       world.Step(

@@ -53,6 +53,9 @@ class PlayerBall
     if(e.keyCode === 83){
       startNumber = 1;
     }
+    if(e.keyCode === 82){
+      startNumber = -1;
+    }
   }
   update()
   {
