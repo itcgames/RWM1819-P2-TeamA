@@ -45,6 +45,7 @@ class PlayerBall
 
     document.addEventListener("keydown",this.keyHandler, true);
     this.startNumber = 0;
+    this.win = false;
 
   }
   keyHandler(e){
@@ -93,6 +94,10 @@ class PlayerBall
 
 
   }
+  getWinState()
+  {
+    return this.win;
+  }
   checkCollision()
   {
     //console.log(this.body.GetUserData());
@@ -103,6 +108,8 @@ class PlayerBall
        || contact.GetFixtureA().GetBody().GetUserData() == "CupGoal" && contact.GetFixtureB().GetBody().GetUserData() == "Player")
          {
            console.log("WINNER WINNER CHICKEN DINNERS");
+           this.win = true;
+
          }
          if(contact.GetFixtureA().GetBody().GetUserData() == "Ball" && contact.GetFixtureB().GetBody().GetUserData() == "PipeInflated")
          {

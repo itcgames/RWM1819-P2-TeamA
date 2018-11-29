@@ -92,7 +92,7 @@ table {
   margin-left:50px; text-align:center; border-collapse:collapse;
   position: absolute;}
 td, th {padding:5px; }
-th {color:white; background-color:blue; font-family:'10px Adventure Regular';;}
+th {color:white; background-color:blue; font-family:'5px Adventure Regular';;}
 tr:nth-child(even) {background: #CCC}
 .tableheader{
 
@@ -100,10 +100,10 @@ tr:nth-child(even) {background: #CCC}
 .test{
 
     margin: auto;
-    width: 80%;
+    width: 32%;
     height: 80%;
     text-align: center;
-    font-size: 4vw;
+    font-size: 3vw;
     z-index: 10;
 
     position: absolute;
@@ -113,7 +113,8 @@ tr:nth-child(even) {background: #CCC}
     left: 0;
     right: 0;
     display: none;
-    overflow-y: scroll;
+    overflow-y:auto;
+    overflow-x:hidden;
     font-family:'10px Adventure Regular', Adventure;
 
 

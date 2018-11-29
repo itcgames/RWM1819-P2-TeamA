@@ -71,7 +71,9 @@ class PlayScene
   this.scoreboard = new ScoreboardManager();
 
   this.scoreboard.initBoard("session")
+  this.scoreboard.clearSessionStorage();
 
+  this.am = new AudioManager();
 
 
   }
@@ -103,8 +105,9 @@ class PlayScene
     world.ClearForces();
 
     this.time = this.scoreboard.getDisplayTimer();
-    if(this.time == "1000:00"){
-      this.scoreboard.addToBoard(55)
+    if(this.player.getWinState() == true){
+      this.scoreboard.addToBoard();
+      this.scoreboard.filterTime(1);
       console.log(this.scoreboard.getBoard());
       this.scoreboard.generate_table()
       gameNs.endScene.render();
@@ -131,7 +134,7 @@ class PlayScene
    this.magnet.render();
    this.blowPipe.render();
 
-   if(this.time == "00:05"){
+   if(this.player.getWinState() == true){
      gameNs.endScene.render();
    }
 
