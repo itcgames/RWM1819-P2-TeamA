@@ -28,6 +28,7 @@ class PlayScene
     this.trampoline = new Trampoline(10,10,world);
     this.player = new PlayerBall(10,1,0.5,world);
     this.ball = new Ball(10,5,0.5,world);
+    this.ball2 = new Ball(4.2,0.5,0.5,world);
     this.ramp = new Ramp(15,1,world);
     this.fan = new Fan(9,5,world);
     this.magnet = new Magnet(4,5,world);
@@ -72,7 +73,17 @@ class PlayScene
     fixDef.shape.SetAsBox(1, 0.5);
     world.CreateBody(bodyDef).CreateFixture(fixDef);
 
+/*
+    //Drag and drop
+    this.drag = new Square(200,400,50,50, 'red', "drag");
+    this.drop = new Square(400,500,75,75, 'green', "drop");
 
+    var array = [];
+    array.push(this.drop);
+    if(this.drag.draggable != undefined){
+      this.drag.draggable.addDropZones(array);
+    }
+    */
 
 
     //setup debug draw
@@ -99,9 +110,14 @@ class PlayScene
   }
   update()
   {
+    this.ramp.update();
+    this.blowPipe.update();
+    this.blowPipe2.update();
     this.player.checkCollision();
     this.player.checkFan(this.fan.getPositionX()
     ,this.fan.getPositionY());
+    this.player.checkMagnet(this.magnet.getPositionX()
+    ,this.magnet.getPositionY());
       world.Step(
           1 / 60   //frame-rate
        ,  10       //velocity iterations
@@ -130,6 +146,9 @@ class PlayScene
    var canvas = document.createElement("mycanvas");
    var ctx = mycanvas.getContext("2d");
    document.body.style.background = "#ffffff";
+
+   //this.drop.draw(ctx);
+   //this.drag.draw(ctx);
    this.trampoline.render();
    if(this.time == "00:05"){
      gameNs.endScene.render();

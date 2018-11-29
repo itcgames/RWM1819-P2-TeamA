@@ -56,24 +56,50 @@ class PlayerBall
    		   );
       //this.impApplied = true;
       //}
-     }
-   }
+      }
+    }
+  }
+   checkMagnet(magnetX,magnetY)
+   {
+      var playerX = this.body.GetPosition().x;
+      var playerY = this.body.GetPosition().y
+      if(playerX > magnetX && playerY > magnetY - 100.5
+      && playerY < magnetY + 100.5){
+        var powerX = magnetX - playerX;
+        var powerY = magnetY - playerY;
+       // if(this.impApplied == false){
+    		    this.bodyAndFixture.GetBody().ApplyForce(
+    			  new this.b2Vec2(powerX,powerY),
+    		  	this.bodyAndFixture.GetBody().GetWorldCenter()
+    		   );
+       //this.impApplied = true;
+       //}
+      }
+
 
   }
   checkCollision()
   {
     //console.log(this.body.GetUserData());
     this.listener.BeginContact = function(contact) {
-         console.log(contact.GetFixtureA().GetBody().GetUserData());
-         console.log(contact.GetFixtureB().GetBody().GetUserData());
+         //console.log(contact.GetFixtureA().GetBody().GetUserData());
+         //console.log(contact.GetFixtureB().GetBody().GetUserData());
          if(contact.GetFixtureA().GetBody().GetUserData() == "Player" && contact.GetFixtureB().GetBody().GetUserData() == "CupGoal"
        || contact.GetFixtureA().GetBody().GetUserData() == "CupGoal" && contact.GetFixtureB().GetBody().GetUserData() == "Player")
          {
            console.log("WINNER WINNER CHICKEN DINNERS");
          }
+         if(contact.GetFixtureA().GetBody().GetUserData() == "Ball" && contact.GetFixtureB().GetBody().GetUserData() == "PipeInflated")
+         {
+           contact.GetFixtureB().GetBody().SetUserData("PipeDeflated");
+         }
+         if(contact.GetFixtureA().GetBody().GetUserData() == "PipeInflated" && contact.GetFixtureB().GetBody().GetUserData() == "Ball")
+         {
+           contact.GetFixtureA().GetBody().SetUserData("PipeDeflated");
+         }
     }
     this.listener.EndContact = function(contact) {
-         console.log(contact.GetFixtureA().GetBody().GetUserData());
+         //console.log(contact.GetFixtureA().GetBody().GetUserData());
     }
     this.listener.PostSolve = function(contact, impulse) {
         // Can overide contact here
