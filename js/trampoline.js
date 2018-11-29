@@ -90,8 +90,10 @@ class Trampoline
     e.preventDefault();
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;
-    if(this.bodyTop.GetPosition().x*30 < this.mousePosX + 20
-    && this.bodyTop.GetPosition().x*30 > this.mousePosX - 20){
+    if(this.mousePosX < this.bodyTop.GetPosition().x*30
+    && this.mousePosX > this.bodyTop.GetPosition().x*30 - (this.img.width * 2)
+    && this.mousePosY  < this.bodyTop.GetPosition().y*30 + (this.img.height)
+    && this.mousePosY > this.bodyTop.GetPosition().y*30 - (this.img.height)){
       this.selected = true;
     }
     else{

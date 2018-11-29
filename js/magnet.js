@@ -146,8 +146,10 @@ class Magnet
     e.preventDefault();
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;
-    if(this.body.GetPosition().x*30 < this.mousePosX + 20
-    && this.body.GetPosition().x*30 > this.mousePosX - 20){
+    if(this.mousePosX < this.body.GetPosition().x*30
+    && this.mousePosX > this.body.GetPosition().x*30 - (this.img.width * 2)
+    && this.mousePosY  < this.body.GetPosition().y*30 + (this.img.height)
+    && this.mousePosY > this.body.GetPosition().y*30 - (this.img.height)){
       this.selected = true;
     }
     else{
@@ -228,8 +230,8 @@ class Magnet
     }
   update(){
     // Drag And Drop
-    this.imgX = (this.body.GetPosition().x *30);
-    this.imgY = (this.body.GetPosition().y *30);
+    this.imgX = (this.body.GetPosition().x *30)-30;
+    this.imgY = (this.body.GetPosition().y *30)-10;
     if(this.selected == true){
     this.body.SetPosition(new this.b2Vec2(this.mousePosX / 30,this.mousePosY / 30));
     }

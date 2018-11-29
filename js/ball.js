@@ -44,8 +44,10 @@ class Ball
     e.preventDefault();
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;
-    if(this.body.GetPosition().x*30 < this.mousePosX + 20
-    && this.body.GetPosition().x*30 > this.mousePosX - 20){
+    if(this.mousePosX < this.body.GetPosition().x*30
+    && this.mousePosX > this.body.GetPosition().x*30 - (this.img.width * 2)
+    && this.mousePosY  < this.body.GetPosition().y*30 + (this.img.height)
+    && this.mousePosY > this.body.GetPosition().y*30 - (this.img.height)){
       this.selected = true;
     }
     else{

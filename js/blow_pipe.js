@@ -114,8 +114,10 @@ class BlowPipe
     e.preventDefault();
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;
-    if(this.body.GetPosition().x*30 < this.mousePosX + 20
-    && this.body.GetPosition().x*30 > this.mousePosX - 20){
+    if(this.mousePosX < this.body.GetPosition().x*30 + (this.img.width * 2)
+    && this.mousePosX > this.body.GetPosition().x*30
+    && this.mousePosY  < this.body.GetPosition().y*30 + (this.img.height /2)
+    && this.mousePosY > this.body.GetPosition().y*30 - (this.img.height/2)){
       this.selected = true;
     }
     else{
@@ -135,8 +137,8 @@ class BlowPipe
 
   update(){
     // Drag And Drop
-    this.imgX = (this.body.GetPosition().x *30);
-    this.imgY = (this.body.GetPosition().y *30);
+    this.imgX = (this.body.GetPosition().x *30)-14;
+    this.imgY = (this.body.GetPosition().y *30)-9;
     if(this.selected == true){
     this.body.SetPosition(new this.b2Vec2(this.mousePosX / 30,this.mousePosY / 30));
     }
