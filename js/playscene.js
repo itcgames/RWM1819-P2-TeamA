@@ -25,15 +25,15 @@ class PlayScene
        ,  true                 //allow sleep
     );
 
-    this.trampoline = new Trampoline(10,10,world);
-    this.player = new PlayerBall(10,1,0.5,world);
-    this.ball = new Ball(10,5,0.5,world);
-    this.ramp = new Ramp(15,1,world);
-    this.fan = new Fan(9,5,world);
-    this.magnet = new Magnet(4,5,world);
-    this.blowPipe = new BlowPipe(4,1.5,true,world);
-    this.blowPipe2 = new BlowPipe(4,3,false,world);
-    this.goalCup = new GoalCup(13,10,world);
+  //  this.trampoline = new Trampoline(10,10,world);
+    this.player = new PlayerBall(5,1,0.5,world);
+    //this.ball = new Ball(10,5,0.5,world);
+    this.ramp = new Ramp(4.5,10,world);
+    //this.fan = new Fan(9,5,world);
+    //this.magnet = new Magnet(4,5,world);
+  //  this.blowPipe = new BlowPipe(4,1.5,true,world);
+  ///  this.blowPipe2 = new BlowPipe(4,3,false,world);
+    this.goalCup = new GoalCup(10,10,world);
 
 
     //Jamie
@@ -72,26 +72,17 @@ class PlayScene
     fixDef.shape.SetAsBox(1, 0.5);
     world.CreateBody(bodyDef).CreateFixture(fixDef);
 
-
-
-
     //setup debug draw
     var debugDraw = new b2DebugDraw();
- debugDraw.SetSprite(document.getElementById("mycanvas").getContext("2d"));
- debugDraw.SetDrawScale(30.0);
- debugDraw.SetFillAlpha(0.3);
- debugDraw.SetLineThickness(1.0);
- debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
- world.SetDebugDraw(debugDraw);
+    debugDraw.SetSprite(document.getElementById("mycanvas").getContext("2d"));
+    debugDraw.SetDrawScale(30.0);
+    debugDraw.SetFillAlpha(0.3);
+    debugDraw.SetLineThickness(1.0);
+    debugDraw.SetFlags(b2DebugDraw.e_shapeBit | b2DebugDraw.e_jointBit);
+    world.SetDebugDraw(debugDraw);
 
-  //  window.setInterval(update, 1000 / 60)
-
-
-  this.scoreboard = new ScoreboardManager();
-
-  this.scoreboard.initBoard("session")
-
-
+    this.scoreboard = new ScoreboardManager();
+    this.scoreboard.initBoard("session")
 
   }
   init(){
@@ -100,8 +91,8 @@ class PlayScene
   update()
   {
     this.player.checkCollision();
-    this.player.checkFan(this.fan.getPositionX()
-    ,this.fan.getPositionY());
+    //this.player.checkFan(this.fan.getPositionX()
+  //  ,this.fan.getPositionY());
       world.Step(
           1 / 60   //frame-rate
        ,  10       //velocity iterations
@@ -109,9 +100,10 @@ class PlayScene
     );
     world.DrawDebugData();
     world.ClearForces();
+    this.player.update();
 
     this.time = this.scoreboard.getDisplayTimer();
-    if(this.time == "00:05"){
+    if(this.time == "00:50"){
       this.scoreboard.addToBoard(55)
       console.log(this.scoreboard.getBoard());
       this.scoreboard.generate_table()
@@ -130,16 +122,17 @@ class PlayScene
    var canvas = document.createElement("mycanvas");
    var ctx = mycanvas.getContext("2d");
    document.body.style.background = "#ffffff";
-   this.trampoline.render();
+  // this.trampoline.render();
    if(this.time == "00:05"){
      gameNs.endScene.render();
    }
+   //partilce effect draw
 
   ctx.fillStyle ='white';
   ctx.font = '55px Adventure Regular';
   ctx.strokeStyle = 'black';
   ctx.fillText(this.time,100,100);
- ctx.strokeText(this.time,100,100);
+  ctx.strokeText(this.time,100,100);
 
   }
 }
