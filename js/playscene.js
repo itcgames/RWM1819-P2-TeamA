@@ -92,10 +92,7 @@ class PlayScene
   this.scoreboard.initBoard("session")
   this.scoreboard.clearSessionStorage();
 
-  this.audioManager = new AudioManager();
-  this.audioManager.init();
-  this.audioManager.loadSoundFile("bg", "img\audio\background.mp3")
-  this.audioManager.playSound("backGround", true, 50)
+  
 
   }
   init(){
