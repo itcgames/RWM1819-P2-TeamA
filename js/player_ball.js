@@ -44,6 +44,7 @@ class PlayerBall
 	//	);
     this.body.SetUserData("Player");
 
+
     gameNs.maxParticles = 200;
     gameNs.particleSize = 1;
     gameNs.objectSize = 10;
@@ -55,19 +56,15 @@ class PlayerBall
     gameNs.particles = [];
     gameNs.canvas = document.querySelector('canvas');
     gameNs.ctx = gameNs.canvas.getContext('2d');
-
     gameNs.canvas.width = window.innerWidth;
     gameNs.canvas.height = window.innerHeight;
+    gameNs.emitters = [new Emitter(new VectorTwo(this.body.GetPosition().x *30, this.body.GetPosition().y *30 ), VectorTwo.fromAngle(0, 2))];
 
-    gameNs.emitters = [new Emitter(new VectorTwo(this.body.GetPosition().x * 30, this.body.GetPosition().y* 30 ), VectorTwo.fromAngle(0, 2))];
-
-   update();
-
-    //addNewParticles();
+    update();
 
     document.addEventListener("keydown",this.keyHandler, true);
     this.startNumber = 0;
-    this.win = false;
+    gameNs.winState = false;
 
   }
   keyHandler(e){
@@ -75,7 +72,7 @@ class PlayerBall
       startNumber = 1;
     }
   }
-  
+
   checkFan(fanX,fanY)
   {
     if(this.fanOn == true)
@@ -111,17 +108,17 @@ class PlayerBall
   }
   getWinState()
   {
-    return this.win;
+    return gameNs.winState;
   }
 
   update(){
-    
+
     if(startNumber == 0){
       this.body.SetPosition(new this.b2Vec2(this.imageX,this.imageY));
     }
     gameNs.emitters[0].position.x = this.body.GetPosition().x *30;
     gameNs.emitters[0].position.y = this.body.GetPosition().y* 30;
-    ///console.log( gameNs.emitters[0] );
+    //console.log( gameNs.emitters[0] );
 
     draw();
   }
@@ -135,15 +132,14 @@ class PlayerBall
        || contact.GetFixtureA().GetBody().GetUserData() == "CupGoal" && contact.GetFixtureB().GetBody().GetUserData() == "Player")
          {
            console.log("WINNER WINNER CHICKEN DINNERS");
-
            addBurstParticles();
            this.loop= true;
+          gameNs.winState = true;
          }
          if(contact.GetFixtureA().GetBody().GetUserData() == "Player" && contact.GetFixtureB().GetBody().GetUserData() == "Ramp"
        || contact.GetFixtureA().GetBody().GetUserData() == "Ramp" && contact.GetFixtureB().GetBody().GetUserData() == "Player")
          {
            addBurstParticles();
-           this.win = true;
 
          }
          if(contact.GetFixtureA().GetBody().GetUserData() == "Ball" && contact.GetFixtureB().GetBody().GetUserData() == "PipeInflated")

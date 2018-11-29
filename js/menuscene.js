@@ -22,6 +22,7 @@ class MenuScene
   //  this.soundManager.init()
   //  this.soundManager.loadSoundFile("backGround", "img/audio/backGround.mp3")
 
+
   }
    createDiv(divId)
   {
@@ -129,8 +130,6 @@ class MenuScene
          var el = document.getElementById( 'Tutorial' );
          el.parentNode.removeChild( el );
        }
-
-
       }
     }
  }

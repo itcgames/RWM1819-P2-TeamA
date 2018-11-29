@@ -98,7 +98,7 @@ class PlayScene
 
     this.time = this.scoreboard.getDisplayTimer();
 
-    if(this.player.getWinState() == true){
+    if(gameNs.winState == true){
       this.scoreboard.addToBoard();
       this.scoreboard.filterTime(1);
       console.log(this.scoreboard.getBoard());
