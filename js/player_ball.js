@@ -83,19 +83,33 @@ class PlayerBall
    checkMagnet(magnetX,magnetY)
    {
       var playerX = this.body.GetPosition().x;
-      var playerY = this.body.GetPosition().y
-      if(playerX > magnetX && playerY > magnetY - 100.5
-      && playerY < magnetY + 100.5){
-        var powerX = magnetX - playerX;
-        var powerY = magnetY - playerY;
-       // if(this.impApplied == false){
-    		    this.bodyAndFixture.GetBody().ApplyForce(
-    			  new this.b2Vec2(powerX,powerY),
-    		  	this.bodyAndFixture.GetBody().GetWorldCenter()
-    		   );
-       //this.impApplied = true;
-       //}
+      var playerY = this.body.GetPosition().y;
+      this.distance = 0;
+      if(playerX < magnetX)
+      {
+      this.distance = Math.sqrt(magnetX - playerX)*(magnetX - playerX) + (magnetY - playerY)*(magnetY - playerY);
+    }
+    else{
+      this.distance = Math.sqrt(playerX - magnetX)*(playerX - magnetX) + (playerY - magnetY)*(playerY - magnetY);
+    }
+      console.log(this.distance);
+      if(magnetY > playerY)
+      {
+        this.powerY = playerY - magnetY;
       }
+      else{
+        this.powerY = magnetY - playerY;
+      }
+        var powerX = magnetX - playerX;
+        if(this.distance < 50){
+
+  		    this.bodyAndFixture.GetBody().ApplyForce(
+   			  new this.b2Vec2(powerX,this.powerY),
+    		  this.bodyAndFixture.GetBody().GetWorldCenter()
+    		   );
+         }
+
+
 
 
   }
