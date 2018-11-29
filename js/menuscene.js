@@ -56,7 +56,7 @@ class MenuScene
         div.style.top = (this.height/8) * 5 + 40 +'px';
       }
 
-    div.addEventListener("touchstart", this.onTouchStart,{passive:false});
+    div.addEventListener("click", this.onTouchStart,{passive:false});
     document.body.appendChild(div);
 
   }

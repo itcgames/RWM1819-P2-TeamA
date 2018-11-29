@@ -137,7 +137,6 @@ function keyDownHandler(e)
  {
    var canvas = document.getElementById("mycanvas");
    var ctx = canvas.getContext("2d");
-   console.log(gameNs.touchStart);
 
    var time2 = new Date().getTime();
    var elapsedTime = time2 - gameNs.time1;
