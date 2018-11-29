@@ -67,7 +67,6 @@ class PlayerBall
       && playerY < magnetY + 100.5){
         var powerX = magnetX - playerX;
         var powerY = magnetY - playerY;
-        console.log(powerX);
        // if(this.impApplied == false){
     		    this.bodyAndFixture.GetBody().ApplyForce(
     			  new this.b2Vec2(powerX,powerY),

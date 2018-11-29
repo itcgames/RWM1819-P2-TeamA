@@ -36,6 +36,7 @@ class Ramp
     var body = world.CreateBody(bodyDef);
     body.CreateFixture(fixDef);
     body.SetUserData("Ramp");
+    body.SetPosition(new b2Vec2(0,0));
 
   }
 

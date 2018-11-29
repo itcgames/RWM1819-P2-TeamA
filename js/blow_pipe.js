@@ -163,11 +163,22 @@ class BlowPipe
 
   update(){
     if(this.body.GetUserData() == "PipeDeflated"){
-      var fix = this.body.GetFixtureList();
-while (fix) {
-   this.body.DestroyFixture(fix);
-   fix = fix.next();
-}
+
+    this.fix = this.body.GetFixtureList();
+    this.body.DestroyFixture(this.fix);
+    this.fix = this.body.GetFixtureList();
+    this.body.DestroyFixture(this.fix);
+    this.fix = this.body.GetFixtureList();
+    this.body.DestroyFixture(this.fix);
+    this.fix = this.body.GetFixtureList();
+    this.body.DestroyFixture(this.fix);
+      // Works but causes an error
+    /*  this.fix = this.body.GetFixtureList();
+      console.log("GOT FIXTURES!!!");
+while (this.fix) {
+   this.body.DestroyFixture(this.fix);
+   this.fix = this.fix.next();
+}*/
       //this.body.DestroyFixture(this.body.GetFixtureList());
       var fixDef = new this.b2FixtureDef;
       fixDef.density = 1;
@@ -182,7 +193,6 @@ while (fix) {
   		  new this.b2Vec2(0, 0.7),
   		  ]);
       this.body.CreateFixture(fixDef);
-      this.body.SetUserData("PipeUsed")
 
       var fixDef = new this.b2FixtureDef;
       fixDef.density = 1;
@@ -231,6 +241,7 @@ while (fix) {
         new this.b2Vec2(-0.4, 0.6),
   		  ]);
       this.body.CreateFixture(fixDef);
+      this.body.SetUserData("PipeUsed");
     }
   }
 
