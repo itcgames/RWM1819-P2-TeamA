@@ -88,6 +88,11 @@ class PlayScene
     this.magnet.update();
     this.trampoline.update();
     this.fan.update();
+    console.log(this.player.checkTrampoline());
+    if(this.player.checkTrampoline() == true){
+      this.trampoline.jump();
+      this.player.setTrampoline();
+    }
 
     this.player.checkCollision();
     this.player.checkFan(this.fan.getPositionX()

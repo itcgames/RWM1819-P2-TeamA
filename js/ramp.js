@@ -51,6 +51,7 @@ class Ramp
     document.addEventListener("mousemove",this.onMouseMove.bind(this), true);
     document.addEventListener("mousedown",this.onMouseDown.bind(this), true);
     document.addEventListener("mouseup",this.onMouseUp.bind(this), true);
+
   }
 
   render(){

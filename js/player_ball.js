@@ -1,5 +1,6 @@
 
 var startNumber = 0;
+var trampJump = false;
 
 class PlayerBall
 {
@@ -17,6 +18,7 @@ class PlayerBall
     this.world = world;
 
     this.fanOn = true;
+    this.trampJump = false;
 
     this.imageX = x;
     this.imageY = y;
@@ -56,13 +58,17 @@ class PlayerBall
   {
     if(startNumber == 0){
     this.body.SetPosition(new this.b2Vec2(this.imageX,this.imageY));
+    this.bodyAndFixture.GetBody().ApplyForce(
+    new this.b2Vec2(0,-10),
+    this.bodyAndFixture.GetBody().GetWorldCenter()
+    );
   }
-  }
+}
   checkFan(fanX,fanY)
   {
     if(this.fanOn == true)
     {
-     if(this.body.GetPosition().x > fanX && this.body.GetPosition().y > fanY - 1.5
+     if(this.body.GetPosition().x > fanX && this.body.GetPosition().x < fanX +3 && this.body.GetPosition().y > fanY - 1.5
      && this.body.GetPosition().y < fanY + 1.5){
       // if(this.impApplied == false){
    		    this.bodyAndFixture.GetBody().ApplyForce(
@@ -93,6 +99,14 @@ class PlayerBall
 
 
   }
+  checkTrampoline()
+  {
+    return trampJump;
+  }
+  setTrampoline()
+  {
+    trampJump = false;
+  }
   checkCollision()
   {
     //console.log(this.body.GetUserData());
@@ -103,6 +117,17 @@ class PlayerBall
        || contact.GetFixtureA().GetBody().GetUserData() == "CupGoal" && contact.GetFixtureB().GetBody().GetUserData() == "Player")
          {
            console.log("WINNER WINNER CHICKEN DINNERS");
+         }
+         if(contact.GetFixtureA().GetBody().GetUserData() == "Player" && contact.GetFixtureB().GetBody().GetUserData() == "TrampolineTop"
+       || contact.GetFixtureA().GetBody().GetUserData() == "TrampolineTop" && contact.GetFixtureB().GetBody().GetUserData() == "Player")
+         {
+           trampJump = true;
+           console.log("TrampHit");
+         }
+         if(contact.GetFixtureA().GetBody().GetUserData() == "Ball" && contact.GetFixtureB().GetBody().GetUserData() == "TrampolineTop"
+       || contact.GetFixtureA().GetBody().GetUserData() == "TrampolineTop" && contact.GetFixtureB().GetBody().GetUserData() == "Ball")
+         {
+           trampJump = true;
          }
          if(contact.GetFixtureA().GetBody().GetUserData() == "Ball" && contact.GetFixtureB().GetBody().GetUserData() == "PipeInflated")
          {
