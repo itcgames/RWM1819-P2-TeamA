@@ -3,16 +3,15 @@
 class Fan
 {
   constructor(x,y,world) {
-    var   b2Vec2 = Box2D.Common.Math.b2Vec2
-     ,	b2BodyDef = Box2D.Dynamics.b2BodyDef
+     var b2BodyDef = Box2D.Dynamics.b2BodyDef
      ,	b2Body = Box2D.Dynamics.b2Body
      ,	b2FixtureDef = Box2D.Dynamics.b2FixtureDef
      ,	b2Fixture = Box2D.Dynamics.b2Fixture
      ,	b2CircleShape = Box2D.Collision.Shapes.b2CircleShape
      ,	b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
        ;
-
     // FSM variables
+    this.b2Vec2 = Box2D.Common.Math.b2Vec2;
     this.stateOn = new State("On");
     this.stateOff = new State("Off");
     this.eventSwitch = new Event("Switch", this.stateOn, this.stateOff, true)
@@ -46,17 +45,17 @@ class Fan
     // Fan shape
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
-		  new b2Vec2(-1 , -1),
-		  new b2Vec2(-0.5, -1), //  0
-		  new b2Vec2(-0.25, -0.75),   //.4
-      new b2Vec2(-0.1 , -0.50),   // .7
-		  new b2Vec2(0.01,-0.25),    //.9
-      new b2Vec2(.05, 0),          // 1
-      new b2Vec2(0.01 , 0.25),
-		  new b2Vec2(-0.1,0.50),
-      new b2Vec2(-0.25, 0.75),
-      new b2Vec2(-0.5 , 1),
-		  new b2Vec2(-1,1),
+		  new this.b2Vec2(-1 , -1),
+		  new this.b2Vec2(-0.5, -1), //  0
+		  new this.b2Vec2(-0.25, -0.75),   //.4
+      new this.b2Vec2(-0.1 , -0.50),   // .7
+		  new this.b2Vec2(0.01,-0.25),    //.9
+      new this.b2Vec2(.05, 0),          // 1
+      new this.b2Vec2(0.01 , 0.25),
+		  new this.b2Vec2(-0.1,0.50),
+      new this.b2Vec2(-0.25, 0.75),
+      new this.b2Vec2(-0.5 , 1),
+		  new this.b2Vec2(-1,1),
 		  ]);
 		bodyDef.position.Set(x,y);
 
@@ -76,17 +75,17 @@ class Fan
     // Back shape
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
-      new b2Vec2(-3, 0),
-      new b2Vec2(-2.90,-0.125),
-      new b2Vec2(-2.70 , -0.25),
-      new b2Vec2(-2.40, -0.375),
-      new b2Vec2(-2, -0.5),
-      new b2Vec2(-1 , -0.5),
-      new b2Vec2(-1,0.5),
-      new b2Vec2(-2 , 0.5),
-      new b2Vec2(-2.40, 0.375),
-      new b2Vec2(-2.70,0.25),
-      new b2Vec2(-2.90 , 0.125),
+      new this.b2Vec2(-3, 0),
+      new this.b2Vec2(-2.90,-0.125),
+      new this.b2Vec2(-2.70 , -0.25),
+      new this.b2Vec2(-2.40, -0.375),
+      new this.b2Vec2(-2, -0.5),
+      new this.b2Vec2(-1 , -0.5),
+      new this.b2Vec2(-1,0.5),
+      new this.b2Vec2(-2 , 0.5),
+      new this.b2Vec2(-2.40, 0.375),
+      new this.b2Vec2(-2.70,0.25),
+      new this.b2Vec2(-2.90 , 0.125),
 		  ]);
 
 
@@ -100,10 +99,10 @@ class Fan
     // Bottom platform
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
-      new b2Vec2(-0.5, 1.2),
-      new b2Vec2(-0.5,1.5),
-      new b2Vec2(-2.5 , 1.5),
-      new b2Vec2(-2.5, 1.2),
+      new this.b2Vec2(-0.5, 1.2),
+      new this.b2Vec2(-0.5,1.5),
+      new this.b2Vec2(-2.5 , 1.5),
+      new this.b2Vec2(-2.5, 1.2),
 		  ]);
 
 
@@ -119,18 +118,47 @@ class Fan
     // Shaft shape
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
-      new b2Vec2(-1,0.5),
-      new b2Vec2(-1 , 1.2),
-      new b2Vec2(-1.75,1.2),
-      new b2Vec2(-1.75 ,0.5),
+      new this.b2Vec2(-1,0.5),
+      new this.b2Vec2(-1 , 1.2),
+      new this.b2Vec2(-1.75,1.2),
+      new this.b2Vec2(-1.75 ,0.5),
 		  ]);
 
     this.body.CreateFixture(fixDef);
 
+    document.addEventListener("mousemove",this.onMouseMove.bind(this), true);
+    document.addEventListener("mousedown",this.onMouseDown.bind(this), true);
+    document.addEventListener("mouseup",this.onMouseUp.bind(this), true);
   };
-    
 
- 
+
+  onMouseDown(e){
+
+      grabbedSomething = true;
+    e.preventDefault();
+    this.mousePosX = e.clientX;
+    this.mousePosY = e.clientY;
+    console.log("Body X = " + this.body.GetPosition().x*30);
+    console.log("Body X = " + this.mousePosX);
+    if(this.body.GetPosition().x*30 < this.mousePosX + 20
+    && this.body.GetPosition().x*30 > this.mousePosX - 20){
+      this.selected = true;
+    }
+    else{
+      this.selected = false;
+    }
+
+  }
+  onMouseMove(e){
+      e.preventDefault();
+      this.mousePosX = e.clientX;
+      this.mousePosY = e.clientY;
+  }
+  onMouseUp(e){
+    e.preventDefault();
+    this.selected = false;
+  }
+
   getPositionX(){
     return this.body.GetPosition().x;
   }
@@ -172,9 +200,18 @@ class Fan
       }
     }
   };
-    
+
   getPositionY(){
     return this.body.GetPosition().y;
+  }
+  update(){
+    // Drag And Drop
+    this.imgX = (this.body.GetPosition().x *30);
+    this.imgY = (this.body.GetPosition().y *30);
+    if(this.selected == true){
+      console.log("SELECTED");
+    this.body.SetPosition(new this.b2Vec2(this.mousePosX / 30,this.mousePosY / 30));
+    }
   }
 
   /**

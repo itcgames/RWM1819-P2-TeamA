@@ -1,4 +1,4 @@
-
+var grabbedSomething = false;
 
 class PlayerBall
 {

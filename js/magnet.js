@@ -2,15 +2,14 @@
 class Magnet
 {
   constructor(x,y,world) {
-    var   b2Vec2 = Box2D.Common.Math.b2Vec2
-     ,	b2BodyDef = Box2D.Dynamics.b2BodyDef
+     var b2BodyDef = Box2D.Dynamics.b2BodyDef
      ,	b2Body = Box2D.Dynamics.b2Body
      ,	b2FixtureDef = Box2D.Dynamics.b2FixtureDef
      ,	b2Fixture = Box2D.Dynamics.b2Fixture
      ,	b2CircleShape = Box2D.Collision.Shapes.b2CircleShape
      ,	b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
        ;
-
+     this.b2Vec2 = Box2D.Common.Math.b2Vec2
      // FSM variables
      this.stateInactive = new State("Inactive");
      this.stateActive = new State("Active");
@@ -18,6 +17,9 @@ class Magnet
      this.eventNothing = new Event("Left zone", this.stateActive, this.stateInactive, false)
      this.fsm = new TwoStateTwoEvent("Magnet field", this.stateInactive, this.stateActive, this.eventAttract, this.eventNothing);
 
+     document.addEventListener("mousemove",this.onMouseMove.bind(this), true);
+     document.addEventListener("mousedown",this.onMouseDown.bind(this), true);
+     document.addEventListener("mouseup",this.onMouseUp.bind(this), true);
 
      // image variables
      this.img = new Image(); // Image object
@@ -52,16 +54,16 @@ class Magnet
     // Top bend
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
-      new b2Vec2(-1,0.5),
-      new b2Vec2(-0.9, 0.3),
-      new b2Vec2(-0.8,0.2),
-      new b2Vec2(-0.7,0.1),
-      new b2Vec2(-0.6,0.05),
-      new b2Vec2(-0.5,0),
-      new b2Vec2(-0.25, -0.15),
-      new b2Vec2(0, -0.25),
-      new b2Vec2(0,0),
-      new b2Vec2(-0.8, 0.5),
+      new this.b2Vec2(-1,0.5),
+      new this.b2Vec2(-0.9, 0.3),
+      new this.b2Vec2(-0.8,0.2),
+      new this.b2Vec2(-0.7,0.1),
+      new this.b2Vec2(-0.6,0.05),
+      new this.b2Vec2(-0.5,0),
+      new this.b2Vec2(-0.25, -0.15),
+      new this.b2Vec2(0, -0.25),
+      new this.b2Vec2(0,0),
+      new this.b2Vec2(-0.8, 0.5),
 
 		  ]);
 		bodyDef.position.Set(x,y);
@@ -79,10 +81,10 @@ class Magnet
     // Top rect
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
-      new b2Vec2(-0, -0.25),
-      new b2Vec2(0.75 , -0.25),
-      new b2Vec2(0.75,0),
-      new b2Vec2(0 , 0),
+      new this.b2Vec2(-0, -0.25),
+      new this.b2Vec2(0.75 , -0.25),
+      new this.b2Vec2(0.75,0),
+      new this.b2Vec2(0 , 0),
 		  ]);
 
 
@@ -99,10 +101,10 @@ class Magnet
     // Bottom rect
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
-      new b2Vec2(-0, 1),
-      new b2Vec2(0.75 , 1),
-      new b2Vec2(0.75,1.25),
-      new b2Vec2(0 , 1.25),
+      new this.b2Vec2(-0, 1),
+      new this.b2Vec2(0.75 , 1),
+      new this.b2Vec2(0.75,1.25),
+      new this.b2Vec2(0 , 1.25),
 		  ]);
 
 
@@ -119,16 +121,16 @@ class Magnet
 
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsArray([
-      new b2Vec2(-1,0.5),
-      new b2Vec2(-0.9, 0.7),
-      new b2Vec2(-0.8,0.8),
-      new b2Vec2(-0.7,0.9),
-      new b2Vec2(-0.6,0.95),
-      new b2Vec2(-0.5,1),
-      new b2Vec2(-0.25, 1.15),
-      new b2Vec2(0, 1.25),
-      new b2Vec2(0,1),
-      new b2Vec2(-0.8, 0.5),
+      new this.b2Vec2(-1,0.5),
+      new this.b2Vec2(-0.9, 0.7),
+      new this.b2Vec2(-0.8,0.8),
+      new this.b2Vec2(-0.7,0.9),
+      new this.b2Vec2(-0.6,0.95),
+      new this.b2Vec2(-0.5,1),
+      new this.b2Vec2(-0.25, 1.15),
+      new this.b2Vec2(0, 1.25),
+      new this.b2Vec2(0,1),
+      new this.b2Vec2(-0.8, 0.5),
 		  ]);
 
 
@@ -138,7 +140,30 @@ class Magnet
 
 
   }
+  onMouseDown(e){
 
+      grabbedSomething = true;
+    e.preventDefault();
+    this.mousePosX = e.clientX;
+    this.mousePosY = e.clientY;
+    if(this.body.GetPosition().x*30 < this.mousePosX + 20
+    && this.body.GetPosition().x*30 > this.mousePosX - 20){
+      this.selected = true;
+    }
+    else{
+      this.selected = false;
+    }
+  }
+
+  onMouseMove(e){
+      e.preventDefault();
+      this.mousePosX = e.clientX;
+      this.mousePosY = e.clientY;
+  }
+  onMouseUp(e){
+    e.preventDefault();
+    this.selected = false;
+  }
   inZone()
   {
     if(this.fsm.currentState === this.stateInactive)
@@ -201,4 +226,12 @@ class Magnet
   drawImage() {
 
     }
+  update(){
+    // Drag And Drop
+    this.imgX = (this.body.GetPosition().x *30);
+    this.imgY = (this.body.GetPosition().y *30);
+    if(this.selected == true){
+    this.body.SetPosition(new this.b2Vec2(this.mousePosX / 30,this.mousePosY / 30));
+    }
+  }
 }

@@ -2,15 +2,19 @@
 class Trampoline
 {
   constructor(x,y,world) {
-    var   b2Vec2 = Box2D.Common.Math.b2Vec2
-     ,	b2BodyDef = Box2D.Dynamics.b2BodyDef
+     var	b2BodyDef = Box2D.Dynamics.b2BodyDef
      ,	b2Body = Box2D.Dynamics.b2Body
      ,	b2FixtureDef = Box2D.Dynamics.b2FixtureDef
      ,	b2Fixture = Box2D.Dynamics.b2Fixture
      ,	b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
        ;
 
+       document.addEventListener("mousemove",this.onMouseMove.bind(this), true);
+       document.addEventListener("mousedown",this.onMouseDown.bind(this), true);
+       document.addEventListener("mouseup",this.onMouseUp.bind(this), true);
     // FSM variables
+    this.b2Vec2 = Box2D.Common.Math.b2Vec2
+
     this.stateBounce = new State("Bounce");
     this.stateStill = new State("Still");
     this.eventJump = new Event("Jump", this.stateStill, this.stateBounce, false)
@@ -45,9 +49,9 @@ class Trampoline
     bodyDef.position.y = y;
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsBox(1, 0.2);
-    var bodyTop = world.CreateBody(bodyDef);
-    bodyTop.CreateFixture(fixDef);
-    bodyTop.SetUserData("TrampolineTop");
+    this.bodyTop = world.CreateBody(bodyDef);
+    this.bodyTop.CreateFixture(fixDef);
+    this.bodyTop.SetUserData("TrampolineTop");
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1.0;
@@ -61,9 +65,9 @@ class Trampoline
     bodyDef.position.y = y + 0.3;
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsBox(0.2, 0.5);
-    var bodyLeft = world.CreateBody(bodyDef);
-    bodyLeft.CreateFixture(fixDef);
-    bodyLeft.SetUserData("TrampolineLeft");
+    this.bodyLeft = world.CreateBody(bodyDef);
+    this.bodyLeft.CreateFixture(fixDef);
+    this.bodyLeft.SetUserData("TrampolineLeft");
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1.0;
@@ -77,9 +81,32 @@ class Trampoline
     bodyDef.position.y = y+0.3;
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsBox(0.2, 0.5);
-    var bodyRight = world.CreateBody(bodyDef);
-    bodyRight.CreateFixture(fixDef);
-    bodyRight.SetUserData("TrampolineRight");
+    this.bodyRight = world.CreateBody(bodyDef);
+    this.bodyRight.CreateFixture(fixDef);
+    this.bodyRight.SetUserData("TrampolineRight");
+  }
+
+  onMouseDown(e){
+    e.preventDefault();
+    this.mousePosX = e.clientX;
+    this.mousePosY = e.clientY;
+    if(this.bodyTop.GetPosition().x*30 < this.mousePosX + 20
+    && this.bodyTop.GetPosition().x*30 > this.mousePosX - 20){
+      this.selected = true;
+    }
+    else{
+      this.selected = false;
+    }
+
+  }
+  onMouseMove(e){
+      e.preventDefault();
+      this.mousePosX = e.clientX;
+      this.mousePosY = e.clientY;
+  }
+  onMouseUp(e){
+    e.preventDefault();
+    this.selected = false;
   }
 
   jump()
@@ -146,4 +173,14 @@ class Trampoline
   drawImage() {
 
     }
+  update(){
+    // Drag And Drop
+    this.imgX = (this.bodyTop.GetPosition().x *30) - 45;
+    this.imgY = (this.bodyTop.GetPosition().y *30) - 8;
+    if(this.selected == true){
+    this.bodyTop.SetPosition(new this.b2Vec2(this.mousePosX / 30,this.mousePosY / 30));
+    this.bodyLeft.SetPosition(new this.b2Vec2((this.mousePosX / 30) -1.2,(this.mousePosY / 30) +0.3));
+    this.bodyRight.SetPosition(new this.b2Vec2((this.mousePosX / 30) +1.2,(this.mousePosY / 30) +0.3));
+    }
+  }
 }

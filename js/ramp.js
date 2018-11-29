@@ -64,33 +64,38 @@ class Ramp
   {
     this.body.GetPosition();
   }
-  onMouseDown(e)
-  {
+
+  onMouseDown(e){
+
+      grabbedSomething = true;
     e.preventDefault();
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;
-    if(this.body.GetPosition().x*30 < this.mousePosX + 20 && this.body.GetPosition().x*30 > this.mousePosX - 20)
-    {
+    if(this.body.GetPosition().x*30 < this.mousePosX + 20
+    && this.body.GetPosition().x*30 > this.mousePosX - 20){
       this.selected = true;
+      console.log("Selected");
     }
-    else
-    {
+    else{
       this.selected = false;
     }
+
   }
-  onMouseMove(e)
-  {
+  onMouseMove(e){
       e.preventDefault();
       this.mousePosX = e.clientX;
       this.mousePosY = e.clientY;
   }
-  onMouseUp(e)
-  {
+  onMouseUp(e){
     e.preventDefault();
+    this.selected = false;
   }
+
   update(){
-    if(this.selected == true)
-    {
+    // Drag And Drop
+    this.imgX = (this.body.GetPosition().x *30);
+    this.imgY = (this.body.GetPosition().y *30);
+    if(this.selected == true){
     this.body.SetPosition(new this.b2Vec2(this.mousePosX / 30,this.mousePosY / 30));
     }
   }

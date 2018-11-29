@@ -8,7 +8,9 @@ class BlowPipe
      ,	b2CircleShape = Box2D.Collision.Shapes.b2CircleShape
        ;
 
-
+       document.addEventListener("mousemove",this.onMouseMove.bind(this), true);
+       document.addEventListener("mousedown",this.onMouseDown.bind(this), true);
+       document.addEventListener("mouseup",this.onMouseUp.bind(this), true);
      // FSM variables
      this.stateReady = new State("Ready");
      this.stateEmpty = new State("Empty");
@@ -107,8 +109,38 @@ class BlowPipe
 
 
   }
+  onMouseDown(e){
+      grabbedSomething = true;
+    e.preventDefault();
+    this.mousePosX = e.clientX;
+    this.mousePosY = e.clientY;
+    if(this.body.GetPosition().x*30 < this.mousePosX + 20
+    && this.body.GetPosition().x*30 > this.mousePosX - 20){
+      this.selected = true;
+    }
+    else{
+      this.selected = false;
+    }
+
+  }
+  onMouseMove(e){
+      e.preventDefault();
+      this.mousePosX = e.clientX;
+      this.mousePosY = e.clientY;
+  }
+  onMouseUp(e){
+    e.preventDefault();
+    this.selected = false;
+  }
 
   update(){
+    // Drag And Drop
+    this.imgX = (this.body.GetPosition().x *30);
+    this.imgY = (this.body.GetPosition().y *30);
+    if(this.selected == true){
+    this.body.SetPosition(new this.b2Vec2(this.mousePosX / 30,this.mousePosY / 30));
+    }
+
     if(this.body.GetUserData() == "PipeDeflated"){
 
     this.fix = this.body.GetFixtureList();

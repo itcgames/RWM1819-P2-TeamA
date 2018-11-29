@@ -25,12 +25,13 @@ class PlayScene
        ,  true                 //allow sleep
     );
 
+    this.fan = new Fan(9,5,world);
     this.trampoline = new Trampoline(10,10,world);
     this.player = new PlayerBall(10,1,0.5,world);
     this.ball = new Ball(10,5,0.5,world);
     this.ball2 = new Ball(4.2,0.5,0.5,world);
     this.ramp = new Ramp(15,1,world);
-    this.fan = new Fan(9,5,world);
+    this.trampoline = new Trampoline(10,10,world);
     this.magnet = new Magnet(4,5,world);
     this.blowPipe = new BlowPipe(4,1.5,world);
     this.blowPipe2 = new BlowPipe(4,3,world);
@@ -113,6 +114,11 @@ class PlayScene
     this.ramp.update();
     this.blowPipe.update();
     this.blowPipe2.update();
+    this.ball.update();
+    this.magnet.update();
+    this.trampoline.update();
+    this.fan.update();
+
     this.player.checkCollision();
     this.player.checkFan(this.fan.getPositionX()
     ,this.fan.getPositionY());
@@ -127,7 +133,7 @@ class PlayScene
     world.ClearForces();
 
     this.time = this.scoreboard.getDisplayTimer();
-    if(this.time == "00:05"){
+    if(this.time == "1000:00"){
       this.scoreboard.addToBoard(55)
       console.log(this.scoreboard.getBoard());
       this.scoreboard.generate_table()
@@ -155,7 +161,7 @@ class PlayScene
    this.magnet.render();
    this.blowPipe.render();
    this.blowPipe2.render();
-    
+
    if(this.time == "00:05"){
      gameNs.endScene.render();
    }
