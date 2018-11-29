@@ -10,6 +10,13 @@ class Trampoline
      ,	b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
        ;
 
+    // FSM variables
+    this.stateBounce = new State("Bounce");
+    this.stateStill = new State("Still");
+    this.eventJump = new Event("Jump", this.stateStill, this.stateBounce, false)
+    this.eventStop = new Event("Stop", this.stateBounce, this.stateStill, false)
+    this.fsm = new TwoStateTwoEvent("Tramp", this.stateBounce, this.stateStill, this.eventJump, this.eventStop);
+
     // image variables
     this.img = new Image(); // Image object
     this.img.src = "img/trampoline.png";
@@ -21,8 +28,10 @@ class Trampoline
     this.imgY = (y *30) - 8;  // Y position on screen, Multipling and substracting to get position right
 
     // controllers for animation speed and where it starts
-    this.animeSpeed = 10;
-    this.animeSpeedIndex = 0;
+    this.animeSpeed = 10;   // Speed
+    this.animeSpeedIndex = 0; // Counter
+    this.animeCount = 0;      // Counter
+    this.animeLimit = 15;      // How many times the animation plays
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1.0;
@@ -71,12 +80,33 @@ class Trampoline
 
   }
 
+  jump()
+  {
+    this.animeCount = 0;
+    if(this.fsm.currentState === this.stateStill)
+    {
+      this.fsm.useEvent(this.eventJump)
+    }
+  }
+
+  stop()
+  {
+    this.animeCount = 0;
+    this.img.animeIndex = 0;
+    if(this.fsm.currentState === this.stateBounce)
+    {
+      this.fsm.useEvent(this.eventStop)
+    }
+  }
 
   render(){
     var canvas = document.createElement("mycanvas");
     var ctx = mycanvas.getContext("2d");
     var image = this.img;
-    this.animate();
+    if(this.fsm.currentState === this.stateBounce)
+    {
+      this.animate();
+    }
 
     ctx.drawImage(image, this.img.animeIndex,0, 48,30,this.imgX, this.imgY,90,32)
 
@@ -93,10 +123,17 @@ class Trampoline
       this.animeSpeedIndex = 0;
       if(this.img.animeIndex < this.img.widthThreshold)
       {
+        this.animeCount++;
         this.img.animeIndex = this.img.animeIndex + this.img.width
       }
       else {
         this.img.animeIndex = 0;
+      }
+
+      console.log(this.animeCount)
+      if(this.animeCount >= this.animeLimit)
+      {
+        this.stop()
       }
     }
   };

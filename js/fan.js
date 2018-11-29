@@ -11,6 +11,11 @@ class Fan
      ,	b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
        ;
 
+    // FSM variables
+    this.stateOn = new State("On");
+    this.stateOff = new State("Off");
+    this.eventSwitch = new Event("Switch", this.stateOn, this.stateOff, true)
+    this.fsm = new TwoStateTwoEvent("Fan", this.stateOff, this.stateOn, this.eventSwitch);
 
     // image variables
     this.img = new Image(); // Image object
@@ -124,11 +129,18 @@ class Fan
 
   }
 
+  hit()
+  {
+    this.fsm.changeState();
+  }
 
   render(){
     var canvas = document.createElement("mycanvas");
     var ctx = mycanvas.getContext("2d");
-    this.animate();
+    if(this.fsm.currentState === this.stateOn)
+    {
+      this.animate();
+    }
 
 
 

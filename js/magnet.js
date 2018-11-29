@@ -11,6 +11,14 @@ class Magnet
      ,	b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
        ;
 
+     // FSM variables
+     this.stateInactive = new State("Inactive");
+     this.stateActive = new State("Active");
+     this.eventAttract = new Event("Attract", this.stateInactive, this.stateActive, false)
+     this.eventNothing = new Event("Left zone", this.stateActive, this.stateInactive, false)
+     this.fsm = new TwoStateTwoEvent("Magnet field", this.stateInactive, this.stateActive, this.eventAttract, this.eventNothing);
+
+
      // image variables
      this.img = new Image(); // Image object
      this.img.src = "img/Magnet.png";
@@ -130,15 +138,33 @@ class Magnet
 
   }
 
+  inZone()
+  {
+    if(this.fsm.currentState === this.stateInactive)
+    {
+      this.fsm.useEvent(this.eventAttract)
+    }
+  }
+
+  outOfZone()
+  {
+    if(this.fsm.currentState === this.stateActive)
+    {
+      this.fsm.useEvent(this.eventNothing)
+    }
+  }
+
 
   render(){
     var canvas = document.createElement("mycanvas");
     var ctx = mycanvas.getContext("2d");
-    this.animate();
 
     ctx.drawImage(this.img, 0, 0, 1021, 926, this.imgX, this.imgY, 60, 50)
-    ctx.drawImage(this.animeImg, this.animeImg.animeIndex, 0, 43, 24, this.animeImgX, this.animeImgY, this.animeImg.width, 24)
-    //console.log(this.animeImg.width)
+    if(this.fsm.currentState === this.stateActive)
+    {
+      this.animate();
+      ctx.drawImage(this.animeImg, this.animeImg.animeIndex, 0, 43, 24, this.animeImgX, this.animeImgY, this.animeImg.width, 24)
+    }
   }
 
   animate()
