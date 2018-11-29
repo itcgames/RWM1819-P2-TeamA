@@ -26,13 +26,16 @@ class PlayScene
     );
 
     this.trampoline = new Trampoline(10,10,world);
-    this.player = new PlayerBall(1,1,0.5,world);
+    this.player = new PlayerBall(10,1,0.5,world);
     this.ball = new Ball(10,5,0.5,world);
-    this.ramp = new Ramp(15,10,world);
+    this.ball2 = new Ball(4.2,0.5,0.5,world);
+    this.ramp = new Ramp(15,1,world);
     this.fan = new Fan(9,5,world);
     this.magnet = new Magnet(4,5,world);
     this.blowPipe = new BlowPipe(4,1.5,world);
     this.blowPipe2 = new BlowPipe(4,3,world);
+    this.goalCup = new GoalCup(13,10,world);
+
 
     //Jamie
     var canvas = document.querySelector('canvas');
@@ -51,7 +54,9 @@ class PlayScene
     bodyDef.position.y = 13;
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsBox(10, 0.5);
-    world.CreateBody(bodyDef).CreateFixture(fixDef);
+    var groundBody = world.CreateBody(bodyDef);
+    groundBody.CreateFixture(fixDef);
+    groundBody.SetUserData("Ground");
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1.0;
@@ -68,25 +73,18 @@ class PlayScene
     fixDef.shape.SetAsBox(1, 0.5);
     world.CreateBody(bodyDef).CreateFixture(fixDef);
 
-    //create some objects
-    bodyDef.type = b2Body.b2_dynamicBody;
-    for(var i = 0; i < 1; ++i) {
-       if(i == 1) {
-          fixDef.shape = new b2PolygonShape;
-          fixDef.shape.SetAsBox(
-                1 //half width
-             ,  1 //half height
-          );
-       } else {
-          fixDef.shape = new b2CircleShape(
-             Math.random() + 0.1 //radius
-          );
-       }
-       fixDef.restitution = 0.2;
-       bodyDef.position.x = 10;
-       bodyDef.position.y = 5;
-       world.CreateBody(bodyDef).CreateFixture(fixDef);
+/*
+    //Drag and drop
+    this.drag = new Square(200,400,50,50, 'red', "drag");
+    this.drop = new Square(400,500,75,75, 'green', "drop");
+
+    var array = [];
+    array.push(this.drop);
+    if(this.drag.draggable != undefined){
+      this.drag.draggable.addDropZones(array);
     }
+    */
+
 
     //setup debug draw
     var debugDraw = new b2DebugDraw();
@@ -100,9 +98,26 @@ class PlayScene
   //  window.setInterval(update, 1000 / 60)
 
 
+  this.scoreboard = new ScoreboardManager();
+
+  this.scoreboard.initBoard("session")
+
+
+
+  }
+  init(){
+    this.scoreboard.startTimer();
   }
   update()
   {
+    this.ramp.update();
+    this.blowPipe.update();
+    this.blowPipe2.update();
+    this.player.checkCollision();
+    this.player.checkFan(this.fan.getPositionX()
+    ,this.fan.getPositionY());
+    this.player.checkMagnet(this.magnet.getPositionX()
+    ,this.magnet.getPositionY());
       world.Step(
           1 / 60   //frame-rate
        ,  10       //velocity iterations
@@ -110,6 +125,15 @@ class PlayScene
     );
     world.DrawDebugData();
     world.ClearForces();
+
+    this.time = this.scoreboard.getDisplayTimer();
+    if(this.time == "00:05"){
+      this.scoreboard.addToBoard(55)
+      console.log(this.scoreboard.getBoard());
+      this.scoreboard.generate_table()
+      gameNs.endScene.render();
+    }
+
 
   }
   /**
@@ -122,12 +146,25 @@ class PlayScene
    var canvas = document.createElement("mycanvas");
    var ctx = mycanvas.getContext("2d");
    document.body.style.background = "#ffffff";
+
+   //this.drop.draw(ctx);
+   //this.drag.draw(ctx);
    this.trampoline.render();
    this.ramp.render();
    this.fan.render();
    this.magnet.render();
    this.blowPipe.render();
    this.blowPipe2.render();
+    
+   if(this.time == "00:05"){
+     gameNs.endScene.render();
+   }
+
+  ctx.fillStyle ='white';
+  ctx.font = '55px Adventure Regular';
+  ctx.strokeStyle = 'black';
+  ctx.fillText(this.time,100,100);
+ ctx.strokeText(this.time,100,100);
 
   }
 }

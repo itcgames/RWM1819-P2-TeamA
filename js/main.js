@@ -73,6 +73,7 @@ function keyDownHandler(e)
  	canvas.id = 'mycanvas';
  	canvas.width = window.innerWidth;
  	canvas.height = window.innerHeight;
+  canvas.style.position = 'relative';
  	//We want this to be a 2D canvas.
  	var ctx = canvas.getContext("2D");
  	//Adds the canvas element to the document.
