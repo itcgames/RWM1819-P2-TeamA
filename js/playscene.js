@@ -32,8 +32,8 @@ class PlayScene
     this.ramp = new Ramp(15,1,world);
     this.fan = new Fan(9,5,world);
     this.magnet = new Magnet(4,5,world);
-    this.blowPipe = new BlowPipe(4,1.5,true,world);
-    this.blowPipe2 = new BlowPipe(4,3,false,world);
+    this.blowPipe = new BlowPipe(4,1.5,world);
+    this.blowPipe2 = new BlowPipe(4,3,world);
     this.goalCup = new GoalCup(13,10,world);
 
 
@@ -150,6 +150,12 @@ class PlayScene
    //this.drop.draw(ctx);
    //this.drag.draw(ctx);
    this.trampoline.render();
+   this.ramp.render();
+   this.fan.render();
+   this.magnet.render();
+   this.blowPipe.render();
+   this.blowPipe2.render();
+    
    if(this.time == "00:05"){
      gameNs.endScene.render();
    }

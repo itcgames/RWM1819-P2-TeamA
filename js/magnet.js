@@ -10,8 +10,36 @@ class Magnet
      ,	b2CircleShape = Box2D.Collision.Shapes.b2CircleShape
      ,	b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
        ;
-    this.imageX = x;
-    this.imageY = y;
+
+     // FSM variables
+     this.stateInactive = new State("Inactive");
+     this.stateActive = new State("Active");
+     this.eventAttract = new Event("Attract", this.stateInactive, this.stateActive, false)
+     this.eventNothing = new Event("Left zone", this.stateActive, this.stateInactive, false)
+     this.fsm = new TwoStateTwoEvent("Magnet field", this.stateInactive, this.stateActive, this.eventAttract, this.eventNothing);
+
+
+     // image variables
+     this.img = new Image(); // Image object
+     this.img.src = "img/Magnet.png";
+     this.img.width = 50;  // Width of one image
+     // Set to a x coordinate halfway through last sprite
+     this.imgX = (x *30) - 30; // X position on screen, Multipling and substracting to get position right
+     this.imgY = (y *30) - 10;  // Y position on screen, Multipling and substracting to get position right
+
+     // controllers for animation speed and where it starts
+     this.animeSpeed = 30;
+     this.animeSpeedIndex = 0;
+
+     this.animeImg = new Image(); // Image object
+     this.animeImg.src = "img/magnet_field.png";
+     this.animeImg.animeIndex = 0;  // Index of what part of the animation to display
+     this.animeImg.width = 14;  // Width of one image
+     // Set to a x coordinate halfway through last sprite
+     this.animeImg.widthThreshold = 25;  // After index goes past this value, index will reset
+     this.animeImgX = this.imgX + 65; // X position on screen, Multipling and substracting to get position right
+     this.animeImgY = this.imgY + 13;  // Y position on screen, Multipling and substracting to get position right
+
 
 
 
@@ -111,6 +139,54 @@ class Magnet
 
   }
 
+  inZone()
+  {
+    if(this.fsm.currentState === this.stateInactive)
+    {
+      this.fsm.useEvent(this.eventAttract)
+    }
+  }
+
+  outOfZone()
+  {
+    if(this.fsm.currentState === this.stateActive)
+    {
+      this.fsm.useEvent(this.eventNothing)
+    }
+  }
+
+
+  render(){
+    var canvas = document.createElement("mycanvas");
+    var ctx = mycanvas.getContext("2d");
+
+    ctx.drawImage(this.img, 0, 0, 1021, 926, this.imgX, this.imgY, 60, 50)
+    if(this.fsm.currentState === this.stateActive)
+    {
+      this.animate();
+      ctx.drawImage(this.animeImg, this.animeImg.animeIndex, 0, 43, 24, this.animeImgX, this.animeImgY, this.animeImg.width, 24)
+    }
+  }
+
+  animate()
+  {
+    if(this.animeSpeedIndex < this.animeSpeed)
+    {
+      this.animeSpeedIndex++;
+    }
+    else
+    {
+      this.animeSpeedIndex = 0;
+      if(this.animeImg.animeIndex < this.animeImg.widthThreshold)
+      {
+        this.animeImg.animeIndex = this.animeImg.animeIndex + this.animeImg.width
+      }
+      else {
+        this.animeImg.animeIndex = 0;
+      }
+    }
+  };
+
   getPositionX(){
     return this.body.GetPosition().x;
 
@@ -118,7 +194,7 @@ class Magnet
   getPositionY(){
     return this.body.GetPosition().y;
   }
-  render(){}
+
   /**
    * Draws an image after it is loaded.
    */
