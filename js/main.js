@@ -18,44 +18,6 @@ function main()
   //document.addEventListener("click", clickHandler.bind(null, sceneManager));
 
 }
-function keyDownHandler(e)
-{
-	//code triggered when left arrow is pressed
-	if(e.keyCode === 37  )
-	{
-
-
-	}
-  else if(e.keyCode === 39 )
-	{
-
-	}
-  else
-  {
-
-  }
-
-//code triggered when UP arrow is pressed
-	if(e.keyCode === 38)
-	{
-
-	}
-  else if(e.keyCode === 40)
-	{
-
-
-
-	}
-  else
-  {
-
-
-  }
-
-
-}
-
-
 
 /**
  * Initialises the canvas - the drawing surface. The canvas
@@ -66,7 +28,7 @@ function keyDownHandler(e)
  */
  function initCanvas()
  {
-   document.addEventListener("keydown", this.keyDownHandler, true);
+   ///document.addEventListener("keydown", this.keyDownHandler, true);
  	//Use the document object to create a new element canvas.
  	var canvas = document.createElement("canvas");
  	//Assign the canvas an id so we can reference it elsewhere.
@@ -81,12 +43,12 @@ function keyDownHandler(e)
   document.addEventListener("touchmove", onTouchMove, {passive:false});
   document.addEventListener("touchend", onTouchEnd);
  }
- window.addEventListener("keydown", function(e) {
+ /*window.addEventListener("keydown", function(e) {
      // Space and arrow keys
      if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
          e.preventDefault();
      }
- }, false);
+ }, false);*/
  function onTouchStart(canvas, e)
  {
     touches = e.touches;
@@ -254,6 +216,4 @@ function keyDownHandler(e)
 function draw(game)
 {
   game.draw();
-
-
 }

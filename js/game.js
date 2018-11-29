@@ -25,7 +25,7 @@ class Game
     gameNs.sceneManager.addScene(gameNs.menuScene);
     gameNs.sceneManager.addScene(gameNs.playScene);
     gameNs.sceneManager.addScene(gameNs.optionsScene);
-    gameNs.scenemanager.addScene(gameNs.helpScene);
+    gameNs.sceneManager.addScene(gameNs.helpScene);
     gameNs.sceneManager.addScene(gameNs.hintsScene)
 
     gameNs.sceneManager.goToScene(gameNs.menuScene.title);
@@ -39,9 +39,11 @@ class Game
   */
   update()
   {
-    window.requestAnimationFrame(gameNs.game.update);
+    //window.requestAnimationFrame(gameNs.game.update);
     gameNs.sceneManager.update();
     gameNs.sceneManager.render();
+    this.draw();
+    console.log("update called")
   }
 //  clickHandler(sceneManager)
   //{
@@ -52,8 +54,6 @@ class Game
   {
     window.requestAnimationFrame(gameNs.game.draw);
     gameNs.sceneManager.render();
-
-
   }
 
 }

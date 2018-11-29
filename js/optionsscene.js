@@ -206,6 +206,8 @@ class OptionsScene
           el.parentNode.removeChild( el );
           var el = document.getElementById( 'Mute' );
           el.parentNode.removeChild( el );
+          var el = document.getElementById( 'HelpScreen' );
+          el.parentNode.removeChild(el);
           gameNs.menuScene.createDiv("Play");
           gameNs.menuScene.createDiv("Options");
           gameNs.menuScene.createDiv("Tutorial");
@@ -214,8 +216,8 @@ class OptionsScene
 
         else if(filename==="helpButton.png")
         {
-          gameNs.sceneManager.goToScene(gameNs.HelpScene.title);
-          var el = document.getElementById( 'Back' );
+          gameNs.sceneManager.goToScene(gameNs.helpScene.title);
+          var el = document.getElementById( 'HelpScreen' );
           el.parentNode.removeChild( el );
           var el = document.getElementById( 'VolumeUp' );
           el.parentNode.removeChild( el );
@@ -223,7 +225,9 @@ class OptionsScene
           el.parentNode.removeChild( el );
           var el = document.getElementById( 'Mute' );
           el.parentNode.removeChild( el );
-          gameNs.helpScene.createDiv("Back")
+          var el = document.getElementById( 'Back' );
+          el.parentNode.removeChild( el );
+          gameNs.helpScene.createDiv("HelpBack")
           gameNs.helpScene.createDiv("Hints")
         }
      }
