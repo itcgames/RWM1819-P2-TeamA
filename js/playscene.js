@@ -99,11 +99,14 @@ class PlayScene
     ,this.fan.getPositionY());
     this.player.checkMagnet(this.magnet.getPositionX()
     ,this.magnet.getPositionY());
+    if(startNumber == 1)
+    {
       world.Step(
           1 / 60   //frame-rate
        ,  10       //velocity iterations
        ,  10       //position iterations
     );
+  }
     world.DrawDebugData();
     world.ClearForces();
 

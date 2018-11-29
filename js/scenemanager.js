@@ -63,7 +63,7 @@ class SceneManager
   /**
   *helper function that renders background colour, font and font size
   */
-  
+
   render()
   {
     this.currentScene.render();

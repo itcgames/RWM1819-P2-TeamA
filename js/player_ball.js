@@ -58,10 +58,10 @@ class PlayerBall
   {
     if(startNumber == 0){
     this.body.SetPosition(new this.b2Vec2(this.imageX,this.imageY));
-    this.bodyAndFixture.GetBody().ApplyForce(
-    new this.b2Vec2(0,-10),
-    this.bodyAndFixture.GetBody().GetWorldCenter()
-    );
+    //this.bodyAndFixture.GetBody().ApplyForce(
+  //  new this.b2Vec2(0,-10),
+    //this.bodyAndFixture.GetBody().GetWorldCenter()
+    //);
   }
 }
   checkFan(fanX,fanY)
