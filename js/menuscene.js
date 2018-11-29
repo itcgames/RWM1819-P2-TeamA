@@ -92,6 +92,7 @@ class MenuScene
          {
 
            gameNs.sceneManager.goToScene(gameNs.playScene.title);
+           gameNs.playScene.init();
            gameNs.timerStart = true;
            gameNs.start = Date.now();
 

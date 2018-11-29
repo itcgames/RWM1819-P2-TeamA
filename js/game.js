@@ -19,11 +19,13 @@ class Game
     gameNs.menuScene = new MenuScene('RWM');
     gameNs.playScene = new PlayScene('Play');
     gameNs.optionsScene = new OptionsScene('Options');
+    gameNs.endScene = new EndScene('endScene');
 
     gameNs.sceneManager.addScene(gameNs.menuScene);
     gameNs.sceneManager.addScene(gameNs.playScene);
     gameNs.sceneManager.addScene(gameNs.optionsScene);
-    gameNs.sceneManager.goToScene(gameNs.menuScene.title);
+    gameNs.sceneManager.addScene(gameNs.endScene);
+    gameNs.sceneManager.goToScene(gameNs.playScene.title);
 
   //  document.addEventListener("click", this.clickHandler.bind(null, gameNs.sceneManager));
     //draw(sceneManager);

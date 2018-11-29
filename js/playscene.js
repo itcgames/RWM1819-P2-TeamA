@@ -87,6 +87,15 @@ class PlayScene
   //  window.setInterval(update, 1000 / 60)
 
 
+  this.scoreboard = new ScoreboardManager();
+
+  this.scoreboard.initBoard("session")
+
+
+
+  }
+  init(){
+    this.scoreboard.startTimer();
   }
   update()
   {
@@ -101,6 +110,15 @@ class PlayScene
     world.DrawDebugData();
     world.ClearForces();
 
+    this.time = this.scoreboard.getDisplayTimer();
+    if(this.time == "00:05"){
+      this.scoreboard.addToBoard(55)
+      console.log(this.scoreboard.getBoard());
+      this.scoreboard.generate_table()
+      gameNs.endScene.render();
+    }
+
+
   }
   /**
    * render function which will overwrite the one inherited by scene
@@ -113,6 +131,15 @@ class PlayScene
    var ctx = mycanvas.getContext("2d");
    document.body.style.background = "#ffffff";
    this.trampoline.render();
+   if(this.time == "00:05"){
+     gameNs.endScene.render();
+   }
+
+  ctx.fillStyle ='white';
+  ctx.font = '55px Adventure Regular';
+  ctx.strokeStyle = 'black';
+  ctx.fillText(this.time,100,100);
+ ctx.strokeText(this.time,100,100);
 
   }
 }
