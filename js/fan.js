@@ -136,13 +136,9 @@ class Fan
     e.preventDefault();
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;
-    console.log("Body Y = " + this.body.GetPosition().y*30);
-    console.log("Mouse Y = " + this.mousePosY);
-    console.log("Body X = " + this.body.GetPosition().x*30);
-    console.log("Mouse X = " + this.mousePosX);
     if(this.mousePosX < this.body.GetPosition().x*30
-    && this.mousePosX > this.body.GetPosition().x*30 - (this.img.width * 2)
-    && this.mousePosY  < this.body.GetPosition().y*30 + (this.img.height)
+    && this.mousePosX > this.body.GetPosition().x*30 - (this.img.width * 4)
+    && this.mousePosY  < this.body.GetPosition().y*30 + (this.img.height * 2)
     && this.mousePosY > this.body.GetPosition().y*30 - (this.img.height)){
       this.selected = true;
     }
@@ -209,12 +205,12 @@ class Fan
   }
   update(){
     // Drag And Drop
+    this.fsm.changeState();
     this.imgX = (this.body.GetPosition().x *30) -90;
     this.imgY = (this.body.GetPosition().y *30) -22;
     this.imgBladeX = (this.body.GetPosition().x *30) -33;
     this.imgBladeY = (this.body.GetPosition().y *30) -29;
     if(this.selected == true){
-      console.log("SELECTED");
     this.body.SetPosition(new this.b2Vec2(this.mousePosX / 30,this.mousePosY / 30));
     }
   }

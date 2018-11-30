@@ -10,6 +10,7 @@ class Ball
        ;
     this.imageX = x;
     this.imageY = y;
+    this.circRadius = radius;
 
     this.b2Vec2 = Box2D.Common.Math.b2Vec2;
 
@@ -44,10 +45,10 @@ class Ball
     e.preventDefault();
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;
-    if(this.mousePosX < this.body.GetPosition().x*30
-    && this.mousePosX > this.body.GetPosition().x*30 - (this.img.width * 2)
-    && this.mousePosY  < this.body.GetPosition().y*30 + (this.img.height)
-    && this.mousePosY > this.body.GetPosition().y*30 - (this.img.height)){
+    if(this.mousePosX < this.body.GetPosition().x*30 + (this.circRadius *30)
+    && this.mousePosX > this.body.GetPosition().x*30 - (this.circRadius *30)
+    && this.mousePosY  < this.body.GetPosition().y*30 + (this.circRadius *30)
+    && this.mousePosY > this.body.GetPosition().y*30 - (this.circRadius *30)){
       this.selected = true;
     }
     else{
