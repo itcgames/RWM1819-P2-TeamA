@@ -230,6 +230,7 @@ while (this.fix) {
     if(this.fsm.currentState === this.stateReady)
     {
       this.fsm.changeState()
+      gameNs.audioManager.playAudio("blowPipe",false,gameNs.volume);
     }
   }
 

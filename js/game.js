@@ -34,6 +34,21 @@ class Game
     gameNs.sceneManager.addScene(gameNs.endScene);
     gameNs.sceneManager.goToScene(gameNs.menuScene.title);
 
+    gameNs.audioManager = new AudioManager();
+    gameNs.audioManager.init();
+    gameNs.audioManager.loadSoundFile("bg","img/audio/background.mp3" )
+    gameNs.audioManager.loadSoundFile("blowPipe","img/audio/Blowpipe.wav" )
+    gameNs.audioManager.loadSoundFile("drop","img/audio/drop.mp3" )
+    gameNs.audioManager.loadSoundFile("fan","img/audio/Fan.wav" )
+    gameNs.audioManager.loadSoundFile("goal","img/audio/goal.mp3" )
+    gameNs.audioManager.loadSoundFile("hitGround","img/audio/Hit_ground.wav")
+    gameNs.audioManager.loadSoundFile("magnet","img/audio/Magnet.wav")
+    gameNs.audioManager.loadSoundFile("tramp","img/audio/Tramp.wav")
+    gameNs.audioManager.loadSoundFile("win","img/audio/Win.wav")
+
+
+
+
   //  document.addEventListener("click", this.clickHandler.bind(null, gameNs.sceneManager));
     //draw(sceneManager);
   }

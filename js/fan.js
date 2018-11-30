@@ -172,6 +172,7 @@ class Fan
     if(this.fsm.currentState === this.stateOn)
     {
       this.animate();
+      gameNs.audioManager.playAudio("fan",false,gameNs.volume);
     }
 
 

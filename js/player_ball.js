@@ -63,13 +63,14 @@ class PlayerBall
 
     gameNs.emitters = [new Emitter(new VectorTwo(this.body.GetPosition().x * 30, this.body.GetPosition().y* 30 ), VectorTwo.fromAngle(0, 2))];
 
-   update();
-
+    update();
     //addNewParticles();
 
     document.addEventListener("keydown",this.keyHandler, true);
     this.startNumber = 0;
+
     gameNs.win = false;
+
 
   }
   keyHandler(e){
@@ -134,7 +135,9 @@ class PlayerBall
   }
   getWinState()
   {
+
     return gameNs.win;
+
   }
 
   update(){
@@ -173,16 +176,24 @@ class PlayerBall
          }
 
            addBurstParticles();
+
+           gameNs.audioManager.playAudio("goal",false,gameNs.volume);
+
+
            this.loop= true;
            if(TotorialEnd == 0)
            {
             gameNs.win = true;
           }
+
          }
          if(contact.GetFixtureA().GetBody().GetUserData() == "Player" && contact.GetFixtureB().GetBody().GetUserData() == "Ramp"
        || contact.GetFixtureA().GetBody().GetUserData() == "Ramp" && contact.GetFixtureB().GetBody().GetUserData() == "Player")
          {
            addBurstParticles();
+
+           gameNs.audioManager.playAudio("drop",false,gameNs.volume);
+
 
 
          }
@@ -200,10 +211,12 @@ class PlayerBall
          if(contact.GetFixtureA().GetBody().GetUserData() == "Ball" && contact.GetFixtureB().GetBody().GetUserData() == "PipeInflated")
          {
            contact.GetFixtureB().GetBody().SetUserData("PipeDeflated");
+           gameNs.audioManager.playAudio("goal",false,gameNs.volume);
          }
          if(contact.GetFixtureA().GetBody().GetUserData() == "PipeInflated" && contact.GetFixtureB().GetBody().GetUserData() == "Ball")
          {
            contact.GetFixtureA().GetBody().SetUserData("PipeDeflated");
+           gameNs.audioManager.playAudio("goal",false,gameNs.volume);
          }
     }
     this.listener.EndContact = function(contact) {

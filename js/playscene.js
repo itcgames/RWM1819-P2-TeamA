@@ -58,15 +58,12 @@ class PlayScene
 
 
   this.scoreboard = new ScoreboardManager();
-
-  this.scoreboard.initBoard("session")
   this.scoreboard.clearSessionStorage();
-
-  this.am = new AudioManager();
 
   }
   init(){
     this.scoreboard.startTimer();
+    gameNs.audioManager.playAudio("bg",true,gameNs.volume);
   }
   update()
   {
@@ -174,7 +171,6 @@ class PlayScene
       this.scoreboard.filterTime(1);
       console.log(this.scoreboard.getBoard());
       this.scoreboard.generate_table()
-      gameNs.endScene.render();
     }
 
 
