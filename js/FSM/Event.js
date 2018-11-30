@@ -79,12 +79,12 @@ class Event
         // First state to second
         if(fsm.currentState.name === this.firstState.name)
         {
-          console.log(this.firstState.name + " to " + this.secondState.name);
+          //console.log(this.firstState.name + " to " + this.secondState.name);
           fsm.currentState = this.secondState;
         } // Second state to first if it is a two way event
         else if(fsm.currentState.name === this.secondState.name && this.twoWay)
         {
-          console.log(this.secondState.name + " to "  + this.firstState.name);
+          //console.log(this.secondState.name + " to "  + this.firstState.name);
           fsm.currentState = this.firstState;
         } // Error can't transition this way
         else if (this.twoWay === false)

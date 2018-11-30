@@ -110,24 +110,30 @@ class BlowPipe
 
   }
   onMouseDown(e){
+    if(gameStartedBool == false)
+    {
     e.preventDefault();
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;
-    if(this.mousePosX < this.body.GetPosition().x*30 + (this.img.width * 2)
-    && this.mousePosX > this.body.GetPosition().x*30
-    && this.mousePosY  < this.body.GetPosition().y*30 + (this.img.height /2)
+    if(this.mousePosX < this.body.GetPosition().x*30 + (this.img.width)
+    && this.mousePosX > this.body.GetPosition().x*30 - (this.img.width/2)
+    && this.mousePosY  < this.body.GetPosition().y*30 + (this.img.height /1.7)
     && this.mousePosY > this.body.GetPosition().y*30 - (this.img.height/2)){
       this.selected = true;
     }
     else{
       this.selected = false;
     }
+  }
 
   }
   onMouseMove(e){
+    if(gameStartedBool == false)
+    {
       e.preventDefault();
       this.mousePosX = e.clientX;
       this.mousePosY = e.clientY;
+    }
   }
   onMouseUp(e){
     e.preventDefault();
@@ -230,6 +236,7 @@ while (this.fix) {
     if(this.fsm.currentState === this.stateReady)
     {
       this.fsm.changeState()
+      gameNs.audioManager.playAudio("blowPipe",false,gameNs.volume);
     }
   }
 

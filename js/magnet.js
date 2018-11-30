@@ -10,6 +10,7 @@ class Magnet
      ,	b2PolygonShape = Box2D.Collision.Shapes.b2PolygonShape
        ;
      this.b2Vec2 = Box2D.Common.Math.b2Vec2
+
      // FSM variables
      this.stateInactive = new State("Inactive");
      this.stateActive = new State("Active");
@@ -141,7 +142,9 @@ class Magnet
 
   }
   onMouseDown(e){
-
+    console.log(gameStartedBool);
+    if(gameStartedBool == false)
+    {
     e.preventDefault();
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;
@@ -149,19 +152,23 @@ class Magnet
     console.log("Y = " + this.body.GetPosition().y * 30);
     if(this.mousePosX < this.body.GetPosition().x*30 + (this.img.width)
     && this.mousePosX > this.body.GetPosition().x*30 - (this.img.width)
-    && this.mousePosY  > this.body.GetPosition().y*30
-    && this.mousePosY < this.body.GetPosition().y*30 + (this.img.height)){
+    && this.mousePosY  > this.body.GetPosition().y*30 - 16
+    && this.mousePosY < (this.body.GetPosition().y*30 + (this.img.height / 20))){
       this.selected = true;
     }
     else{
       this.selected = false;
     }
   }
+}
 
   onMouseMove(e){
+    if(gameStartedBool == false)
+    {
       e.preventDefault();
       this.mousePosX = e.clientX;
       this.mousePosY = e.clientY;
+    }
   }
   onMouseUp(e){
     e.preventDefault();

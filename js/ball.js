@@ -10,6 +10,7 @@ class Ball
        ;
     this.imageX = x;
     this.imageY = y;
+    this.circRadius = radius;
 
     this.radius = radius;
 
@@ -43,24 +44,30 @@ class Ball
 
   }
   onMouseDown(e){
+    if(gameStartedBool == false)
+    {
     e.preventDefault();
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;
-    if(this.mousePosX < this.body.GetPosition().x*30
-    && this.mousePosX > this.body.GetPosition().x*30 - (this.radius* 2)
-    && this.mousePosY  < this.body.GetPosition().y*30 + (this.radius)
-    && this.mousePosY > this.body.GetPosition().y*30 - (this.radius)){
+    if(this.mousePosX < this.body.GetPosition().x*30 + (this.circRadius *30)
+    && this.mousePosX > this.body.GetPosition().x*30 - (this.circRadius *30)
+    && this.mousePosY  < this.body.GetPosition().y*30 + (this.circRadius *30)
+    && this.mousePosY > this.body.GetPosition().y*30 - (this.circRadius *30)){
       this.selected = true;
     }
     else{
       this.selected = false;
     }
+  }
 
   }
   onMouseMove(e){
+    if(gameStartedBool == false)
+    {
       e.preventDefault();
       this.mousePosX = e.clientX;
       this.mousePosY = e.clientY;
+    }
   }
   onMouseUp(e){
     e.preventDefault();

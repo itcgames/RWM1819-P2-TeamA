@@ -51,6 +51,7 @@ class Ramp
     document.addEventListener("mousemove",this.onMouseMove.bind(this), true);
     document.addEventListener("mousedown",this.onMouseDown.bind(this), true);
     document.addEventListener("mouseup",this.onMouseUp.bind(this), true);
+
   }
 
   render(){
@@ -66,26 +67,32 @@ class Ramp
   }
 
   onMouseDown(e){
+    if(gameStartedBool == false)
+    {
 
     e.preventDefault();
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;
 
-    if(this.mousePosX < this.body.GetPosition().x*30
-    && this.mousePosX > this.body.GetPosition().x*30 - (this.img.width * 2)
-    && this.mousePosY  < this.body.GetPosition().y*30 + (this.img.height)
-    && this.mousePosY > this.body.GetPosition().y*30 - (this.img.height)){
+    if(this.mousePosX > this.body.GetPosition().x*30
+    && this.mousePosX < this.body.GetPosition().x*30 + (this.img.width)
+    && this.mousePosY  < this.body.GetPosition().y*30 + (this.img.height * 1.5)
+    && this.mousePosY > this.body.GetPosition().y*30 - (this.img.height * 1.5)){
       this.selected = true;
     }
     else{
       this.selected = false;
     }
+  }
 
   }
   onMouseMove(e){
+    if(gameStartedBool == false)
+    {
       e.preventDefault();
       this.mousePosX = e.clientX;
       this.mousePosY = e.clientY;
+    }
   }
   onMouseUp(e){
     e.preventDefault();

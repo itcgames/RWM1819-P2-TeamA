@@ -18,6 +18,7 @@ class Game
     gameNs.sceneManager = new SceneManager();
     gameNs.menuScene = new MenuScene('RWM');
     gameNs.playScene = new PlayScene('Play');
+  //  gameNs.tutorialScene = new TutorialScene('Tutorial');
     gameNs.optionsScene = new OptionsScene('Options');
     gameNs.endScene = new EndScene('endScene');
     gameNs.helpScene = new HelpScene('Help')
@@ -27,6 +28,7 @@ class Game
 
     gameNs.sceneManager.addScene(gameNs.menuScene);
     gameNs.sceneManager.addScene(gameNs.playScene);
+  //  gameNs.sceneManager.addScene(gameNs.tutorialScene);
     gameNs.sceneManager.addScene(gameNs.optionsScene);
     gameNs.sceneManager.addScene(gameNs.helpScene);
     gameNs.sceneManager.addScene(gameNs.hintsScene)
@@ -35,6 +37,21 @@ class Game
     gameNs.sceneManager.addScene(gameNs.splashScene);
 
     gameNs.sceneManager.goToScene(gameNs.splashScene.title)
+
+    gameNs.audioManager = new AudioManager();
+    gameNs.audioManager.init();
+    gameNs.audioManager.loadSoundFile("bg","img/audio/background.mp3" )
+    gameNs.audioManager.loadSoundFile("blowPipe","img/audio/Blowpipe.wav" )
+    gameNs.audioManager.loadSoundFile("drop","img/audio/drop.mp3" )
+    gameNs.audioManager.loadSoundFile("fan","img/audio/Fan.wav" )
+    gameNs.audioManager.loadSoundFile("goal","img/audio/goal.mp3" )
+    gameNs.audioManager.loadSoundFile("hitGround","img/audio/Hit_ground.wav")
+    gameNs.audioManager.loadSoundFile("magnet","img/audio/Magnet.wav")
+    gameNs.audioManager.loadSoundFile("tramp","img/audio/Tramp.wav")
+    gameNs.audioManager.loadSoundFile("win","img/audio/Win.wav")
+
+
+
 
   //  document.addEventListener("click", this.clickHandler.bind(null, gameNs.sceneManager));
     //draw(sceneManager);
@@ -47,8 +64,8 @@ class Game
   {
     window.requestAnimationFrame(gameNs.game.update);
     gameNs.sceneManager.update();
-    gameNs.sceneManager.render();
-    console.log("update called")
+    //this.draw();
+    //console.log("update called")
   }
 //  clickHandler(sceneManager)
   //{
