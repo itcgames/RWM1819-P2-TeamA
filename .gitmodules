@@ -1,0 +1,9 @@
+[submodule "RWM1819-Help-A"]
+	path = RWM1819-Help-A
+	url = https://github.com/itcgames/RWM1819-Help-A.git
+[submodule "RWM1819-Scoreboard-A"]
+	path = RWM1819-Scoreboard-A
+	url = https://github.com/itcgames/RWM1819-Scoreboard-A.git
+[submodule "RWM1819-Audio-A"]
+	path = RWM1819-Audio-A
+	url = https://github.com/itcgames/RWM1819-Audio-A.git
