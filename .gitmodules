@@ -10,3 +10,6 @@
 [submodule "RWM1819-Particle-B"]
 	path = RWM1819-Particle-B
 	url = https://github.com/itcgames/RWM1819-Particle-B.git
+[submodule "RWM1819-Tutorial-A"]
+	path = RWM1819-Tutorial-A
+	url = https://github.com/itcgames/RWM1819-Tutorial-A.git

@@ -1,4 +1,5 @@
    var world;
+   var TutorialEnd = 0;
 
 class PlayScene
 {
@@ -24,6 +25,7 @@ class PlayScene
           new b2Vec2(0, 10)    //gravity
        ,  true                 //allow sleep
     );
+    this.tutorialStart = false;
 
     this.level = new Level(23.8,12.5,world);
 
@@ -35,6 +37,7 @@ class PlayScene
     this.magnet = new Magnet(20.8,3,world);
     this.blowPipe = new BlowPipe(20.5,9,world);
     this.goalCup = new GoalCup(17,12.2,world);
+
 
 
     //Jamie
@@ -107,6 +110,8 @@ class PlayScene
       this.blowPipe = new BlowPipe(20.5,9,world);
       this.goalCup = new GoalCup(17,12.2,world);
 
+      this.tutorialStart = false;
+
       startNumber = 0;
     }
     // Tutorial
@@ -119,16 +124,30 @@ class PlayScene
         }}catch(e){
             return true; //ignore them :)
 }
-    this.level = new Level(30.8,20.5,world);
-    this.fan = new Fan(29.6,18,world);
-    this.player = new PlayerBall(8,6,0.5,world);
-    this.goalCup = new GoalCup(22,20.2,world);
+    this.level = new Level(35.8,20.5,world);
+    this.fan = new Fan(34.6,18,world);
+    this.player = new PlayerBall(10,6,0.5,world);
+    this.goalCup = new GoalCup(27,20.2,world);
 
     this.magnet = new Magnet(2000.8,3,world);
     this.ball = new Ball(1000,5,0.5,world);
     this.trampoline = new Trampoline(2100.3,11,world);
     this.blowPipe = new BlowPipe(2000.5,9,world);
     this.ramp = new Ramp(2000.1,1,world);
+
+    this.tutorialText = new tutorialText("Place the highlighted object between the arrows.",100,800);
+    this.arrow = new Arrow(180,300,"right");
+    this.arrow2 = new Arrow(220,260,"down");
+    this.arrow3 = new Arrow(260,300,"left");
+    this.arrow4 = new Arrow(220,340,"up");
+    this.highlight = new Highlight(1000,550,200,200);
+    this.prompt = new Prompt(1250,500,"leftClick");
+
+    this.tutorialCount = 0;
+    this.textChanged = false;
+
+    this.tutorialStart = true;
+    TutorialEnd = -1;
 
       startNumber = 0;
     }
@@ -168,8 +187,6 @@ class PlayScene
   render()
   {
 
-   world.DrawDebugData();
-
    var canvas = document.createElement("mycanvas");
    var ctx = mycanvas.getContext("2d");
    document.body.style.background = "#ffffff";
@@ -177,15 +194,47 @@ class PlayScene
 
    //this.drop.draw(ctx);
    //this.drag.draw(ctx);
+   world.DrawDebugData();
+
+   if(this.tutorialStart == true)
+   {
+     if(this.tutorialCount < 200){
+     this.tutorialCount = this.tutorialCount + 1;
+      }
+      else if(this.textChanged == false){
+        this.tutorialText = new tutorialText("Press Enter to start",100,800);
+        this.textChanged = true;
+      }
+     ctx.save();
+     this.tutorialText.drawText();
+     this.tutorialText.drawBackground();
+     this.arrow.drawImage();
+     this.arrow2.drawImage();
+     this.arrow3.drawImage();
+     this.arrow4.drawImage();
+     this.highlight.drawImage();
+     this.prompt.drawImage();
+     ctx.restore();
+
+     if(TutorialEnd == 1)
+     {
+       this.tutorialText = new tutorialText("Press R to return to start the level",100,800);
+       this.diamondAchievement = new DiamondAchievement("Tutorial Complete!");
+       console.log("TUTORIAL DONE");
+       TutorialEnd = 2;
+     }
+     if(TutorialEnd == 2)
+     {
+       this.diamondAchievement.drawImage();
+     }
+   }
+
+
    this.trampoline.render();
    this.ramp.render();
    this.fan.render();
    this.magnet.render();
    this.blowPipe.render();
-
-   if(this.player.getWinState() == true){
-     gameNs.endScene.render();
-   }
    //partilce effect draw
 
   ctx.fillStyle ='white';

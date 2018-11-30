@@ -69,7 +69,7 @@ class PlayerBall
 
     document.addEventListener("keydown",this.keyHandler, true);
     this.startNumber = 0;
-    this.win = false;
+    gameNs.win = false;
 
   }
   keyHandler(e){
@@ -81,6 +81,7 @@ class PlayerBall
     }
     if(e.keyCode === 82){
       startNumber = -1;
+      TutorialEnd = 0;
     }
   }
 
@@ -133,7 +134,7 @@ class PlayerBall
   }
   getWinState()
   {
-    return this.win;
+    return gameNs.win;
   }
 
   update(){
@@ -166,15 +167,23 @@ class PlayerBall
        || contact.GetFixtureA().GetBody().GetUserData() == "CupGoal" && contact.GetFixtureB().GetBody().GetUserData() == "Player")
          {
            console.log("WINNER WINNER CHICKEN DINNERS");
+           if(TutorialEnd == -1)
+           {
+           TutorialEnd = 1;
+         }
 
            addBurstParticles();
            this.loop= true;
+           if(TotorialEnd == 0)
+           {
+            gameNs.win = true;
+          }
          }
          if(contact.GetFixtureA().GetBody().GetUserData() == "Player" && contact.GetFixtureB().GetBody().GetUserData() == "Ramp"
        || contact.GetFixtureA().GetBody().GetUserData() == "Ramp" && contact.GetFixtureB().GetBody().GetUserData() == "Player")
          {
            addBurstParticles();
-           this.win = true;
+
 
          }
          if(contact.GetFixtureA().GetBody().GetUserData() == "Player" && contact.GetFixtureB().GetBody().GetUserData() == "TrampolineTop"
