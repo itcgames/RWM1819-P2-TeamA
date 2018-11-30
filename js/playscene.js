@@ -109,6 +109,29 @@ class PlayScene
 
       startNumber = 0;
     }
+    // Tutorial
+    if(startNumber == -2)
+    {
+      try{
+        while(world.GetBodyList()){
+          world.DestroyBody(world.GetBodyList());
+          world.GetBodyList().next();
+        }}catch(e){
+            return true; //ignore them :)
+}
+    this.level = new Level(30.8,20.5,world);
+    this.fan = new Fan(29.6,18,world);
+    this.player = new PlayerBall(8,6,0.5,world);
+    this.goalCup = new GoalCup(22,20.2,world);
+
+    this.magnet = new Magnet(2000.8,3,world);
+    this.ball = new Ball(1000,5,0.5,world);
+    this.trampoline = new Trampoline(2100.3,11,world);
+    this.blowPipe = new BlowPipe(2000.5,9,world);
+    this.ramp = new Ramp(2000.1,1,world);
+
+      startNumber = 0;
+    }
     if(startNumber == 1)
     {
       world.Step(
@@ -117,7 +140,6 @@ class PlayScene
        ,  10       //position iterations
     );
   }
-    world.DrawDebugData();
     world.ClearForces();
     this.player.update();
 
@@ -145,6 +167,8 @@ class PlayScene
    */
   render()
   {
+
+   world.DrawDebugData();
 
    var canvas = document.createElement("mycanvas");
    var ctx = mycanvas.getContext("2d");

@@ -76,6 +76,9 @@ class PlayerBall
     if(e.keyCode === 13){
       startNumber = 1;
     }
+    if(e.keyCode === 84){
+      startNumber = -2;
+    }
     if(e.keyCode === 82){
       startNumber = -1;
     }
