@@ -1,0 +1,7 @@
+Due to time contraints we couldnt put all the instructuion in the game:
+
+When you are in the game pressing ENTER starts the playe ball moving.
+You can then retry by pressing R.
+If you press T the tutorial level appears.
+When the scoreboard displays after you get the ball in the goal you can press M to return to the Menu.
+Left click is used to drag the drag the contraptions into the level
