@@ -22,15 +22,19 @@ class Game
     gameNs.endScene = new EndScene('endScene');
     gameNs.helpScene = new HelpScene('Help')
     gameNs.hintsScene = new HintsScene('Hints')
+    gameNs.splashScene = new SplashScene('Splash')
+
 
     gameNs.sceneManager.addScene(gameNs.menuScene);
     gameNs.sceneManager.addScene(gameNs.playScene);
     gameNs.sceneManager.addScene(gameNs.optionsScene);
     gameNs.sceneManager.addScene(gameNs.helpScene);
     gameNs.sceneManager.addScene(gameNs.hintsScene)
-
     gameNs.sceneManager.addScene(gameNs.endScene);
-    gameNs.sceneManager.goToScene(gameNs.menuScene.title);
+    gameNs.sceneManager.addScene(gameNs.menuScene);
+    gameNs.sceneManager.addScene(gameNs.splashScene);
+
+    gameNs.sceneManager.goToScene(gameNs.splashScene.title)
 
   //  document.addEventListener("click", this.clickHandler.bind(null, gameNs.sceneManager));
     //draw(sceneManager);
@@ -41,10 +45,9 @@ class Game
   */
   update()
   {
-    //window.requestAnimationFrame(gameNs.game.update);
+    window.requestAnimationFrame(gameNs.game.update);
     gameNs.sceneManager.update();
     gameNs.sceneManager.render();
-    this.draw();
     console.log("update called")
   }
 //  clickHandler(sceneManager)

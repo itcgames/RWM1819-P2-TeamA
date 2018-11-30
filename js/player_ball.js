@@ -67,7 +67,7 @@ class PlayerBall
 
     document.addEventListener("keydown",this.keyHandler, true);
     this.startNumber = 0;
-    this.win = false;
+    gameNs.win = false;
 
   }
   keyHandler(e){
@@ -75,7 +75,7 @@ class PlayerBall
       startNumber = 1;
     }
   }
-  
+
   checkFan(fanX,fanY)
   {
     if(this.fanOn == true)
@@ -111,11 +111,11 @@ class PlayerBall
   }
   getWinState()
   {
-    return this.win;
+    return gameNs.win;
   }
 
   update(){
-    
+
     if(startNumber == 0){
       this.body.SetPosition(new this.b2Vec2(this.imageX,this.imageY));
     }
@@ -138,12 +138,13 @@ class PlayerBall
 
            addBurstParticles();
            this.loop= true;
+           gameNs.win = true;
          }
          if(contact.GetFixtureA().GetBody().GetUserData() == "Player" && contact.GetFixtureB().GetBody().GetUserData() == "Ramp"
        || contact.GetFixtureA().GetBody().GetUserData() == "Ramp" && contact.GetFixtureB().GetBody().GetUserData() == "Player")
          {
            addBurstParticles();
-           this.win = true;
+
 
          }
          if(contact.GetFixtureA().GetBody().GetUserData() == "Ball" && contact.GetFixtureB().GetBody().GetUserData() == "PipeInflated")

@@ -98,7 +98,7 @@ class OptionsScene
      div.style.top = (this.height/2) + 120+'px'
    }
   // ctx.drawImage(image, 0 , this.height,100, this.heightVol ,this.x,this.y, this.widthVol,this.heightVol);
-   div.addEventListener("touchstart", this.onTouchStart,{passive:false});
+   div.addEventListener("click", this.onTouchStart,{passive:false});
    document.body.appendChild(div);
 
  }

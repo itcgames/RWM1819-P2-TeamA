@@ -41,6 +41,8 @@ class PlayScene
     //Jamie
     var canvas = document.querySelector('canvas');
     var ctx = canvas.getContext('2d');
+    var goalReached = false
+    this.goalReached = goalReached
 
 
     //setup debug draw

@@ -11,6 +11,8 @@ class Ball
     this.imageX = x;
     this.imageY = y;
 
+    this.radius = radius;
+
     this.b2Vec2 = Box2D.Common.Math.b2Vec2;
 
     var fixDef = new b2FixtureDef;
@@ -45,9 +47,9 @@ class Ball
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;
     if(this.mousePosX < this.body.GetPosition().x*30
-    && this.mousePosX > this.body.GetPosition().x*30 - (this.img.width * 2)
-    && this.mousePosY  < this.body.GetPosition().y*30 + (this.img.height)
-    && this.mousePosY > this.body.GetPosition().y*30 - (this.img.height)){
+    && this.mousePosX > this.body.GetPosition().x*30 - (this.radius* 2)
+    && this.mousePosY  < this.body.GetPosition().y*30 + (this.radius)
+    && this.mousePosY > this.body.GetPosition().y*30 - (this.radius)){
       this.selected = true;
     }
     else{
