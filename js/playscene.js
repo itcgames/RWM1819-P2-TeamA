@@ -62,9 +62,6 @@ class PlayScene
 
   this.am = new AudioManager();
 
-    this.scoreboard = new ScoreboardManager();
-    this.scoreboard.initBoard("session")
-
   }
   init(){
     this.scoreboard.startTimer();

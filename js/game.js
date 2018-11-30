@@ -41,11 +41,10 @@ class Game
   */
   update()
   {
-    //window.requestAnimationFrame(gameNs.game.update);
+    window.requestAnimationFrame(gameNs.game.update);
     gameNs.sceneManager.update();
-    gameNs.sceneManager.render();
-    this.draw();
-    console.log("update called")
+    //this.draw();
+    //console.log("update called")
   }
 //  clickHandler(sceneManager)
   //{
