@@ -24,17 +24,24 @@ class PlayScene
           new b2Vec2(0, 10)    //gravity
        ,  true                 //allow sleep
     );
+    console.log(window.innerWidth)
+    this.level = new Level(window.innerWidth / 32,window.innerHeight / 40,world);
 
-    this.level = new Level(23.8,12.5,world);
+    this.player = new PlayerBall(2,2,0.5,world);
+    if(window.innerWidth / 32 > 27)
+    {
+      console.log(window.innerWidth / 32)
+      this.goalCup = new GoalCup(20,12.2,world);
+    }
 
-    this.fan = new Fan(22.6,6,world);
-    this.trampoline = new Trampoline(21.3,11,world);
-    this.player = new PlayerBall(2,1,0.5,world);
+    // Contraptions
+    this.fan = new Fan(window.innerWidth / 32 - 1,6,world);
+    this.trampoline = new Trampoline(window.innerWidth / 32 - 3,11,world);
     this.ball = new Ball(10,5,0.5,world);
-    this.ramp = new Ramp(20.1,1,world);
-    this.magnet = new Magnet(20.8,3,world);
-    this.blowPipe = new BlowPipe(20.5,9,world);
-    this.goalCup = new GoalCup(17,12.2,world);
+    this.ramp = new Ramp(window.innerWidth / 32 - 3,1,world);
+    this.magnet = new Magnet(window.innerWidth / 32 - 3,3,world);
+    this.blowPipe = new BlowPipe(window.innerWidth / 32 - 3,9,world);
+
 
 
     //Jamie

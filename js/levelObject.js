@@ -23,7 +23,8 @@ class Level
     //Ground floor
     bodyDef.type = b2Body.b2_staticBody;
     bodyDef.position.x = 0;
-    bodyDef.position.y = height + 0.5;
+    console.log(height)
+    bodyDef.position.y = height;
     fixDef.shape = new b2PolygonShape;
     fixDef.shape.SetAsBox(width, 0.5);
     world.CreateBody(bodyDef).CreateFixture(fixDef);
