@@ -13,10 +13,18 @@ class MenuScene
     this.title = title;
     this.width = window.innerWidth;
     this.height = window.innerHeight;
+    this.img = new Image()
+    this.img.src = "img/MenuBG.png"
+    var canvas = document.getElementById("mycanvas")
+    mycanvas.style.position = "absolute"
+    mycanvas.style.left = this.img.offsetLeft
+    mycanvas.style.top = this.img.offsetTop
+    this.width = window.innerWidth
+    this.height = window.innerHeight
 
-    this.createDiv("Play");
+    /*this.createDiv("Play");
     this.createDiv("Options");
-    this.createDiv("Tutorial");
+    this.createDiv("Tutorial");*/
 
   //  this.soundManager = new SoundManager()
   //  this.soundManager.init()
@@ -144,9 +152,11 @@ class MenuScene
     var canvas = document.createElement("mycanvas");
     var ctx = mycanvas.getContext("2d");
     ctx.clearRect(0, 0, mycanvas.width, mycanvas.height);
+    var image = this.img;
+    ctx.drawImage(image, 0,0,this.width,this.height)
     document.body.style.background = "#bbcfed";
     ctx.font = '55px Adventure Regular';
-    ctx.fillText(this.title, this.width/2 - 170, 70);
+  //  ctx.fillText(this.title, this.width/2 - 170, 70);
 
   }
 }

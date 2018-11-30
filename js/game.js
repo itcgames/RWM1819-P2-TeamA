@@ -23,6 +23,8 @@ class Game
     gameNs.endScene = new EndScene('endScene');
     gameNs.helpScene = new HelpScene('Help')
     gameNs.hintsScene = new HintsScene('Hints')
+    gameNs.splashScene = new SplashScene('Splash')
+
 
     gameNs.sceneManager.addScene(gameNs.menuScene);
     gameNs.sceneManager.addScene(gameNs.playScene);
@@ -30,9 +32,11 @@ class Game
     gameNs.sceneManager.addScene(gameNs.optionsScene);
     gameNs.sceneManager.addScene(gameNs.helpScene);
     gameNs.sceneManager.addScene(gameNs.hintsScene)
-
     gameNs.sceneManager.addScene(gameNs.endScene);
-    gameNs.sceneManager.goToScene(gameNs.menuScene.title);
+    gameNs.sceneManager.addScene(gameNs.menuScene);
+    gameNs.sceneManager.addScene(gameNs.splashScene);
+
+    gameNs.sceneManager.goToScene(gameNs.splashScene.title)
 
     gameNs.audioManager = new AudioManager();
     gameNs.audioManager.init();

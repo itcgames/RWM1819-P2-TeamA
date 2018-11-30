@@ -67,9 +67,7 @@ class PlayerBall
 
     document.addEventListener("keydown",this.keyHandler, true);
     this.startNumber = 0;
-
     gameNs.win = false;
-
 
   }
   keyHandler(e){
@@ -180,7 +178,7 @@ class PlayerBall
 
 
            this.loop= true;
-           if(TotorialEnd == 0)
+           if(TutorialEnd == 0)
            {
             gameNs.win = true;
           }
@@ -190,6 +188,7 @@ class PlayerBall
        || contact.GetFixtureA().GetBody().GetUserData() == "Ramp" && contact.GetFixtureB().GetBody().GetUserData() == "Player")
          {
            addBurstParticles();
+
 
            gameNs.audioManager.playAudio("drop",false,gameNs.volume);
 

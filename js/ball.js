@@ -12,6 +12,8 @@ class Ball
     this.imageY = y;
     this.circRadius = radius;
 
+    this.radius = radius;
+
     this.b2Vec2 = Box2D.Common.Math.b2Vec2;
 
     var fixDef = new b2FixtureDef;

@@ -36,11 +36,12 @@ class HelpScene{
       div.innerHTML = "<img src=\'img/hintsButton.png\'>";
       this.div = div;
 
+      div.style.visibility = "visible"
       div.style.position = "absolute";
       div.style.left = (this.width/ 2) - 135 +"px";
       div.style.top = (this.height/ 8) * 3 + 40 +'px';
     }
-    div.addEventListener("touchstart", this.onTouchStart,{passive:false});
+    div.addEventListener("click", this.onTouchStart,{passive:false});
     document.body.appendChild(div);
   }
 
@@ -81,10 +82,13 @@ class HelpScene{
          gameNs.optionsScene.createDiv("VolumeDown");
          gameNs.optionsScene.createDiv("Back");
          gameNs.optionsScene.createDiv("HelpScreen");
+         gameNs.ctx.lineWidth="1"
+
        }
        else if (filename === "hintsButton.png" )
        {
         // gameNs.soundManager.playSound("Concentrate", true, 0.2);
+        gameNs.ctx.clearRect(0,0,mycanvas.width, mycanvas.height)
          gameNs.sceneManager.goToScene(gameNs.hintsScene.title);
          var el = document.getElementById('Hints')
          el.parentNode.removeChild(el)
@@ -99,34 +103,42 @@ class HelpScene{
 
   keyHandler(e)
   {
-    if(e.keyCode === 87 || e.keyCode === 38)//w key
+    if(gameNs.sceneManager.currentScene.title === gameNs.helpScene.title)
     {
-      gameNs.control.highlightW()
-      console.log("W pressed")
+      if(e.keyCode === 87 || e.keyCode === 38)//w key
+      {
+        gameNs.control.highlightW()
+        console.log("W pressed")
+      }
+      else if(e.keyCode === 65 || e.keyCode === 37)//a
+      {
+        gameNs.control.highlightA()
+        console.log("A pressed")
+      }
+      else if(e.keyCode === 83 || e.keyCode === 40)//s key
+      {
+        gameNs.control.highLightS()
+        console.log("S pressed")
+      }
+      else if(e.keyCode === 68 || e.keyCode === 39)// d key
+      {
+        gameNs.control.highLightD()
+        console.log("D pressed")
+      }
+      else if(e.keyCode === 82)
+      {
+        gameNs.control.highlightR()
+      }
+      else if(e.keyCode === 32)
+      {
+        gameNs.control.highLightSpace()
+        console.log("Space pressed")
+      }
+      else {
+        gameNs.ctx.clearRect(0,0,mycanvas.width, mycanvas.height)
+      }
     }
-    else if(e.keyCode === 65 || e.keyCode === 37)//a
-    {
-      gameNs.control.highlightA()
-      console.log("A pressed")
-    }
-    else if(e.keyCode === 83 || e.keyCode === 40)//s key
-    {
-      gameNs.control.highLightS()
-      console.log("S pressed")
-    }
-    else if(e.keyCode === 68 || e.keyCode === 39)// d key
-    {
-      gameNs.control.highLightD()
-      console.log("D pressed")
-    }
-    else if(e.keyCode === 32)
-    {
-      gameNs.control.highLightSpace()
-      console.log("Space pressed")
-    }
-    else {
-      gameNs.ctx.clearRect(0,0,mycanvas.width, mycanvas.height)
-    }
+
   }
 
   update()

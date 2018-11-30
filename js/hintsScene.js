@@ -34,7 +34,7 @@ class HintsScene{
       div.style.left = (this.width/ 2) - 450 +"px";
       div.style.top = (this.height/8) - 100 +'px';
     }
-    div.addEventListener("touchstart", this.onTouchStart,{passive:false});
+    div.addEventListener("click", this.onTouchStart,{passive:false});
     document.body.appendChild(div);
   }
   onTouchStart(e)
