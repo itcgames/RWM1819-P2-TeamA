@@ -28,16 +28,19 @@ class PlayScene
     );
     this.tutorialStart = false;
 
-    this.level = new Level(23.8,12.5,world);
+    this.level = new Level(56,30,world);
 
-    this.fan = new Fan(22.6,6,world);
-    this.trampoline = new Trampoline(21.3,11,world);
-    this.player = new PlayerBall(2,1,0.5,world);
-    this.ball = new Ball(10,5,0.5,world);
-    this.ramp = new Ramp(20.1,1,world);
-    this.magnet = new Magnet(20.8,3,world);
-    this.blowPipe = new BlowPipe(20.5,9,world);
-    this.goalCup = new GoalCup(17,12.2,world);
+      this.fan = new Fan(54.6,6,world);
+      this.trampoline = new Trampoline(53.3,11,world);
+      this.player = new PlayerBall(23,5,0.5,world);
+      this.ball = new Ball(42,5,0.5,world);
+      this.ramp = new Ramp(52.1,1,world);
+      this.magnet = new Magnet(52.8,3,world);
+      this.blowPipe = new BlowPipe(52.5,9,world);
+      this.goalCup = new GoalCup(23,29.8,world);
+      this.platform = new Platform(23,15,15,0.5,world);
+
+
 
 
 
@@ -100,15 +103,17 @@ class PlayScene
         }}catch(e){
             return true; //ignore them :)
 }
-      this.level = new Level(23.8,12.5,world);
-      this.fan = new Fan(22.6,6,world);
-      this.trampoline = new Trampoline(21.3,11,world);
-      this.player = new PlayerBall(2,1,0.5,world);
-      this.ball = new Ball(10,5,0.5,world);
-      this.ramp = new Ramp(20.1,1,world);
-      this.magnet = new Magnet(20.8,3,world);
-      this.blowPipe = new BlowPipe(20.5,9,world);
-      this.goalCup = new GoalCup(17,12.2,world);
+this.level = new Level(56,30,world);
+
+  this.fan = new Fan(54.6,6,world);
+  this.trampoline = new Trampoline(53.3,11,world);
+  this.player = new PlayerBall(23,5,0.5,world);
+  this.ball = new Ball(42,5,0.5,world);
+  this.ramp = new Ramp(52.1,1,world);
+  this.magnet = new Magnet(52.8,3,world);
+  this.blowPipe = new BlowPipe(52.5,9,world);
+  this.goalCup = new GoalCup(23,29.8,world);
+  this.platform = new Platform(23,15,15,0.5,world);
 
       this.tutorialStart = false;
 
