@@ -24,7 +24,7 @@ class PlayScene
           new b2Vec2(0, 10)    //gravity
        ,  true                 //allow sleep
     );
-    this.level = new Level(0,0,world);
+    this.level = new Level(23.8,12.5,world);
     this.fan = new Fan(22.6,6,world);
     this.trampoline = new Trampoline(21.3,11,world);
     this.player = new PlayerBall(2,1,0.5,world);
@@ -106,7 +106,7 @@ class PlayScene
         }}catch(e){
             return true; //ignore them :)
 }
-      this.level = new Level(0,0,world);
+      this.level = new Level(23.8,12.5,world);
       this.fan = new Fan(22.6,6,world);
       this.trampoline = new Trampoline(21.3,11,world);
       this.player = new PlayerBall(2,1,0.5,world);
@@ -130,7 +130,7 @@ class PlayScene
     world.ClearForces();
 
     this.time = this.scoreboard.getDisplayTimer();
-    if(this.time == "1000:00"){
+    if(this.time == "5:00"){
       this.scoreboard.addToBoard(55)
       this.scoreboard.generate_table()
       gameNs.endScene.render();
