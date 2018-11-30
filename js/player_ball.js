@@ -1,6 +1,7 @@
-
+var gameNs = {};
 var startNumber = 0;
 var trampJump = false;
+
 
 class PlayerBall
 {
@@ -45,8 +46,30 @@ class PlayerBall
 	//	);
     this.body.SetUserData("Player");
 
+    gameNs.maxParticles = 200;
+    gameNs.particleSize = 1;
+    gameNs.objectSize = 10;
+    gameNs.life = 0;
+    gameNs.maxLife = 200;
+    gameNs.loop = false;
+    gameNs.alpha = 255;
+
+    gameNs.particles = [];
+    gameNs.canvas = document.querySelector('canvas');
+    gameNs.ctx = gameNs.canvas.getContext('2d');
+
+    gameNs.canvas.width = window.innerWidth;
+    gameNs.canvas.height = window.innerHeight;
+
+    gameNs.emitters = [new Emitter(new VectorTwo(this.body.GetPosition().x * 30, this.body.GetPosition().y* 30 ), VectorTwo.fromAngle(0, 2))];
+
+   update();
+
+    //addNewParticles();
+
     document.addEventListener("keydown",this.keyHandler, true);
     this.startNumber = 0;
+    this.win = false;
 
   }
   keyHandler(e){
@@ -57,16 +80,7 @@ class PlayerBall
       startNumber = -1;
     }
   }
-  update()
-  {
-    if(startNumber == 0){
-    this.body.SetPosition(new this.b2Vec2(this.imageX,this.imageY));
-    //this.bodyAndFixture.GetBody().ApplyForce(
-  //  new this.b2Vec2(0,-10),
-    //this.bodyAndFixture.GetBody().GetWorldCenter()
-    //);
-  }
-}
+
   checkFan(fanX,fanY)
   {
     if(this.fanOn == true)
@@ -109,8 +123,24 @@ class PlayerBall
    			  new this.b2Vec2(powerX,this.powerY),
     		  this.bodyAndFixture.GetBody().GetWorldCenter()
     		   );
+
          }
 
+      
+  }
+  getWinState()
+  {
+    return this.win;
+  }
+
+  update(){
+    
+    if(startNumber == 0){
+      this.body.SetPosition(new this.b2Vec2(this.imageX,this.imageY));
+    }
+    gameNs.emitters[0].position.x = this.body.GetPosition().x *30;
+    gameNs.emitters[0].position.y = this.body.GetPosition().y* 30;
+    ///console.log( gameNs.emitters[0] );
 
 
 
@@ -133,6 +163,16 @@ class PlayerBall
        || contact.GetFixtureA().GetBody().GetUserData() == "CupGoal" && contact.GetFixtureB().GetBody().GetUserData() == "Player")
          {
            console.log("WINNER WINNER CHICKEN DINNERS");
+
+           addBurstParticles();
+           this.loop= true;
+         }
+         if(contact.GetFixtureA().GetBody().GetUserData() == "Player" && contact.GetFixtureB().GetBody().GetUserData() == "Ramp"
+       || contact.GetFixtureA().GetBody().GetUserData() == "Ramp" && contact.GetFixtureB().GetBody().GetUserData() == "Player")
+         {
+           addBurstParticles();
+           this.win = true;
+
          }
          if(contact.GetFixtureA().GetBody().GetUserData() == "Player" && contact.GetFixtureB().GetBody().GetUserData() == "TrampolineTop"
        || contact.GetFixtureA().GetBody().GetUserData() == "TrampolineTop" && contact.GetFixtureB().GetBody().GetUserData() == "Player")
@@ -165,6 +205,7 @@ class PlayerBall
     }
     this.world.SetContactListener(this.listener);
   }
+
   getPositionX()
   {
 

@@ -5,6 +5,7 @@ class SceneManager
  */
   constructor()
   {
+
     this.currentScene = null;
     this.scenes = {};
     this.titles = [];
