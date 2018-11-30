@@ -46,25 +46,24 @@ class PlayerBall
 	//	);
     this.body.SetUserData("Player");
 
-    gameNs.maxParticles = 200;
-    gameNs.particleSize = 1;
-    gameNs.objectSize = 10;
-    gameNs.life = 0;
-    gameNs.maxLife = 200;
-    gameNs.loop = false;
-    gameNs.alpha = 255;
 
-    gameNs.particles = [];
-    gameNs.canvas = document.querySelector('canvas');
-    gameNs.ctx = gameNs.canvas.getContext('2d');
+      gameNs.maxParticles = 200;
+      gameNs.particleSize = 1;
+      gameNs.objectSize = 10;
+      gameNs.life = 0;
+      gameNs.maxLife = 200;
+      gameNs.loop = false;
+      gameNs.alpha = 255;
 
-    gameNs.canvas.width = window.innerWidth;
-    gameNs.canvas.height = window.innerHeight;
+      gameNs.particles = [];
+      gameNs.canvas = document.querySelector('canvas');
+      gameNs.ctx = gameNs.canvas.getContext('2d');
 
-    gameNs.emitters = [new Emitter(new VectorTwo(this.body.GetPosition().x * 30, this.body.GetPosition().y* 30 ), VectorTwo.fromAngle(0, 2))];
+      gameNs.canvas.width = window.innerWidth;
+      gameNs.canvas.height = window.innerHeight;
 
-    update();
-    //addNewParticles();
+      gameNs.emitters = [new Emitter(new VectorTwo(this.body.GetPosition().x * 30, this.body.GetPosition().y* 30 ), VectorTwo.fromAngle(0, 2))];
+      update();
 
     document.addEventListener("keydown",this.keyHandler, true);
     this.startNumber = 0;
@@ -76,12 +75,15 @@ class PlayerBall
   keyHandler(e){
     if(e.keyCode === 13){
       startNumber = 1;
+      gameStartedBool = true;
     }
     if(e.keyCode === 84){
       startNumber = -2;
+      gameStartedBool = false;
     }
     if(e.keyCode === 82){
       startNumber = -1;
+      gameStartedBool = false;
       TutorialEnd = 0;
     }
   }
@@ -141,15 +143,12 @@ class PlayerBall
   }
 
   update(){
+    gameNs.emitters[0].position.x = this.body.GetPosition().x *30;
+    gameNs.emitters[0].position.y = this.body.GetPosition().y* 30;
 
     if(startNumber == 0){
       this.body.SetPosition(new this.b2Vec2(this.imageX,this.imageY));
     }
-    gameNs.emitters[0].position.x = this.body.GetPosition().x *30;
-    gameNs.emitters[0].position.y = this.body.GetPosition().y* 30;
-    ///console.log( gameNs.emitters[0] );
-
-
 
   }
   checkTrampoline()
@@ -176,7 +175,7 @@ class PlayerBall
          }
 
            addBurstParticles();
-
+           console.log("colide");
            gameNs.audioManager.playAudio("goal",false,gameNs.volume);
 
 

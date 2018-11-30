@@ -142,7 +142,9 @@ class Magnet
 
   }
   onMouseDown(e){
-
+    console.log(gameStartedBool);
+    if(gameStartedBool == false)
+    {
     e.preventDefault();
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;
@@ -158,11 +160,15 @@ class Magnet
       this.selected = false;
     }
   }
+}
 
   onMouseMove(e){
+    if(gameStartedBool == false)
+    {
       e.preventDefault();
       this.mousePosX = e.clientX;
       this.mousePosY = e.clientY;
+    }
   }
   onMouseUp(e){
     e.preventDefault();

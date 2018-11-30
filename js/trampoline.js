@@ -87,6 +87,8 @@ class Trampoline
   }
 
   onMouseDown(e){
+    if(gameStartedBool == false)
+    {
     e.preventDefault();
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;
@@ -99,12 +101,16 @@ class Trampoline
     else{
       this.selected = false;
     }
+  }
 
   }
   onMouseMove(e){
+    if(gameStartedBool == false)
+    {
       e.preventDefault();
       this.mousePosX = e.clientX;
       this.mousePosY = e.clientY;
+    }
   }
   onMouseUp(e){
     e.preventDefault();

@@ -1,5 +1,6 @@
    var world;
    var TutorialEnd = 0;
+   var gameStartedBool = false;
 
 class PlayScene
 {
@@ -231,6 +232,7 @@ class PlayScene
    this.fan.render();
    this.magnet.render();
    this.blowPipe.render();
+   draw();
    //partilce effect draw
 
   ctx.fillStyle ='white';
