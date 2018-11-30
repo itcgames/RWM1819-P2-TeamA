@@ -1,5 +1,6 @@
 var gameNs = {};
 var startNumber = 0;
+var trampJump = false;
 
 
 class PlayerBall
@@ -18,6 +19,7 @@ class PlayerBall
     this.world = world;
 
     this.fanOn = true;
+    this.trampJump = false;
 
     this.imageX = x;
     this.imageY = y;
@@ -74,13 +76,16 @@ class PlayerBall
     if(e.keyCode === 83){
       startNumber = 1;
     }
+    if(e.keyCode === 82){
+      startNumber = -1;
+    }
   }
-  
+
   checkFan(fanX,fanY)
   {
     if(this.fanOn == true)
     {
-     if(this.body.GetPosition().x > fanX && this.body.GetPosition().y > fanY - 1.5
+     if(this.body.GetPosition().x > fanX && this.body.GetPosition().x < fanX +3 && this.body.GetPosition().y > fanY - 1.5
      && this.body.GetPosition().y < fanY + 1.5){
       // if(this.impApplied == false){
    		    this.bodyAndFixture.GetBody().ApplyForce(
@@ -95,19 +100,33 @@ class PlayerBall
    checkMagnet(magnetX,magnetY)
    {
       var playerX = this.body.GetPosition().x;
-      var playerY = this.body.GetPosition().y
-      if(playerX > magnetX && playerY > magnetY - 100.5
-      && playerY < magnetY + 100.5){
-        var powerX = magnetX - playerX;
-        var powerY = magnetY - playerY;
-       // if(this.impApplied == false){
-    		    this.bodyAndFixture.GetBody().ApplyForce(
-    			  new this.b2Vec2(powerX,powerY),
-    		  	this.bodyAndFixture.GetBody().GetWorldCenter()
-    		   );
-       //this.impApplied = true;
-       //}
+      var playerY = this.body.GetPosition().y;
+      this.distance = 0;
+      if(playerX < magnetX)
+      {
+      this.distance = Math.sqrt(magnetX - playerX)*(magnetX - playerX) + (magnetY - playerY)*(magnetY - playerY);
+    }
+    else{
+      this.distance = Math.sqrt(playerX - magnetX)*(playerX - magnetX) + (playerY - magnetY)*(playerY - magnetY);
+    }
+      if(magnetY > playerY)
+      {
+        this.powerY = playerY - magnetY;
       }
+      else{
+        this.powerY = magnetY - playerY;
+      }
+        var powerX = magnetX - playerX;
+        if(this.distance < 50){
+
+  		    this.bodyAndFixture.GetBody().ApplyForce(
+   			  new this.b2Vec2(powerX,this.powerY),
+    		  this.bodyAndFixture.GetBody().GetWorldCenter()
+    		   );
+
+         }
+
+      
   }
   getWinState()
   {
@@ -123,7 +142,16 @@ class PlayerBall
     gameNs.emitters[0].position.y = this.body.GetPosition().y* 30;
     ///console.log( gameNs.emitters[0] );
 
-    draw();
+
+
+  }
+  checkTrampoline()
+  {
+    return trampJump;
+  }
+  setTrampoline()
+  {
+    trampJump = false;
   }
   checkCollision()
   {
@@ -145,6 +173,17 @@ class PlayerBall
            addBurstParticles();
            this.win = true;
 
+         }
+         if(contact.GetFixtureA().GetBody().GetUserData() == "Player" && contact.GetFixtureB().GetBody().GetUserData() == "TrampolineTop"
+       || contact.GetFixtureA().GetBody().GetUserData() == "TrampolineTop" && contact.GetFixtureB().GetBody().GetUserData() == "Player")
+         {
+           trampJump = true;
+           console.log("TrampHit");
+         }
+         if(contact.GetFixtureA().GetBody().GetUserData() == "Ball" && contact.GetFixtureB().GetBody().GetUserData() == "TrampolineTop"
+       || contact.GetFixtureA().GetBody().GetUserData() == "TrampolineTop" && contact.GetFixtureB().GetBody().GetUserData() == "Ball")
+         {
+           trampJump = true;
          }
          if(contact.GetFixtureA().GetBody().GetUserData() == "Ball" && contact.GetFixtureB().GetBody().GetUserData() == "PipeInflated")
          {

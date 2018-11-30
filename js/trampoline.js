@@ -19,7 +19,7 @@ class Trampoline
     this.stateStill = new State("Still");
     this.eventJump = new Event("Jump", this.stateStill, this.stateBounce, false)
     this.eventStop = new Event("Stop", this.stateBounce, this.stateStill, false)
-    this.fsm = new TwoStateTwoEvent("Tramp", this.stateBounce, this.stateStill, this.eventJump, this.eventStop);
+    this.fsm = new TwoStateTwoEvent("Tramp", this.stateStill, this.stateBounce, this.eventJump, this.eventStop);
 
     // image variables
     this.img = new Image(); // Image object
@@ -35,7 +35,7 @@ class Trampoline
     this.animeSpeed = 10;   // Speed
     this.animeSpeedIndex = 0; // Counter
     this.animeCount = 0;      // Counter
-    this.animeLimit = 15;      // How many times the animation plays
+    this.animeLimit = 5;      // How many times the animation plays
 
     var fixDef = new b2FixtureDef;
     fixDef.density = 1.0;
@@ -90,8 +90,8 @@ class Trampoline
     e.preventDefault();
     this.mousePosX = e.clientX;
     this.mousePosY = e.clientY;
-    if(this.mousePosX < this.bodyTop.GetPosition().x*30
-    && this.mousePosX > this.bodyTop.GetPosition().x*30 - (this.img.width * 2)
+    if(this.mousePosX < this.bodyTop.GetPosition().x*30 + (this.img.width)
+    && this.mousePosX > this.bodyTop.GetPosition().x*30 - (this.img.width)
     && this.mousePosY  < this.bodyTop.GetPosition().y*30 + (this.img.height)
     && this.mousePosY > this.bodyTop.GetPosition().y*30 - (this.img.height)){
       this.selected = true;

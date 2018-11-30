@@ -25,16 +25,15 @@ class PlayScene
        ,  true                 //allow sleep
     );
 
-    this.level = new Level(0,0,world);
+    this.level = new Level(23.8,12.5,world);
+
     this.fan = new Fan(22.6,6,world);
     this.trampoline = new Trampoline(21.3,11,world);
     this.player = new PlayerBall(2,1,0.5,world);
     this.ball = new Ball(10,5,0.5,world);
-    this.ball2 = new Ball(5.2,0.5,0.5,world);
     this.ramp = new Ramp(20.1,1,world);
     this.magnet = new Magnet(20.8,3,world);
     this.blowPipe = new BlowPipe(20.5,9,world);
-    //this.blowPipe2 = new BlowPipe(4,3,world);
     this.goalCup = new GoalCup(17,12.2,world);
 
 
@@ -76,6 +75,10 @@ class PlayScene
     this.magnet.update();
     this.trampoline.update();
     this.fan.update();
+    if(this.player.checkTrampoline() == true){
+      this.trampoline.jump();
+      this.player.setTrampoline();
+    }
 
     this.player.checkCollision();
 
@@ -84,16 +87,45 @@ class PlayScene
     this.player.checkMagnet(this.magnet.getPositionX()
     ,this.magnet.getPositionY());
 
+    // Recreate if startNumber = -1
+    if(startNumber == -1)
+    {
+      try{
+        while(world.GetBodyList()){
+          world.DestroyBody(world.GetBodyList());
+          world.GetBodyList().next();
+        }}catch(e){
+            return true; //ignore them :)
+}
+      this.level = new Level(23.8,12.5,world);
+      this.fan = new Fan(22.6,6,world);
+      this.trampoline = new Trampoline(21.3,11,world);
+      this.player = new PlayerBall(2,1,0.5,world);
+      this.ball = new Ball(10,5,0.5,world);
+      this.ramp = new Ramp(20.1,1,world);
+      this.magnet = new Magnet(20.8,3,world);
+      this.blowPipe = new BlowPipe(20.5,9,world);
+      this.goalCup = new GoalCup(17,12.2,world);
+
+      startNumber = 0;
+    }
+    if(startNumber == 1)
+    {
       world.Step(
           1 / 60   //frame-rate
        ,  10       //velocity iterations
        ,  10       //position iterations
     );
+  }
     world.DrawDebugData();
     world.ClearForces();
     this.player.update();
 
     this.time = this.scoreboard.getDisplayTimer();
+
+    if(this.time == "5:00"){
+      this.scoreboard.addToBoard(55)
+
 
     if(this.player.getWinState() == true){
       this.scoreboard.addToBoard();
