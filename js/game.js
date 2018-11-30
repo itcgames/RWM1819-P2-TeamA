@@ -18,6 +18,7 @@ class Game
     gameNs.sceneManager = new SceneManager();
     gameNs.menuScene = new MenuScene('RWM');
     gameNs.playScene = new PlayScene('Play');
+  //  gameNs.tutorialScene = new TutorialScene('Tutorial');
     gameNs.optionsScene = new OptionsScene('Options');
     gameNs.endScene = new EndScene('endScene');
     gameNs.helpScene = new HelpScene('Help')
@@ -25,6 +26,7 @@ class Game
 
     gameNs.sceneManager.addScene(gameNs.menuScene);
     gameNs.sceneManager.addScene(gameNs.playScene);
+  //  gameNs.sceneManager.addScene(gameNs.tutorialScene);
     gameNs.sceneManager.addScene(gameNs.optionsScene);
     gameNs.sceneManager.addScene(gameNs.helpScene);
     gameNs.sceneManager.addScene(gameNs.hintsScene)
