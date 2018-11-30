@@ -61,21 +61,20 @@ class PlayerBall
 
     gameNs.emitters = [new Emitter(new VectorTwo(this.body.GetPosition().x * 30, this.body.GetPosition().y* 30 ), VectorTwo.fromAngle(0, 2))];
 
-   update();
 
     //addNewParticles();
 
     document.addEventListener("keydown",this.keyHandler, true);
     this.startNumber = 0;
-    this.win = false;
+  //  this.win = false;
 
   }
   keyHandler(e){
-    if(e.keyCode === 83){
+    if(e.keyCode === 13){
       startNumber = 1;
     }
   }
-  
+
   checkFan(fanX,fanY)
   {
     if(this.fanOn == true)
@@ -111,11 +110,11 @@ class PlayerBall
   }
   getWinState()
   {
-    return this.win;
+    return gameNs.winState;
   }
 
   update(){
-    
+
     if(startNumber == 0){
       this.body.SetPosition(new this.b2Vec2(this.imageX,this.imageY));
     }
@@ -137,22 +136,28 @@ class PlayerBall
            console.log("WINNER WINNER CHICKEN DINNERS");
 
            addBurstParticles();
-           this.loop= true;
+           this.loop = true;
+           gameNs.winState = true;
+           gameNs.audioManager.playAudio("goal",false,gameNs.volume);
+
          }
          if(contact.GetFixtureA().GetBody().GetUserData() == "Player" && contact.GetFixtureB().GetBody().GetUserData() == "Ramp"
        || contact.GetFixtureA().GetBody().GetUserData() == "Ramp" && contact.GetFixtureB().GetBody().GetUserData() == "Player")
          {
            addBurstParticles();
-           this.win = true;
+           gameNs.audioManager.playAudio("drop",false,gameNs.volume);
+
 
          }
          if(contact.GetFixtureA().GetBody().GetUserData() == "Ball" && contact.GetFixtureB().GetBody().GetUserData() == "PipeInflated")
          {
            contact.GetFixtureB().GetBody().SetUserData("PipeDeflated");
+           gameNs.audioManager.playAudio("goal",false,gameNs.volume);
          }
          if(contact.GetFixtureA().GetBody().GetUserData() == "PipeInflated" && contact.GetFixtureB().GetBody().GetUserData() == "Ball")
          {
            contact.GetFixtureA().GetBody().SetUserData("PipeDeflated");
+           gameNs.audioManager.playAudio("goal",false,gameNs.volume);
          }
     }
     this.listener.EndContact = function(contact) {
