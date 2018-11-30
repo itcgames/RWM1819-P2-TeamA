@@ -61,7 +61,7 @@ class PlayerBall
 
     gameNs.emitters = [new Emitter(new VectorTwo(this.body.GetPosition().x * 30, this.body.GetPosition().y* 30 ), VectorTwo.fromAngle(0, 2))];
 
-
+    update();
     //addNewParticles();
 
     document.addEventListener("keydown",this.keyHandler, true);
