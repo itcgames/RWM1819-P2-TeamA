@@ -73,7 +73,7 @@ class PlayerBall
 
   }
   keyHandler(e){
-    if(e.keyCode === 83){
+    if(e.keyCode === 13){
       startNumber = 1;
     }
     if(e.keyCode === 82){
@@ -126,7 +126,7 @@ class PlayerBall
 
          }
 
-      
+
   }
   getWinState()
   {
@@ -134,7 +134,7 @@ class PlayerBall
   }
 
   update(){
-    
+
     if(startNumber == 0){
       this.body.SetPosition(new this.b2Vec2(this.imageX,this.imageY));
     }

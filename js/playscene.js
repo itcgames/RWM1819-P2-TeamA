@@ -125,6 +125,7 @@ class PlayScene
 
     if(this.time == "5:00"){
       this.scoreboard.addToBoard(55)
+    }
 
 
     if(this.player.getWinState() == true){
@@ -134,6 +135,7 @@ class PlayScene
       this.scoreboard.generate_table()
       gameNs.endScene.render();
     }
+
 
 
   }
